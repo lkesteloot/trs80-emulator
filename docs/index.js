@@ -10829,7 +10829,7 @@
                     console.log("Reading from unknown port 0x" + toHex(lo(address), 2));
                     return 0;
             }
-            console.log("Reading 0x" + toHex(value, 2) + " from port 0x" + toHex(lo(address), 2));
+            // console.log("Reading 0x" + toHex(value, 2) + " from port 0x" + toHex(lo(address), 2));
             return value;
         }
         writePort(address, value) {
@@ -10873,7 +10873,7 @@
                     console.log("Writing 0x" + toHex(value, 2) + " to unknown port 0x" + toHex(port, 2));
                     return;
             }
-            console.log("Wrote 0x" + toHex(value, 2) + " to port 0x" + toHex(port, 2));
+            // console.log("Wrote 0x" + toHex(value, 2) + " to port 0x" + toHex(port, 2));
         }
         writeMemory(address, value) {
             if (address < this.ROM_SIZE) {
@@ -10930,7 +10930,7 @@
     trs80.reset();
     // Start machine.
     let clocksPerTick = 2000;
-    const startTime = Date.now();
+    let startTime = Date.now();
     function tick() {
         for (let i = 0; i < clocksPerTick; i++) {
             trs80.step();
@@ -10939,9 +10939,16 @@
     }
     function scheduleNextTick() {
         // Delay to match original clock speed.
-        const actualElapsed = Date.now() - startTime;
+        const now = Date.now();
+        const actualElapsed = now - startTime;
         const expectedElapsed = trs80.tStateCount * 1000 / Trs80.CLOCK_HZ;
-        const delay = Math.round(Math.max(0, expectedElapsed - actualElapsed));
+        let behind = expectedElapsed - actualElapsed;
+        if (behind < -100) {
+            // We're too far behind. Catch up artificially.
+            startTime = now - expectedElapsed;
+            behind = 0;
+        }
+        const delay = Math.round(Math.max(0, behind));
         if (delay === 0) {
             // Delay too short, do more each tick.
             clocksPerTick = Math.min(clocksPerTick + 100, 10000);
