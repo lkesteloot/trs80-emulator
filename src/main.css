@@ -9,7 +9,7 @@
   src: url("fonts/amtreasure/AnotherMansTreasureMIII64C.ttf");
 }
 
-#screen {
+.trs80-emulator-screen {
     font-family: "AnotherMansTreasureMIII64C", monospace;
     font-size: 30pt;
     display: inline-block;
@@ -21,8 +21,7 @@
     /* line-height: 1px; */
 }
 
-#screen span {
+.trs80-emulator-screen span {
     display: inline-block;
     white-space: pre;
 }
-
