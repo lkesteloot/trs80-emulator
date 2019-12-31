@@ -18,7 +18,6 @@
          * the end of the cassette, just return zero.
          */
         readSample() {
-            console.log("Reading cassette");
             return 0;
         }
     }
@@ -10390,7 +10389,7 @@
     // really not.
     const BEGIN_ADDR = 0x3800;
     const END_ADDR = BEGIN_ADDR + 256;
-    const KEY_DELAY_CLOCK_CYCLES = 4000;
+    const KEY_DELAY_CLOCK_CYCLES = 50000;
     // Whether to force a Shift key, and how.
     var ShiftState;
     (function (ShiftState) {
@@ -10733,6 +10732,27 @@
             const body = document.getElementsByTagName("body")[0];
             body.addEventListener("keydown", (event) => keyEvent(event, true));
             body.addEventListener("keyup", (event) => keyEvent(event, false));
+            body.addEventListener("paste", (event) => {
+                if (event.clipboardData) {
+                    const data = event.clipboardData.getData("text/plain");
+                    if (data) {
+                        for (let ch of data) {
+                            if (ch === "\n") {
+                                console.log("Got newline");
+                            }
+                            if (ch === "\r") {
+                                console.log("Got return");
+                            }
+                            if (ch === "\n" || ch === "\r") {
+                                ch = "Enter";
+                            }
+                            this.keyEvent(ch, true);
+                            this.keyEvent(ch, false);
+                        }
+                    }
+                }
+                event.preventDefault();
+            });
         }
         // Dequeue the next key and set its bit. Return whether a key was processed.
         processKeyQueue() {
@@ -10847,6 +10867,7 @@
         reset() {
             this.setIrqMask(0);
             this.setNmiMask(0);
+            this.resetCassette();
             this.keyboard.clearKeyboard();
             this.setTimerInterrupt(false);
             this.z80.reset();
@@ -10980,10 +11001,10 @@
                 case 0xEE:
                 case 0xEF:
                     // Various controls.
-                    // TODO
                     this.modeImage = value;
                     this.setCassetteMotor((value & 0x02) !== 0);
-                    // this.setExpandedCharacters(value&0x04 !== 0)
+                    // TODO
+                    // this.setExpandedCharacters((value & 0x04) !== 0);
                     break;
                 case 0xF0:
                     // Disk command.
@@ -11196,7 +11217,9 @@
         }
         // Kick off the reading process when doing 1500-baud reads.
         kickOffCassette() {
-            if (this.cassetteMotorOn && this.cassetteState === CassetteState.CLOSE && this.cassetteInterruptsEnabled()) {
+            if (this.cassetteMotorOn &&
+                this.cassetteState === CassetteState.CLOSE &&
+                this.cassetteInterruptsEnabled()) {
                 // Kick off the process.
                 this.cassetteRiseInterrupt();
                 this.cassetteFallInterrupt();
@@ -11208,8 +11231,9 @@
                 if (cassetteMotorOn) {
                     this.cassetteFlipFlop = false;
                     this.cassetteLastNonZeroValue = CassetteValue.NEUTRAL;
-                    // TODO: the Go code waits a second before kicking off the cassette.
-                    this.kickOffCassette();
+                    // Waits a second before kicking off the cassette.
+                    // TODO this should be in CPU cycles, not browser cycles.
+                    setTimeout(() => this.kickOffCassette(), 1000);
                 }
                 else {
                     this.setCassetteState(CassetteState.CLOSE);
@@ -11279,7 +11303,7 @@
         }
         // Open file, get metadata, and get read to read the tape.
         openCassetteFile() {
-            // TODO open cassette.
+            // TODO open/rewind cassette?
             // Reset the clock.
             this.cassetteMotorOnClock = this.tStateCount;
             this.cassetteSamplesRead = 0;
