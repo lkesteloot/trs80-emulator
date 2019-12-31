@@ -11156,7 +11156,7 @@
                     this.clocksPerTick = Math.max(this.clocksPerTick - 100, 100);
                 }
             }
-            console.log(this.clocksPerTick, delay);
+            // console.log(this.clocksPerTick, delay);
             this.cancelTickTimeout();
             this.tickHandle = window.setTimeout(() => {
                 this.tickHandle = undefined;
