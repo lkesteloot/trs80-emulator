@@ -10507,6 +10507,7 @@
     keyMap.set("ArrowUp", new KeyInfo(6, 3, ShiftState.NEUTRAL));
     keyMap.set("ArrowDown", new KeyInfo(6, 4, ShiftState.NEUTRAL));
     keyMap.set("ArrowLeft", new KeyInfo(6, 5, ShiftState.NEUTRAL));
+    keyMap.set("Backspace", new KeyInfo(6, 5, ShiftState.NEUTRAL)); // Left arrow
     keyMap.set("ArrowRight", new KeyInfo(6, 6, ShiftState.NEUTRAL));
     keyMap.set(" ", new KeyInfo(6, 7, ShiftState.NEUTRAL));
     keyMap.set("Shift", new KeyInfo(7, 0, ShiftState.NEUTRAL));
@@ -10596,7 +10597,7 @@
                 if (event.metaKey || event.ctrlKey) {
                     return;
                 }
-                let key = event.key;
+                const key = event.key;
                 if (key !== "") {
                     this.keyEvent(key, isPressed);
                     event.preventDefault();
@@ -10890,7 +10891,7 @@
                 case 0xFD:
                 case 0xFE:
                 case 0xFF:
-                    if ((value & 0x20) != 0) {
+                    if ((value & 0x20) !== 0) {
                         // Model III Micro Labs graphics card.
                         console.log("Sending 0x" + toHex(value, 2) + " to Micro Labs graphics card");
                     }
@@ -10932,6 +10933,14 @@
                 }
                 this.memory[address] = value;
             }
+        }
+        // Reset cassette edge interrupts.
+        cassetteClearInterrupt() {
+            this.irqLatch &= ~CASSETTE_IRQ_MASKS;
+        }
+        // Check whether the software has enabled these interrupts.
+        cassetteInterruptsEnabled() {
+            return (this.irqMask & CASSETTE_IRQ_MASKS) !== 0;
         }
         // Reset whether we've seen this NMI interrupt if the mask and latch no longer overlap.
         updateNmiSeen() {
@@ -11198,14 +11207,6 @@
             this.cassetteFallInterruptCount++;
             this.irqLatch = (this.irqLatch & ~CASSETTE_FALL_IRQ_MASK) |
                 (this.irqMask & CASSETTE_FALL_IRQ_MASK);
-        }
-        // Reset cassette edge interrupts.
-        cassetteClearInterrupt() {
-            this.irqLatch &= ~CASSETTE_IRQ_MASKS;
-        }
-        // Check whether the software has enabled these interrupts.
-        cassetteInterruptsEnabled() {
-            return (this.irqMask & CASSETTE_IRQ_MASKS) != 0;
         }
     }
     Trs80.TIMER_CYCLES = CLOCK_HZ / TIMER_HZ;
