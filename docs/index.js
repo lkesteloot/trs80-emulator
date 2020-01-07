@@ -4,8 +4,10 @@
     (global = global || self, factory(global.Trs80Emulator = {}));
 }(this, (function (exports) { 'use strict';
 
-    // Interface for fetching cassette audio data. We make this a concrete
-    // class because rollup.js can't handle exported interfaces.
+    /**
+     * Interface for fetching cassette audio data. We make this a concrete
+     * class because rollup.js can't handle exported interfaces.
+     */
     class Cassette {
         constructor() {
             /**
@@ -14,11 +16,23 @@
             this.samplesPerSecond = 44100;
         }
         /**
+         * Called when the motor starts.
+         */
+        onMotorStart() {
+            // Optional function.
+        }
+        /**
          * Read the next sample. Must be in the range -1 to 1. If we try to read off
          * the end of the cassette, just return zero.
          */
         readSample() {
             return 0;
+        }
+        /**
+         * Called when the motor stops.
+         */
+        onMotorStop() {
+            // Optional function.
         }
     }
 
@@ -11123,7 +11137,12 @@
                     this.setCassetteState(CassetteState.CLOSE);
                 }
                 this.cassetteMotorOn = cassetteMotorOn;
-                this.updateCassetteMotorLight();
+                if (cassetteMotorOn) {
+                    this.cassette.onMotorStart();
+                }
+                else {
+                    this.cassette.onMotorStop();
+                }
             }
         }
         // Read some of the cassette to see if we should be triggering a rise/fall interrupt.
@@ -11191,10 +11210,6 @@
             // Reset the clock.
             this.cassetteMotorOnClock = this.tStateCount;
             this.cassetteSamplesRead = 0;
-        }
-        // Update the status of the red light on the display.
-        updateCassetteMotorLight() {
-            // TODO Update UI light based on this.cassetteMotorOn.
         }
         // Saw a positive edge on cassette.
         cassetteRiseInterrupt() {
