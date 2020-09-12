@@ -7,7 +7,9 @@
         <div id="screen"></div>
         <script type="module">
             import "./index.js";
-            const screen = document.getElementById("screen");
+            const screenNode = document.getElementById("screen");
+            const screen = new Trs80Emulator.CssScreen(screenNode);
+            /// const screen = new Trs80Emulator.WebGlScreen(screenNode);
             const trs80 = new Trs80Emulator.Trs80(screen, new Trs80Emulator.Cassette());
             trs80.reset();
             trs80.start();
