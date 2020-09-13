@@ -11,6 +11,10 @@
             const screen = new Trs80Emulator.CssScreen(screenNode);
             /// const screen = new Trs80Emulator.WebGlScreen(screenNode);
             const trs80 = new Trs80Emulator.Trs80(screen, new Trs80Emulator.Cassette());
+
+            let controlPanel = new Trs80Emulator.ControlPanel(screen.getNode());
+            controlPanel.addResetButton(() => trs80.reset());
+
             trs80.reset();
             trs80.start();
         </script>
