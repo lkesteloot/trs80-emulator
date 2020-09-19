@@ -12011,9 +12011,86 @@ void main() {
         }
     }
 
+    const gCssPrefix$1 = CSS_PREFIX + "-progress-bar";
+    const gScreenNodeCssClass$1 = gCssPrefix$1 + "-screen-node";
+    const gBarCssClass = gCssPrefix$1 + "-bar";
+    const gSubbarCssClass = gCssPrefix$1 + "-subbar";
+    const GLOBAL_CSS$1 = "." + gBarCssClass + ` {
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 15%;
+    width: 70%;
+    bottom: 10%;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity .20s ease-in-out;
+}
+
+.` + gSubbarCssClass + ` {
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 0;
+    height: 20px;
+}
+
+.` + gScreenNodeCssClass$1 + ` {
+    /* Force the screen node to relative positioning. Hope that doesn't screw anything up. */
+    position: relative;
+}
+
+`;
+    /**
+     * Overlay on top of a screen to show progress, for instance the position of a cassette tape.
+     */
+    class ProgressBar {
+        /**
+         * @param screenNode the node from the Trs80Screen object's getNode() method.
+         */
+        constructor(screenNode) {
+            this.maxValue = 100;
+            // Make global CSS if necessary.
+            ProgressBar.configureStyle();
+            screenNode.classList.add(gScreenNodeCssClass$1);
+            this.barNode = document.createElement("div");
+            this.barNode.classList.add(gBarCssClass);
+            screenNode.appendChild(this.barNode);
+            this.subbarNode = document.createElement("div");
+            this.subbarNode.classList.add(gSubbarCssClass);
+            this.barNode.appendChild(this.subbarNode);
+        }
+        setMaxValue(maxValue) {
+            this.maxValue = maxValue;
+        }
+        setValue(value) {
+            this.subbarNode.style.width = "" + Math.round(value * 100 / this.maxValue) + "%";
+        }
+        show() {
+            this.barNode.style.opacity = "1";
+        }
+        hide() {
+            this.barNode.style.opacity = "0";
+        }
+        /**
+         * Make a global stylesheet for all TRS-80 emulators on this page.
+         */
+        static configureStyle() {
+            const styleId = gCssPrefix$1;
+            if (document.getElementById(styleId) !== null) {
+                // Already created.
+                return;
+            }
+            const node = document.createElement("style");
+            node.id = styleId;
+            node.innerHTML = GLOBAL_CSS$1;
+            document.head.appendChild(node);
+        }
+    }
+
     exports.Cassette = Cassette;
     exports.ControlPanel = ControlPanel;
     exports.CssScreen = CssScreen;
+    exports.ProgressBar = ProgressBar;
     exports.Trs80 = Trs80;
     exports.WebGlScreen = WebGlScreen;
 
