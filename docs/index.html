@@ -14,6 +14,8 @@
 
             let controlPanel = new Trs80Emulator.ControlPanel(screen.getNode());
             controlPanel.addResetButton(() => trs80.reset());
+            controlPanel.addTapeRewindButton(() => trs80.reset());
+            controlPanel.addScreenshotButton(() => trs80.reset());
 
             trs80.reset();
             trs80.start();
