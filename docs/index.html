@@ -20,8 +20,8 @@
 
             const controlPanel = new Trs80Emulator.ControlPanel(screen.getNode());
             controlPanel.addResetButton(() => trs80.reset());
-            controlPanel.addTapeRewindButton(() => progressBar.show());
-            controlPanel.addScreenshotButton(() => progressBar.hide());
+            // controlPanel.addTapeRewindButton(() => progressBar.show());
+            // controlPanel.addScreenshotButton(() => progressBar.hide());
             controlPanel.addSettingsButton(settingsPanel);
 
             trs80.reset();
