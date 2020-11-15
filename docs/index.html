@@ -8,8 +8,7 @@
         <script type="module">
             import "./index.js";
             const screenNode = document.getElementById("screen");
-            const screen = new Trs80Emulator.CssScreen(screenNode);
-            /// const screen = new Trs80Emulator.WebGlScreen(screenNode);
+            const screen = new Trs80Emulator.CanvasScreen(screenNode);
             const trs80 = new Trs80Emulator.Trs80(screen, new Trs80Emulator.Cassette());
 
             const progressBar = new Trs80Emulator.ProgressBar(screen.getNode());
