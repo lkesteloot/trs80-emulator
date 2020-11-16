@@ -11690,7 +11690,7 @@
          * Make a bitmap for the specified character (0-255). "on" pixels are the
          * specified color, "off" pixels are fully transparent.
          */
-        makeImage(char, rgb, expanded) {
+        makeImage(char, expanded, options) {
             const canvas = document.createElement("canvas");
             let expandedMultiplier = expanded ? 2 : 1;
             canvas.width = this.width * expandedMultiplier;
@@ -11705,10 +11705,11 @@
                 const pixel = (byte & (1 << bit)) !== 0;
                 if (pixel) {
                     const pixelOffset = (y * canvas.width + x) * 4;
-                    imageData.data[pixelOffset + 0] = rgb[0];
-                    imageData.data[pixelOffset + 1] = rgb[1];
-                    imageData.data[pixelOffset + 2] = rgb[2];
-                    imageData.data[pixelOffset + 3] = 0xFF;
+                    const alpha = options.scanlines ? (y % 2 == 0 ? 0xFF : 0xAA) : 0xFF;
+                    imageData.data[pixelOffset + 0] = options.color[0];
+                    imageData.data[pixelOffset + 1] = options.color[1];
+                    imageData.data[pixelOffset + 2] = options.color[2];
+                    imageData.data[pixelOffset + 3] = alpha;
                 }
             };
             const bankOffset = this.banks[Math.floor(char / 64)];
@@ -11741,7 +11742,6 @@
     }
     // Original Model III, with special symbols.
     const MODEL3_FONT = new Font(GLYPH_CG4, 8, 12, [0, 64, -1, 128]);
-    //# sourceMappingURL=Fonts.js.map
 
     const cssPrefix = CSS_PREFIX + "-canvas-screen";
     const BASE_CSS = `
@@ -11806,9 +11806,13 @@
                 this.thumbnailImage.height = 16 * 24 / 3;
                 this.node.appendChild(this.thumbnailImage);
             }
+            const glyphOptions = {
+                color: WHITE_PHOSPHOR,
+                scanlines: true,
+            };
             for (let i = 0; i < 256; i++) {
-                this.narrowGlyphs.push(MODEL3_FONT.makeImage(i, WHITE_PHOSPHOR, false));
-                this.expandedGlyphs.push(MODEL3_FONT.makeImage(i, WHITE_PHOSPHOR, true));
+                this.narrowGlyphs.push(MODEL3_FONT.makeImage(i, false, glyphOptions));
+                this.expandedGlyphs.push(MODEL3_FONT.makeImage(i, true, glyphOptions));
             }
             // Make global CSS if necessary.
             configureStylesheet();
@@ -11860,6 +11864,7 @@
             }
         }
     }
+    //# sourceMappingURL=CanvasScreen.js.map
 
     const gCssPrefix = CSS_PREFIX + "-control-panel";
     const gScreenNodeCssClass = gCssPrefix + "-screen-node";
