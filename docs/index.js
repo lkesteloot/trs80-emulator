@@ -11769,6 +11769,7 @@
     }
     // Run it on the next event cycle.
     const UPDATE_THUMBNAIL_TIMEOUT_MS = 0;
+    const WHITE_PHOSPHOR = [230, 231, 252];
     /**
      * TRS-80 screen based on an HTML canvas element.
      */
@@ -11804,7 +11805,7 @@
                 this.node.appendChild(this.thumbnailImage);
             }
             for (let i = 0; i < 256; i++) {
-                this.glyphs.push(MODEL3_FONT.makeImage(i, [255, 255, 255]));
+                this.glyphs.push(MODEL3_FONT.makeImage(i, WHITE_PHOSPHOR));
             }
             // Make global CSS if necessary.
             configureStylesheet();
@@ -11856,6 +11857,7 @@
             }
         }
     }
+    //# sourceMappingURL=CanvasScreen.js.map
 
     const gCssPrefix = CSS_PREFIX + "-control-panel";
     const gScreenNodeCssClass = gCssPrefix + "-screen-node";
