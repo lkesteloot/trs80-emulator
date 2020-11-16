@@ -11690,20 +11690,21 @@
          * Make a bitmap for the specified character (0-255). "on" pixels are the
          * specified color, "off" pixels are fully transparent.
          */
-        makeImage(char, rgb) {
+        makeImage(char, rgb, expanded) {
             const canvas = document.createElement("canvas");
-            canvas.width = this.width;
+            let expandedMultiplier = expanded ? 2 : 1;
+            canvas.width = this.width * expandedMultiplier;
             canvas.height = this.height * 2;
             const ctx = canvas.getContext("2d");
             if (ctx === null) {
                 throw new Error("2d context not supported");
             }
-            const imageData = ctx.createImageData(this.width, this.height * 2);
+            const imageData = ctx.createImageData(canvas.width, canvas.height);
             // Light pixel at (x,y) in imageData if bit "bit" of "byte" is on.
             const lightPixel = (x, y, byte, bit) => {
                 const pixel = (byte & (1 << bit)) !== 0;
                 if (pixel) {
-                    const pixelOffset = (y * this.width + x) * 4;
+                    const pixelOffset = (y * canvas.width + x) * 4;
                     imageData.data[pixelOffset + 0] = rgb[0];
                     imageData.data[pixelOffset + 1] = rgb[1];
                     imageData.data[pixelOffset + 2] = rgb[2];
@@ -11714,10 +11715,10 @@
             if (bankOffset === -1) {
                 // Graphical character.
                 const byte = char % 64;
-                for (let y = 0; y < this.height * 2; y++) {
-                    const py = Math.floor(y / (this.height * 2 / 3));
-                    for (let x = 0; x < this.width; x++) {
-                        const px = Math.floor(x / (this.width / 2));
+                for (let y = 0; y < canvas.height; y++) {
+                    const py = Math.floor(y / (canvas.height / 3));
+                    for (let x = 0; x < canvas.width; x++) {
+                        const px = Math.floor(x / (canvas.width / 2));
                         const bit = py * 2 + px;
                         lightPixel(x, y, byte, bit);
                     }
@@ -11727,10 +11728,10 @@
                 // Bitmap character.
                 const charOffset = bankOffset + char % 64;
                 const byteOffset = charOffset * 12;
-                for (let y = 0; y < this.height * 2; y++) {
+                for (let y = 0; y < canvas.height; y++) {
                     const byte = this.bits[byteOffset + Math.floor(y / 2)];
-                    for (let x = 0; x < this.width; x++) {
-                        lightPixel(x, y, byte, x);
+                    for (let x = 0; x < canvas.width; x++) {
+                        lightPixel(x, y, byte, Math.floor(x / expandedMultiplier));
                     }
                 }
             }
@@ -11776,7 +11777,8 @@
     class CanvasScreen extends Trs80Screen {
         constructor(parentNode, isThumbnail) {
             super();
-            this.glyphs = [];
+            this.narrowGlyphs = [];
+            this.expandedGlyphs = [];
             clearElement(parentNode);
             // Make our own sub-node that we have control over.
             this.node = document.createElement("div");
@@ -11805,7 +11807,8 @@
                 this.node.appendChild(this.thumbnailImage);
             }
             for (let i = 0; i < 256; i++) {
-                this.glyphs.push(MODEL3_FONT.makeImage(i, WHITE_PHOSPHOR));
+                this.narrowGlyphs.push(MODEL3_FONT.makeImage(i, WHITE_PHOSPHOR, false));
+                this.expandedGlyphs.push(MODEL3_FONT.makeImage(i, WHITE_PHOSPHOR, true));
             }
             // Make global CSS if necessary.
             configureStylesheet();
@@ -11815,10 +11818,10 @@
             const screenX = (offset % 64) * 8;
             const screenY = Math.floor(offset / 64) * 24;
             this.narrowContext.clearRect(screenX, screenY, 8, 24);
-            this.narrowContext.drawImage(this.glyphs[value], 0, 0, 8, 24, screenX, screenY, 8, 24);
+            this.narrowContext.drawImage(this.narrowGlyphs[value], 0, 0, 8, 24, screenX, screenY, 8, 24);
             if (offset % 2 === 0) {
                 this.expandedContext.clearRect(screenX, screenY, 16, 24);
-                this.expandedContext.drawImage(this.glyphs[value], 0, 0, 16, 24, screenX, screenY, 16, 24);
+                this.expandedContext.drawImage(this.expandedGlyphs[value], 0, 0, 16, 24, screenX, screenY, 16, 24);
             }
             this.scheduleUpdateThumbnail();
         }
@@ -11857,7 +11860,6 @@
             }
         }
     }
-    //# sourceMappingURL=CanvasScreen.js.map
 
     const gCssPrefix = CSS_PREFIX + "-control-panel";
     const gScreenNodeCssClass = gCssPrefix + "-screen-node";
