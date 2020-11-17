@@ -10750,6 +10750,17 @@
             return true;
         }
         /**
+         * Whether this new config needs to be rebooted, if the emulator currently is running the old config.
+         */
+        needsReboot(oldConfig) {
+            // Maybe here we could not reboot if only the CG chip changed. The software is able to detect the
+            // difference (since bit 6 is synthetic in one case).
+            return this.modelType !== oldConfig.modelType ||
+                this.basicLevel !== oldConfig.basicLevel ||
+                this.cgChip !== oldConfig.cgChip ||
+                this.ramSize !== oldConfig.ramSize;
+        }
+        /**
          * Return the RAM size in bytes.
          */
         getRamSize() {
@@ -10872,12 +10883,17 @@
             return this.config;
         }
         /**
-         * Sets a new configuration and reboots into it.
+         * Sets a new configuration and reboots into it if necessary.
          */
         setConfig(config) {
+            const needsReboot = config.needsReboot(this.config);
             this.config = config;
-            this.updateFromConfig();
-            this.reset();
+            const videoMemory = this.memory.slice(SCREEN_BEGIN, SCREEN_END);
+            this.screen.setConfig(this.config, videoMemory);
+            if (needsReboot) {
+                this.updateFromConfig();
+                this.reset();
+            }
         }
         /**
          * Update our settings based on the config. Wipes memory.
@@ -10886,7 +10902,6 @@
             this.memory = new Uint8Array(RAM_START + this.config.getRamSize());
             this.memory.fill(0);
             this.loadRom();
-            this.screen.setConfig(this.config, []);
         }
         /**
          * Load the config-specific ROM into memory.
@@ -12197,7 +12212,7 @@
                 this.thumbnailImage.height = 16 * 24 / 3;
                 this.node.appendChild(this.thumbnailImage);
             }
-            this.setConfig(Config.makeDefault(), []);
+            this.setConfig(Config.makeDefault(), new Uint8Array(0));
             // Make global CSS if necessary.
             configureStylesheet();
         }
@@ -12468,6 +12483,7 @@
     const gScreenNodeCssClass$1 = gCssPrefix$1 + "-screen-node";
     const gPanelCssClass$1 = gCssPrefix$1 + "-panel";
     const gShownCssClass = gCssPrefix$1 + "-shown";
+    const gAcceptButtonCssClass = gCssPrefix$1 + "-accept";
     const gRebootButtonCssClass = gCssPrefix$1 + "-reboot";
     const gOptionsClass = gCssPrefix$1 + "-options";
     const gButtonsClass = gCssPrefix$1 + "-buttons";
@@ -12523,11 +12539,13 @@
 .${gPanelCssClass$1} input[type=radio] + label {
     display: block;
     flex-grow: 1;
+    flex-basis: 0;
     text-align: center;
     padding: 4px 16px;
     margin-left: 10px;
     border-radius: 3px;
     background-color: #44443A;
+    white-space: nowrap;
 }
 
 .${gPanelCssClass$1} input[type=radio] + label:first-of-type {
@@ -12554,6 +12572,7 @@
 .${gPanelCssClass$1} a {
     display: block;
     flex-grow: 1;
+    flex-basis: 0;
     text-align: center;
     padding: 4px 16px;
     border-radius: 3px;
@@ -12567,10 +12586,18 @@
     margin-left: 0;
 }
 
+.${gPanelCssClass$1} a.${gAcceptButtonCssClass} {
+    font-weight: bold;
+    color: #eee;
+    background-color: #449944;
+}
+
+.${gPanelCssClass$1} a.${gAcceptButtonCssClass}:hover {
+    background-color: #338833;
+}
+
 .${gPanelCssClass$1} a.${gRebootButtonCssClass} {
     background-color: #D25F43;
-    color: #eee;
-    font-weight: bold;
 }
 
 .${gPanelCssClass$1} a:hover {
@@ -12732,14 +12759,14 @@
             const buttonsDiv = document.createElement("div");
             buttonsDiv.classList.add(gButtonsClass);
             div.appendChild(buttonsDiv);
-            const rebootButton = document.createElement("a");
-            rebootButton.classList.add(gRebootButtonCssClass);
-            rebootButton.innerText = "Reboot";
-            rebootButton.addEventListener("click", (event) => {
+            this.acceptButton = document.createElement("a");
+            this.acceptButton.classList.add(gAcceptButtonCssClass);
+            this.acceptButton.addEventListener("click", (event) => {
                 event.preventDefault();
-                this.reboot();
+                this.accept();
             });
-            buttonsDiv.appendChild(rebootButton);
+            buttonsDiv.appendChild(this.acceptButton);
+            this.configureAcceptButton(this.trs80.getConfig());
             const cancelButton = document.createElement("a");
             cancelButton.innerText = "Cancel";
             cancelButton.addEventListener("click", (event) => {
@@ -12763,9 +12790,9 @@
             this.panelNode.classList.add(gShownCssClass);
         }
         /**
-         * Reboot the machine (and close the dialog box).
+         * Accept the changes, configure the machine, and close the dialog box.
          */
-        reboot() {
+        accept() {
             this.trs80.setConfig(this.getConfig());
             this.close();
         }
@@ -12786,6 +12813,20 @@
             for (const displayedOption of this.displayedOptions) {
                 const enabled = displayedOption.block.updateConfig(displayedOption.option.value, config).isValid();
                 displayedOption.input.disabled = !enabled;
+            }
+            this.configureAcceptButton(config);
+        }
+        /**
+         * Set the accept button to be OK or Reboot.
+         */
+        configureAcceptButton(config) {
+            if (config.needsReboot(this.trs80.getConfig())) {
+                this.acceptButton.classList.add(gRebootButtonCssClass);
+                this.acceptButton.innerText = "Reboot";
+            }
+            else {
+                this.acceptButton.classList.remove(gRebootButtonCssClass);
+                this.acceptButton.innerText = "OK";
             }
         }
         /**
@@ -12816,7 +12857,6 @@
             document.head.appendChild(node);
         }
     }
-    //# sourceMappingURL=SettingsPanel.js.map
 
     const gCssPrefix$2 = CSS_PREFIX + "-progress-bar";
     const gScreenNodeCssClass$2 = gCssPrefix$2 + "-screen-node";
