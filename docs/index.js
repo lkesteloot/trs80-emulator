@@ -10772,6 +10772,7 @@
             return kb * 1024;
         }
     }
+    //# sourceMappingURL=Config.js.map
 
     // IRQs
     const CASSETTE_RISE_IRQ_MASK = 0x01;
@@ -10807,6 +10808,15 @@
      */
     function isScreenAddress(address) {
         return address >= SCREEN_BEGIN && address < SCREEN_END;
+    }
+    /**
+     * See the FONT.md file for an explanation of this, but basically bit 6 is the NOR of bits 5 and 7.
+     */
+    function computeVideoBit6(value) {
+        const bit5 = (value >> 5) & 1;
+        const bit7 = (value >> 7) & 1;
+        const bit6 = (bit5 | bit7) ^ 1;
+        return (value & 0xBF) | (bit6 << 6);
     }
     /**
      * HAL for the TRS-80 Model III.
@@ -11088,6 +11098,10 @@
             }
             else {
                 if (address >= SCREEN_BEGIN && address < SCREEN_END) {
+                    if (this.config.cgChip === CGChip.ORIGINAL) {
+                        // No bit 6 in video memory, need to compute it.
+                        value = computeVideoBit6(value);
+                    }
                     this.screen.writeChar(address, value);
                 }
                 else if (address < RAM_START) {
@@ -11386,6 +11400,7 @@
         }
     }
     Trs80.TIMER_CYCLES = CLOCK_HZ / TIMER_HZ;
+    //# sourceMappingURL=Trs80.js.map
 
     /**
      * Abstract base class for displaying a screen.
@@ -11467,6 +11482,7 @@
             }
         }
     }
+    //# sourceMappingURL=Trs80Screen.js.map
 
     /**
      * These fonts are from the xtrs emulator, and the CG# references match those.
@@ -12279,6 +12295,7 @@
             }
         }
     }
+    //# sourceMappingURL=CanvasScreen.js.map
 
     const gCssPrefix = CSS_PREFIX + "-control-panel";
     const gScreenNodeCssClass = gCssPrefix + "-screen-node";
@@ -12328,7 +12345,7 @@
 `;
     const GLOBAL_CSS = `
 .${gPanelCssClass} {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
     right: 10px;
     top: 10px;
@@ -12445,6 +12462,7 @@
             document.head.appendChild(node);
         }
     }
+    //# sourceMappingURL=ControlPanel.js.map
 
     const gCssPrefix$1 = CSS_PREFIX + "-settings-panel";
     const gScreenNodeCssClass$1 = gCssPrefix$1 + "-screen-node";
@@ -12798,6 +12816,7 @@
             document.head.appendChild(node);
         }
     }
+    //# sourceMappingURL=SettingsPanel.js.map
 
     const gCssPrefix$2 = CSS_PREFIX + "-progress-bar";
     const gScreenNodeCssClass$2 = gCssPrefix$2 + "-screen-node";
