@@ -12185,6 +12185,7 @@
             super();
             this.narrowGlyphs = [];
             this.expandedGlyphs = [];
+            this.glyphWidth = 0;
             clearElement(parentNode);
             // Make our own sub-node that we have control over.
             this.node = document.createElement("div");
@@ -12258,6 +12259,7 @@
                 this.narrowGlyphs.push(font.makeImage(i, false, glyphOptions));
                 this.expandedGlyphs.push(font.makeImage(i, true, glyphOptions));
             }
+            this.glyphWidth = font.width;
             // Refresh screen.
             for (let i = 0; i < values.length; i++) {
                 this.writeChar(SCREEN_BEGIN + i, values[i]);
@@ -12268,10 +12270,10 @@
             const screenX = (offset % 64) * 8;
             const screenY = Math.floor(offset / 64) * 24;
             this.narrowContext.clearRect(screenX, screenY, 8, 24);
-            this.narrowContext.drawImage(this.narrowGlyphs[value], 0, 0, 8, 24, screenX, screenY, 8, 24);
+            this.narrowContext.drawImage(this.narrowGlyphs[value], 0, 0, this.glyphWidth, 24, screenX, screenY, 8, 24);
             if (offset % 2 === 0) {
                 this.expandedContext.clearRect(screenX, screenY, 16, 24);
-                this.expandedContext.drawImage(this.expandedGlyphs[value], 0, 0, 16, 24, screenX, screenY, 16, 24);
+                this.expandedContext.drawImage(this.expandedGlyphs[value], 0, 0, this.glyphWidth * 2, 24, screenX, screenY, 16, 24);
             }
             this.scheduleUpdateThumbnail();
         }
@@ -12857,6 +12859,7 @@
             document.head.appendChild(node);
         }
     }
+    //# sourceMappingURL=SettingsPanel.js.map
 
     const gCssPrefix$2 = CSS_PREFIX + "-progress-bar";
     const gScreenNodeCssClass$2 = gCssPrefix$2 + "-screen-node";
