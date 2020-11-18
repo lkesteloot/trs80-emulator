@@ -11041,7 +11041,7 @@
         }
         readPort(address) {
             const port = address & 0xFF;
-            let value;
+            let value = 0xFF; // Default value for missing ports.
             switch (port) {
                 case 0x00:
                     // Joystick.
@@ -11478,6 +11478,7 @@
                 (this.irqMask & M3_CASSETTE_FALL_IRQ_MASK);
         }
     }
+    //# sourceMappingURL=Trs80.js.map
 
     /**
      * Abstract base class for displaying a screen.
