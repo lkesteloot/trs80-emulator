@@ -10786,18 +10786,21 @@
     //# sourceMappingURL=Config.js.map
 
     // IRQs
-    const CASSETTE_RISE_IRQ_MASK = 0x01;
-    const CASSETTE_FALL_IRQ_MASK = 0x02;
-    const TIMER_IRQ_MASK = 0x04;
-    const CASSETTE_IRQ_MASKS = CASSETTE_RISE_IRQ_MASK | CASSETTE_FALL_IRQ_MASK;
+    const M1_TIMER_IRQ_MASK = 0x80;
+    const M3_CASSETTE_RISE_IRQ_MASK = 0x01;
+    const M3_CASSETTE_FALL_IRQ_MASK = 0x02;
+    const M3_TIMER_IRQ_MASK = 0x04;
+    const CASSETTE_IRQ_MASKS = M3_CASSETTE_RISE_IRQ_MASK | M3_CASSETTE_FALL_IRQ_MASK;
     // NMIs
     const RESET_NMI_MASK = 0x20;
     // Timer.
-    const TIMER_HZ = 30;
+    const M1_TIMER_HZ = 40;
+    const M3_TIMER_HZ = 30;
     const ROM_SIZE = 14 * 1024;
     const RAM_START = 16 * 1024;
-    // https://en.wikipedia.org/wiki/TRS-80#Model_III
-    const CLOCK_HZ = 2030000;
+    // CPU clock speeds.
+    const M1_CLOCK_HZ = 1774080;
+    const M3_CLOCK_HZ = 2027520;
     const INITIAL_CLICKS_PER_TICK = 2000;
     const CASSETTE_THRESHOLD = 5000 / 32768.0;
     // State of the cassette hardware. We don't support writing.
@@ -10834,6 +10837,8 @@
      */
     class Trs80 {
         constructor(screen, cassette) {
+            this.timerHz = M3_TIMER_HZ;
+            this.clockHz = M3_CLOCK_HZ;
             this.tStateCount = 0;
             this.memory = new Uint8Array(0);
             this.keyboard = new Keyboard();
@@ -10901,6 +10906,17 @@
             this.memory = new Uint8Array(RAM_START + this.config.getRamSize());
             this.memory.fill(0);
             this.loadRom();
+            switch (this.config.modelType) {
+                case ModelType.MODEL1:
+                    this.timerHz = M1_TIMER_HZ;
+                    this.clockHz = M1_CLOCK_HZ;
+                    break;
+                case ModelType.MODEL3:
+                default:
+                    this.timerHz = M3_TIMER_HZ;
+                    this.clockHz = M3_CLOCK_HZ;
+                    break;
+            }
         }
         /**
          * Load the config-specific ROM into memory.
@@ -10967,6 +10983,17 @@
             this.nmiMask = nmiMask | RESET_NMI_MASK;
             this.updateNmiSeen();
         }
+        interruptLatchRead() {
+            if (this.config.modelType === ModelType.MODEL1) {
+                const irqLatch = this.irqLatch;
+                this.setTimerInterrupt(false);
+                // TODO irq = this.irqLatch !== 0;
+                return irqLatch;
+            }
+            else {
+                return ~this.irqLatch & 0xFF;
+            }
+        }
         step() {
             this.z80.step();
             // Handle non-maskable interrupts.
@@ -10981,7 +11008,7 @@
                 this.z80.maskableInterrupt();
             }
             // Set off a timer interrupt.
-            if (this.tStateCount > this.previousTimerClock + Trs80.TIMER_CYCLES) {
+            if (this.tStateCount > this.previousTimerClock + this.clockHz / this.timerHz) {
                 this.handleTimer();
                 this.previousTimerClock = this.tStateCount;
             }
@@ -11021,20 +11048,26 @@
                     value = 0xFF;
                     break;
                 case 0xE0:
-                    // IRQ latch read.
-                    value = ~this.irqLatch & 0xFF;
+                    if (this.config.modelType !== ModelType.MODEL1) {
+                        // IRQ latch read.
+                        value = this.interruptLatchRead();
+                    }
                     break;
                 case 0xE4:
-                    // NMI latch read.
-                    value = ~this.nmiLatch & 0xFF;
+                    if (this.config.modelType !== ModelType.MODEL1) {
+                        // NMI latch read.
+                        value = ~this.nmiLatch & 0xFF;
+                    }
                     break;
                 case 0xEC:
                 case 0xED:
                 case 0xEE:
                 case 0xEF:
-                    // Acknowledge timer.
-                    this.setTimerInterrupt(false);
-                    value = 0xFF;
+                    if (this.config.modelType !== ModelType.MODEL1) {
+                        // Acknowledge timer.
+                        this.setTimerInterrupt(false);
+                        value = 0xFF;
+                    }
                     break;
                 case 0xF0:
                     // No diskette.
@@ -11042,7 +11075,16 @@
                     break;
                 case 0xFF:
                     // Cassette and various flags.
-                    value = (this.modeImage & 0x7E) | this.getCassetteByte();
+                    if (this.config.modelType === ModelType.MODEL1) {
+                        value = 0x3F;
+                        if (!this.screen.isExpandedCharacters()) {
+                            value |= 0x40;
+                        }
+                    }
+                    else {
+                        value = this.modeImage & 0x7E;
+                    }
+                    value |= this.getCassetteByte();
                     break;
                 default:
                     console.log("Reading from unknown port 0x" + toHex(lo(address), 2));
@@ -11055,25 +11097,31 @@
             const port = address & 0xFF;
             switch (port) {
                 case 0xE0:
-                    // Set interrupt mask.
-                    this.setIrqMask(value);
+                    if (this.config.modelType !== ModelType.MODEL1) {
+                        // Set interrupt mask.
+                        this.setIrqMask(value);
+                    }
                     break;
                 case 0xE4:
                 case 0xE5:
                 case 0xE6:
                 case 0xE7:
-                    // Set NMI state.
-                    this.setNmiMask(value);
+                    if (this.config.modelType !== ModelType.MODEL1) {
+                        // Set NMI state.
+                        this.setNmiMask(value);
+                    }
                     break;
                 case 0xEC:
                 case 0xED:
                 case 0xEE:
                 case 0xEF:
-                    // Various controls.
-                    this.modeImage = value;
-                    this.setCassetteMotor((value & 0x02) !== 0);
-                    this.screen.setExpandedCharacters((value & 0x04) !== 0);
-                    this.screen.setAlternateCharacters((value & 0x08) === 0);
+                    if (this.config.modelType !== ModelType.MODEL1) {
+                        // Various controls.
+                        this.modeImage = value;
+                        this.setCassetteMotor((value & 0x02) !== 0);
+                        this.screen.setExpandedCharacters((value & 0x04) !== 0);
+                        this.screen.setAlternateCharacters((value & 0x08) === 0);
+                    }
                     break;
                 case 0xF0:
                     // Disk command.
@@ -11092,6 +11140,10 @@
                 case 0xFD:
                 case 0xFE:
                 case 0xFF:
+                    if (this.config.modelType === ModelType.MODEL1) {
+                        this.setCassetteMotor((value & 0x04) !== 0);
+                        this.screen.setExpandedCharacters((value & 0x08) !== 0);
+                    }
                     if ((value & 0x20) !== 0) {
                         // Model III Micro Labs graphics card.
                         console.log("Sending 0x" + toHex(value, 2) + " to Micro Labs graphics card");
@@ -11225,7 +11277,7 @@
                 // Delay to match original clock speed.
                 const now = Date.now();
                 const actualElapsed = now - this.startTime;
-                const expectedElapsed = this.tStateCount * 1000 / CLOCK_HZ;
+                const expectedElapsed = this.tStateCount * 1000 / this.clockHz;
                 let behind = expectedElapsed - actualElapsed;
                 if (behind < -100 || behind > 100) {
                     // We're too far behind or ahead. Catch up artificially.
@@ -11260,11 +11312,21 @@
         }
         // Set or reset the timer interrupt.
         setTimerInterrupt(state) {
-            if (state) {
-                this.irqLatch |= TIMER_IRQ_MASK;
+            if (this.config.modelType === ModelType.MODEL1) {
+                if (state) {
+                    this.irqLatch |= M1_TIMER_IRQ_MASK;
+                }
+                else {
+                    this.irqLatch &= ~M1_TIMER_IRQ_MASK;
+                }
             }
             else {
-                this.irqLatch &= ~TIMER_IRQ_MASK;
+                if (state) {
+                    this.irqLatch |= M3_TIMER_IRQ_MASK;
+                }
+                else {
+                    this.irqLatch &= ~M3_TIMER_IRQ_MASK;
+                }
             }
         }
         // What to do when the hardware timer goes off.
@@ -11288,7 +11350,7 @@
             if (this.cassetteFlipFlop) {
                 b |= 0x80;
             }
-            if (this.cassetteLastNonZeroValue === CassetteValue.POSITIVE) {
+            if (this.config.modelType !== ModelType.MODEL1 && this.cassetteLastNonZeroValue === CassetteValue.POSITIVE) {
                 b |= 0x01;
             }
             return b;
@@ -11321,7 +11383,9 @@
                     this.cassetteLastNonZeroValue = CassetteValue.NEUTRAL;
                     // Waits a second before kicking off the cassette.
                     // TODO this should be in CPU cycles, not browser cycles.
-                    setTimeout(() => this.kickOffCassette(), 1000);
+                    if (this.config.modelType !== ModelType.MODEL1) {
+                        setTimeout(() => this.kickOffCassette(), 1000);
+                    }
                 }
                 else {
                     this.setCassetteState(CassetteState.CLOSE);
@@ -11340,7 +11404,7 @@
             if (this.cassetteMotorOn && this.setCassetteState(CassetteState.READ) >= 0) {
                 // See how many samples we should have read by now.
                 const samplesToRead = Math.round((this.tStateCount - this.cassetteMotorOnClock) *
-                    this.cassette.samplesPerSecond / CLOCK_HZ);
+                    this.cassette.samplesPerSecond / this.clockHz);
                 // Catch up.
                 while (this.cassetteSamplesRead < samplesToRead) {
                     const sample = this.cassette.readSample();
@@ -11404,17 +11468,16 @@
         // Saw a positive edge on cassette.
         cassetteRiseInterrupt() {
             this.cassetteRiseInterruptCount++;
-            this.irqLatch = (this.irqLatch & ~CASSETTE_RISE_IRQ_MASK) |
-                (this.irqMask & CASSETTE_RISE_IRQ_MASK);
+            this.irqLatch = (this.irqLatch & ~M3_CASSETTE_RISE_IRQ_MASK) |
+                (this.irqMask & M3_CASSETTE_RISE_IRQ_MASK);
         }
         // Saw a negative edge on cassette.
         cassetteFallInterrupt() {
             this.cassetteFallInterruptCount++;
-            this.irqLatch = (this.irqLatch & ~CASSETTE_FALL_IRQ_MASK) |
-                (this.irqMask & CASSETTE_FALL_IRQ_MASK);
+            this.irqLatch = (this.irqLatch & ~M3_CASSETTE_FALL_IRQ_MASK) |
+                (this.irqMask & M3_CASSETTE_FALL_IRQ_MASK);
         }
     }
-    Trs80.TIMER_CYCLES = CLOCK_HZ / TIMER_HZ;
     //# sourceMappingURL=Trs80.js.map
 
     /**
