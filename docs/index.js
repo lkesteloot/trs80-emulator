@@ -11478,7 +11478,6 @@
                 (this.irqMask & M3_CASSETTE_FALL_IRQ_MASK);
         }
     }
-    //# sourceMappingURL=Trs80.js.map
 
     /**
      * Abstract base class for displaying a screen.
