@@ -15,13 +15,15 @@
             progressBar.setMaxValue(1234);
             progressBar.setValue(1234/3);
 
-            const settingsPanel = new Trs80Emulator.SettingsPanel(screen.getNode(), trs80);
+            const hardwareSettingsPanel = new Trs80Emulator.SettingsPanel(screen.getNode(), trs80, Trs80Emulator.PanelType.HARDWARE);
+            const viewSettingsPanel = new Trs80Emulator.SettingsPanel(screen.getNode(), trs80, Trs80Emulator.PanelType.VIEW);
 
             const controlPanel = new Trs80Emulator.ControlPanel(screen.getNode());
             controlPanel.addResetButton(() => trs80.reset());
             // controlPanel.addTapeRewindButton(() => progressBar.show());
             // controlPanel.addScreenshotButton(() => progressBar.hide());
-            controlPanel.addSettingsButton(settingsPanel);
+            controlPanel.addSettingsButton(hardwareSettingsPanel);
+            controlPanel.addSettingsButton(viewSettingsPanel);
 
             trs80.reset();
             trs80.start();
