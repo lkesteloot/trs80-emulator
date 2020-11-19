@@ -10702,36 +10702,60 @@
         Phosphor[Phosphor["AMBER"] = 2] = "AMBER";
     })(Phosphor || (Phosphor = {}));
     /**
+     * Background color.
+     */
+    var Background;
+    (function (Background) {
+        Background[Background["BLACK"] = 0] = "BLACK";
+        Background[Background["AUTHENTIC"] = 1] = "AUTHENTIC";
+    })(Background || (Background = {}));
+    /**
+     * Whether to display scan lines.
+     */
+    var ScanLines;
+    (function (ScanLines) {
+        ScanLines[ScanLines["OFF"] = 0] = "OFF";
+        ScanLines[ScanLines["ON"] = 1] = "ON";
+    })(ScanLines || (ScanLines = {}));
+    /**
      * A specific configuration of model and RAM.
      */
     class Config {
-        constructor(modelType, basicLevel, cgChip, ramSize, phosphor) {
+        constructor(modelType, basicLevel, cgChip, ramSize, phosphor, background, scanLines) {
             this.modelType = modelType;
             this.basicLevel = basicLevel;
             this.cgChip = cgChip;
             this.ramSize = ramSize;
             this.phosphor = phosphor;
+            this.background = background;
+            this.scanLines = scanLines;
         }
         withModelType(modelType) {
-            return new Config(modelType, this.basicLevel, this.cgChip, this.ramSize, this.phosphor);
+            return new Config(modelType, this.basicLevel, this.cgChip, this.ramSize, this.phosphor, this.background, this.scanLines);
         }
         withBasicLevel(basicLevel) {
-            return new Config(this.modelType, basicLevel, this.cgChip, this.ramSize, this.phosphor);
+            return new Config(this.modelType, basicLevel, this.cgChip, this.ramSize, this.phosphor, this.background, this.scanLines);
         }
         withCGChip(cgChip) {
-            return new Config(this.modelType, this.basicLevel, cgChip, this.ramSize, this.phosphor);
+            return new Config(this.modelType, this.basicLevel, cgChip, this.ramSize, this.phosphor, this.background, this.scanLines);
         }
         withRamSize(ramSize) {
-            return new Config(this.modelType, this.basicLevel, this.cgChip, ramSize, this.phosphor);
+            return new Config(this.modelType, this.basicLevel, this.cgChip, ramSize, this.phosphor, this.background, this.scanLines);
         }
         withPhosphor(phosphor) {
-            return new Config(this.modelType, this.basicLevel, this.cgChip, this.ramSize, phosphor);
+            return new Config(this.modelType, this.basicLevel, this.cgChip, this.ramSize, phosphor, this.background, this.scanLines);
+        }
+        withBackground(background) {
+            return new Config(this.modelType, this.basicLevel, this.cgChip, this.ramSize, this.phosphor, background, this.scanLines);
+        }
+        withScanLines(scanLines) {
+            return new Config(this.modelType, this.basicLevel, this.cgChip, this.ramSize, this.phosphor, this.background, scanLines);
         }
         /**
          * Make a default configuration.
          */
         static makeDefault() {
-            return new Config(ModelType.MODEL3, BasicLevel.LEVEL2, CGChip.LOWER_CASE, RamSize.RAM_48_KB, Phosphor.WHITE);
+            return new Config(ModelType.MODEL3, BasicLevel.LEVEL2, CGChip.LOWER_CASE, RamSize.RAM_48_KB, Phosphor.WHITE, Background.AUTHENTIC, ScanLines.OFF);
         }
         /**
          * Whether this particular config is valid.
@@ -12180,7 +12204,7 @@
                 const pixel = (byte & (1 << bit)) !== 0;
                 if (pixel) {
                     const pixelOffset = (y * canvas.width + x) * 4;
-                    const alpha = options.scanlines ? (y % 2 == 0 ? 0xFF : 0xAA) : 0xFF;
+                    const alpha = options.scanLines ? (y % 2 == 0 ? 0xFF : 0xAA) : 0xFF;
                     imageData.data[pixelOffset + 0] = options.color[0];
                     imageData.data[pixelOffset + 1] = options.color[1];
                     imageData.data[pixelOffset + 2] = options.color[2];
@@ -12225,14 +12249,19 @@
     const MODEL3_ALT_FONT = new Font(GLYPH_CG4, 8, 12, [0, 64, -1, 192]);
     //# sourceMappingURL=Fonts.js.map
 
-    const cssPrefix = CSS_PREFIX + "-canvas-screen";
+    const gCssPrefix = CSS_PREFIX + "-canvas-screen";
+    const gBlackBackgroundClass = gCssPrefix + "-black-background";
     const BASE_CSS = `
 
-.${cssPrefix} {
+.${gCssPrefix} {
     display: inline-block;
     padding: 10px;
     background-color: #334843;
     border-radius: 8px;
+}
+
+.${gCssPrefix}.${gBlackBackgroundClass} {
+    background-color: black;
 }
 
 `;
@@ -12240,7 +12269,7 @@
      * Make a global stylesheet for all TRS-80 emulators on this page. Idempotent.
      */
     function configureStylesheet() {
-        const styleId = cssPrefix;
+        const styleId = gCssPrefix;
         if (document.getElementById(styleId) !== null) {
             // Already created.
             return;
@@ -12268,7 +12297,7 @@
             clearElement(parentNode);
             // Make our own sub-node that we have control over.
             this.node = document.createElement("div");
-            this.node.classList.add(cssPrefix);
+            this.node.classList.add(gCssPrefix);
             parentNode.appendChild(this.node);
             this.canvas = document.createElement("canvas");
             this.canvas.width = 64 * 8;
@@ -12327,9 +12356,18 @@
                     }
                     break;
             }
+            switch (this.config.background) {
+                case Background.BLACK:
+                    this.node.classList.add(gBlackBackgroundClass);
+                    break;
+                case Background.AUTHENTIC:
+                default:
+                    this.node.classList.remove(gBlackBackgroundClass);
+                    break;
+            }
             const glyphOptions = {
                 color: color,
-                scanlines: false,
+                scanLines: this.config.scanLines === ScanLines.ON,
             };
             for (let i = 0; i < 256; i++) {
                 this.glyphs[i] = font.makeImage(i, this.isExpandedCharacters(), glyphOptions);
@@ -12414,14 +12452,14 @@
     }
     //# sourceMappingURL=CanvasScreen.js.map
 
-    const gCssPrefix = CSS_PREFIX + "-settings-panel";
-    const gScreenNodeCssClass = gCssPrefix + "-screen-node";
-    const gPanelCssClass = gCssPrefix + "-panel";
-    const gShownCssClass = gCssPrefix + "-shown";
-    const gAcceptButtonCssClass = gCssPrefix + "-accept";
-    const gRebootButtonCssClass = gCssPrefix + "-reboot";
-    const gOptionsClass = gCssPrefix + "-options";
-    const gButtonsClass = gCssPrefix + "-buttons";
+    const gCssPrefix$1 = CSS_PREFIX + "-settings-panel";
+    const gScreenNodeCssClass = gCssPrefix$1 + "-screen-node";
+    const gPanelCssClass = gCssPrefix$1 + "-panel";
+    const gShownCssClass = gCssPrefix$1 + "-shown";
+    const gAcceptButtonCssClass = gCssPrefix$1 + "-accept";
+    const gRebootButtonCssClass = gCssPrefix$1 + "-reboot";
+    const gOptionsClass = gCssPrefix$1 + "-options";
+    const gButtonsClass = gCssPrefix$1 + "-buttons";
     const GLOBAL_CSS = `
 .${gPanelCssClass} {
     display: flex;
@@ -12653,6 +12691,36 @@
                 },
             ]
         },
+        {
+            title: "Background",
+            isChecked: (background, config) => background === config.background,
+            updateConfig: (background, config) => config.withBackground(background),
+            options: [
+                {
+                    label: "Black",
+                    value: Background.BLACK,
+                },
+                {
+                    label: "Authentic",
+                    value: Background.AUTHENTIC,
+                },
+            ]
+        },
+        {
+            title: "Scan Lines",
+            isChecked: (scanLines, config) => scanLines === config.scanLines,
+            updateConfig: (scanLines, config) => config.withScanLines(scanLines),
+            options: [
+                {
+                    label: "Off",
+                    value: ScanLines.OFF,
+                },
+                {
+                    label: "On",
+                    value: ScanLines.ON,
+                },
+            ]
+        },
     ];
     (function (PanelType) {
         // Model, RAM, etc.
@@ -12688,7 +12756,7 @@
             const div = document.createElement("div");
             this.panelNode.appendChild(div);
             for (const block of optionBlocksForPanelType(panelType)) {
-                const name = gCssPrefix + "-" + gRadioButtonCounter++;
+                const name = gCssPrefix$1 + "-" + gRadioButtonCounter++;
                 const blockDiv = document.createElement("div");
                 div.appendChild(blockDiv);
                 const h1 = document.createElement("h1");
@@ -12698,7 +12766,7 @@
                 optionsDiv.classList.add(gOptionsClass);
                 blockDiv.appendChild(optionsDiv);
                 for (const option of block.options) {
-                    const id = gCssPrefix + "-" + gRadioButtonCounter++;
+                    const id = gCssPrefix$1 + "-" + gRadioButtonCounter++;
                     const input = document.createElement("input");
                     input.id = id;
                     input.type = "radio";
@@ -12801,7 +12869,7 @@
          * Make a global stylesheet for all TRS-80 emulators on this page.
          */
         static configureStyle() {
-            const styleId = gCssPrefix;
+            const styleId = gCssPrefix$1;
             if (document.getElementById(styleId) !== null) {
                 // Already created.
                 return;
@@ -12812,12 +12880,13 @@
             document.head.appendChild(node);
         }
     }
+    //# sourceMappingURL=SettingsPanel.js.map
 
-    const gCssPrefix$1 = CSS_PREFIX + "-control-panel";
-    const gScreenNodeCssClass$1 = gCssPrefix$1 + "-screen-node";
-    const gPanelCssClass$1 = gCssPrefix$1 + "-panel";
-    const gButtonCssClass = gCssPrefix$1 + "-button";
-    const gShowingOtherPanelCssClass = gCssPrefix$1 + "-showing-other-panel";
+    const gCssPrefix$2 = CSS_PREFIX + "-control-panel";
+    const gScreenNodeCssClass$1 = gCssPrefix$2 + "-screen-node";
+    const gPanelCssClass$1 = gCssPrefix$2 + "-panel";
+    const gButtonCssClass = gCssPrefix$2 + "-button";
+    const gShowingOtherPanelCssClass = gCssPrefix$2 + "-showing-other-panel";
     // https://thenounproject.com/search/?q=reset&i=3012384
     const RESET_ICON = `
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="30" height="30" viewBox="0 0 100 100" xml:space="preserve">
@@ -12985,7 +13054,7 @@
          * Make a global stylesheet for all TRS-80 emulators on this page.
          */
         static configureStyle() {
-            const styleId = gCssPrefix$1;
+            const styleId = gCssPrefix$2;
             if (document.getElementById(styleId) !== null) {
                 // Already created.
                 return;
@@ -12998,10 +13067,10 @@
     }
     //# sourceMappingURL=ControlPanel.js.map
 
-    const gCssPrefix$2 = CSS_PREFIX + "-progress-bar";
-    const gScreenNodeCssClass$2 = gCssPrefix$2 + "-screen-node";
-    const gBarCssClass = gCssPrefix$2 + "-bar";
-    const gSubbarCssClass = gCssPrefix$2 + "-subbar";
+    const gCssPrefix$3 = CSS_PREFIX + "-progress-bar";
+    const gScreenNodeCssClass$2 = gCssPrefix$3 + "-screen-node";
+    const gBarCssClass = gCssPrefix$3 + "-bar";
+    const gSubbarCssClass = gCssPrefix$3 + "-subbar";
     const GLOBAL_CSS$2 = "." + gBarCssClass + ` {
     background-color: rgba(0, 0, 0, 0.2);
     position: absolute;
@@ -13062,7 +13131,7 @@
          * Make a global stylesheet for all TRS-80 emulators on this page.
          */
         static configureStyle() {
-            const styleId = gCssPrefix$2;
+            const styleId = gCssPrefix$3;
             if (document.getElementById(styleId) !== null) {
                 // Already created.
                 return;
