@@ -12258,6 +12258,7 @@
     padding: 10px;
     background-color: #334843;
     border-radius: 8px;
+    transition: background-color .5s ease-in-out;
 }
 
 .${gCssPrefix}.${gBlackBackgroundClass} {
@@ -12485,7 +12486,7 @@
     flex-direction: column;
     justify-content: space-between;
     
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(40, 40, 40, 0.8);
     border-radius: 15px;
     color: #ccc;
     font-family: sans-serif;
@@ -12938,7 +12939,7 @@
 `;
     const GLOBAL_CSS$1 = `
 .${gPanelCssClass$1} {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(40, 40, 40, 0.8);
     position: absolute;
     right: 10px;
     top: 10px;
