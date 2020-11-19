@@ -12464,6 +12464,7 @@
     const gButtonsClass = gCssPrefix$1 + "-buttons";
     const gColorButtonClass = gCssPrefix$1 + "-color-button";
     const gDarkColorButtonClass = gCssPrefix$1 + "-dark-color-button";
+    const gAcceptButtonColor = "#449944";
     const GLOBAL_CSS = `
 .${gPanelCssClass} {
     display: flex;
@@ -12599,7 +12600,7 @@
 .${gPanelCssClass} a.${gAcceptButtonCssClass} {
     font-weight: bold;
     color: #eee;
-    background-color: #449944;
+    background-color: ${gAcceptButtonColor};
 }
 
 .${gPanelCssClass} a.${gAcceptButtonCssClass}:hover {
@@ -12719,10 +12720,21 @@
             title: "Phosphor",
             isChecked: (phosphor, config) => phosphor === config.phosphor,
             updateConfig: (phosphor, config) => config.withPhosphor(phosphor),
-            options: [Phosphor.WHITE, Phosphor.GREEN, Phosphor.AMBER].map(p => ({
-                label: rgbToCss(adjustColor(phosphorToRgb(p), 0.85)),
-                value: p,
-            })),
+            options: [
+                {
+                    label: rgbToCss(adjustColor(phosphorToRgb(Phosphor.WHITE), 0.8)),
+                    value: Phosphor.WHITE,
+                },
+                {
+                    // Cheat and use the green from the OK button so that the two greens don't clash.
+                    label: gAcceptButtonColor,
+                    value: Phosphor.GREEN,
+                },
+                {
+                    label: rgbToCss(adjustColor(phosphorToRgb(Phosphor.AMBER), 0.8)),
+                    value: Phosphor.AMBER,
+                },
+            ]
         },
         {
             title: "Background",
@@ -12785,7 +12797,7 @@
         const blu = parseInt(color.substr(5, 2), 16);
         const gray = red * 0.3 + grn * 0.6 + blu * 0.1;
         console.log(color, red, grn, blu, gray);
-        return gray < 128;
+        return gray < 110;
     }
     let gRadioButtonCounter = 1;
     /**
@@ -12939,6 +12951,7 @@
             document.head.appendChild(node);
         }
     }
+    //# sourceMappingURL=SettingsPanel.js.map
 
     const gCssPrefix$2 = CSS_PREFIX + "-control-panel";
     const gScreenNodeCssClass$1 = gCssPrefix$2 + "-screen-node";
