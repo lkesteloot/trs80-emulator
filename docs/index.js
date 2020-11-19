@@ -12251,18 +12251,20 @@
 
     const gCssPrefix = CSS_PREFIX + "-canvas-screen";
     const gBlackBackgroundClass = gCssPrefix + "-black-background";
+    const AUTHENTIC_BACKGROUND = "#334843";
+    const BLACK_BACKGROUND = "#000000";
     const BASE_CSS = `
 
 .${gCssPrefix} {
     display: inline-block;
     padding: 10px;
-    background-color: #334843;
+    background-color: ${AUTHENTIC_BACKGROUND};
     border-radius: 8px;
     transition: background-color .5s ease-in-out;
 }
 
 .${gCssPrefix}.${gBlackBackgroundClass} {
-    background-color: black;
+    background-color: ${BLACK_BACKGROUND};
 }
 
 `;
@@ -12285,6 +12287,18 @@
     const WHITE_PHOSPHOR = [230, 231, 252];
     const AMBER_PHOSPHOR = [247, 190, 64];
     const GREEN_PHOSPHOR = [122, 244, 96];
+    // Gets an RGB array (0-255) for a phosphor.
+    function phosphorToRgb(phosphor) {
+        switch (phosphor) {
+            case Phosphor.WHITE:
+            default:
+                return WHITE_PHOSPHOR;
+            case Phosphor.GREEN:
+                return GREEN_PHOSPHOR;
+            case Phosphor.AMBER:
+                return AMBER_PHOSPHOR;
+        }
+    }
     /**
      * TRS-80 screen based on an HTML canvas element.
      */
@@ -12326,19 +12340,6 @@
          * Update the font and screen from the config and other state.
          */
         updateFromConfig() {
-            let color;
-            switch (this.config.phosphor) {
-                case Phosphor.WHITE:
-                default:
-                    color = WHITE_PHOSPHOR;
-                    break;
-                case Phosphor.GREEN:
-                    color = GREEN_PHOSPHOR;
-                    break;
-                case Phosphor.AMBER:
-                    color = AMBER_PHOSPHOR;
-                    break;
-            }
             let font;
             switch (this.config.cgChip) {
                 case CGChip.ORIGINAL:
@@ -12367,7 +12368,7 @@
                     break;
             }
             const glyphOptions = {
-                color: color,
+                color: phosphorToRgb(this.config.phosphor),
                 scanLines: this.config.scanLines === ScanLines.ON,
             };
             for (let i = 0; i < 256; i++) {
@@ -12461,6 +12462,8 @@
     const gRebootButtonCssClass = gCssPrefix$1 + "-reboot";
     const gOptionsClass = gCssPrefix$1 + "-options";
     const gButtonsClass = gCssPrefix$1 + "-buttons";
+    const gColorButtonClass = gCssPrefix$1 + "-color-button";
+    const gDarkColorButtonClass = gCssPrefix$1 + "-dark-color-button";
     const GLOBAL_CSS = `
 .${gPanelCssClass} {
     display: flex;
@@ -12494,6 +12497,7 @@
     line-height: normal;
     margin: 20px 0;
     padding: 10px 30px;
+    min-width: 200px;
 }
 
 .${gPanelCssClass} h1 {
@@ -12506,6 +12510,7 @@
 
 .${gPanelCssClass} .${gOptionsClass} {
     display: flex;
+    justify-content: center;
 }
 
 .${gPanelCssClass} input[type=radio] {
@@ -12522,6 +12527,35 @@
     border-radius: 3px;
     background-color: #44443A;
     white-space: nowrap;
+}
+
+.${gPanelCssClass} input[type=radio] + label.${gColorButtonClass} {
+    flex-grow: 0;
+    flex-basis: auto;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    color: transparent;
+    transition: color .20s ease-in-out;
+}
+
+.${gPanelCssClass} input[type=radio] + label.${gColorButtonClass}.${gDarkColorButtonClass} {
+    border: solid 2px #ccc;
+}
+
+.${gPanelCssClass} input[type=radio]:checked + label.${gColorButtonClass}::after {
+    content: "✓";
+    font-size: 20px;
+}
+
+.${gPanelCssClass} input[type=radio]:checked + label.${gColorButtonClass} {
+    color: black;
+}
+
+.${gPanelCssClass} input[type=radio]:checked + label.${gColorButtonClass}.${gDarkColorButtonClass} {
+    color: #ccc;
 }
 
 .${gPanelCssClass} input[type=radio] + label:first-of-type {
@@ -12598,6 +12632,14 @@
             this.block = block;
             this.option = option;
         }
+    }
+    // Convert RGB array (0-255) to a CSS string.
+    function rgbToCss(color) {
+        return "#" + color.map(c => c.toString(16).padStart(2, "0").toUpperCase()).join("");
+    }
+    // Multiplies an RGB (0-255) color by a factor.
+    function adjustColor(color, factor) {
+        return color.map(c => Math.max(0, Math.min(255, Math.round(c * factor))));
     }
     /**
      * Our full configuration options.
@@ -12677,20 +12719,10 @@
             title: "Phosphor",
             isChecked: (phosphor, config) => phosphor === config.phosphor,
             updateConfig: (phosphor, config) => config.withPhosphor(phosphor),
-            options: [
-                {
-                    label: "White",
-                    value: Phosphor.WHITE,
-                },
-                {
-                    label: "Green",
-                    value: Phosphor.GREEN,
-                },
-                {
-                    label: "Amber",
-                    value: Phosphor.AMBER,
-                },
-            ]
+            options: [Phosphor.WHITE, Phosphor.GREEN, Phosphor.AMBER].map(p => ({
+                label: rgbToCss(adjustColor(phosphorToRgb(p), 0.85)),
+                value: p,
+            })),
         },
         {
             title: "Background",
@@ -12698,11 +12730,11 @@
             updateConfig: (background, config) => config.withBackground(background),
             options: [
                 {
-                    label: "Black",
+                    label: BLACK_BACKGROUND,
                     value: Background.BLACK,
                 },
                 {
-                    label: "Authentic",
+                    label: AUTHENTIC_BACKGROUND,
                     value: Background.AUTHENTIC,
                 },
             ]
@@ -12738,6 +12770,22 @@
             case exports.PanelType.VIEW:
                 return VIEW_OPTION_BLOCKS;
         }
+    }
+    /**
+     * Whether the given CSS color is dark.
+     *
+     * @param color an CSS color in the form "#rrggbb".
+     */
+    function isDarkColor(color) {
+        if (!color.startsWith("#") || color.length !== 7) {
+            throw new Error("isDarkColor: not a color (" + color + ")");
+        }
+        const red = parseInt(color.substr(1, 2), 16);
+        const grn = parseInt(color.substr(3, 2), 16);
+        const blu = parseInt(color.substr(5, 2), 16);
+        const gray = red * 0.3 + grn * 0.6 + blu * 0.1;
+        console.log(color, red, grn, blu, gray);
+        return gray < 128;
     }
     let gRadioButtonCounter = 1;
     /**
@@ -12776,7 +12824,17 @@
                     optionsDiv.appendChild(input);
                     const label = document.createElement("label");
                     label.htmlFor = id;
-                    label.innerText = option.label;
+                    if (option.label.startsWith("#")) {
+                        // It's a color, show a swatch.
+                        label.classList.add(gColorButtonClass);
+                        label.style.backgroundColor = option.label;
+                        if (isDarkColor(option.label)) {
+                            label.classList.add(gDarkColorButtonClass);
+                        }
+                    }
+                    else {
+                        label.innerText = option.label;
+                    }
                     optionsDiv.appendChild(label);
                     this.displayedOptions.push(new DisplayedOption(input, block, option));
                 }
@@ -12881,7 +12939,6 @@
             document.head.appendChild(node);
         }
     }
-    //# sourceMappingURL=SettingsPanel.js.map
 
     const gCssPrefix$2 = CSS_PREFIX + "-control-panel";
     const gScreenNodeCssClass$1 = gCssPrefix$2 + "-screen-node";
