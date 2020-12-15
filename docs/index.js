@@ -13196,7 +13196,7 @@
     }
 
     exports.CanvasScreen = CanvasScreen;
-    exports.Cassette = Cassette;
+    exports.CassettePlayer = Cassette;
     exports.ControlPanel = ControlPanel;
     exports.ProgressBar = ProgressBar;
     exports.SettingsPanel = SettingsPanel;
