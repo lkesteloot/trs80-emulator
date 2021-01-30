@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 34);
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -100,28 +100,56 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HandlingBase = exports.PromiseDispatcherBase = exports.PromiseSubscription = exports.DispatchError = exports.EventManagement = exports.EventListBase = exports.DispatcherWrapper = exports.DispatcherBase = exports.Subscription = void 0;
-const DispatcherBase_1 = __webpack_require__(59);
+const DispatcherBase_1 = __webpack_require__(61);
 Object.defineProperty(exports, "DispatcherBase", { enumerable: true, get: function () { return DispatcherBase_1.DispatcherBase; } });
-const DispatchError_1 = __webpack_require__(60);
+const DispatchError_1 = __webpack_require__(62);
 Object.defineProperty(exports, "DispatchError", { enumerable: true, get: function () { return DispatchError_1.DispatchError; } });
-const DispatcherWrapper_1 = __webpack_require__(61);
+const DispatcherWrapper_1 = __webpack_require__(63);
 Object.defineProperty(exports, "DispatcherWrapper", { enumerable: true, get: function () { return DispatcherWrapper_1.DispatcherWrapper; } });
-const EventListBase_1 = __webpack_require__(62);
+const EventListBase_1 = __webpack_require__(64);
 Object.defineProperty(exports, "EventListBase", { enumerable: true, get: function () { return EventListBase_1.EventListBase; } });
-const EventManagement_1 = __webpack_require__(63);
+const EventManagement_1 = __webpack_require__(65);
 Object.defineProperty(exports, "EventManagement", { enumerable: true, get: function () { return EventManagement_1.EventManagement; } });
-const HandlingBase_1 = __webpack_require__(64);
+const HandlingBase_1 = __webpack_require__(66);
 Object.defineProperty(exports, "HandlingBase", { enumerable: true, get: function () { return HandlingBase_1.HandlingBase; } });
-const PromiseDispatcherBase_1 = __webpack_require__(65);
+const PromiseDispatcherBase_1 = __webpack_require__(67);
 Object.defineProperty(exports, "PromiseDispatcherBase", { enumerable: true, get: function () { return PromiseDispatcherBase_1.PromiseDispatcherBase; } });
-const PromiseSubscription_1 = __webpack_require__(66);
+const PromiseSubscription_1 = __webpack_require__(68);
 Object.defineProperty(exports, "PromiseSubscription", { enumerable: true, get: function () { return PromiseSubscription_1.PromiseSubscription; } });
-const Subscription_1 = __webpack_require__(67);
+const Subscription_1 = __webpack_require__(69);
 Object.defineProperty(exports, "Subscription", { enumerable: true, get: function () { return Subscription_1.Subscription; } });
 
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProgramAnnotation = void 0;
+/**
+ * Information about one particular section of a program. The indices refer back to a binary
+ * that the program was parsed from.
+ */
+class ProgramAnnotation {
+    constructor(text, begin, end) {
+        this.text = text;
+        this.begin = begin;
+        this.end = end;
+    }
+    /**
+     * Create a new program annotation with the begin and end increased by the specified offset.
+     */
+    adjusted(offset) {
+        return new ProgramAnnotation(this.text, this.begin + offset, this.end + offset);
+    }
+}
+exports.ProgramAnnotation = ProgramAnnotation;
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -142,33 +170,33 @@ exports.Trs80File = Trs80File;
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SCREEN_END = exports.SCREEN_BEGIN = exports.CSS_PREFIX = void 0;
-exports.CSS_PREFIX = "trs80-emulator";
-// RAM address range of screen.
-exports.SCREEN_BEGIN = 15 * 1024;
-exports.SCREEN_END = 16 * 1024;
-
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(50));
-__export(__webpack_require__(51));
-__export(__webpack_require__(17));
-__export(__webpack_require__(52));
+__exportStar(__webpack_require__(16), exports);
+__exportStar(__webpack_require__(18), exports);
+__exportStar(__webpack_require__(19), exports);
+__exportStar(__webpack_require__(9), exports);
+__exportStar(__webpack_require__(2), exports);
+__exportStar(__webpack_require__(21), exports);
+__exportStar(__webpack_require__(20), exports);
+__exportStar(__webpack_require__(5), exports);
+__exportStar(__webpack_require__(22), exports);
+__exportStar(__webpack_require__(45), exports);
+__exportStar(__webpack_require__(46), exports);
 
 
 /***/ }),
@@ -177,20 +205,14 @@ __export(__webpack_require__(52));
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProgramAnnotation = void 0;
-/**
- * Information about one particular section of a program. The indices refer back to a binary
- * that the program was parsed from.
- */
-class ProgramAnnotation {
-    constructor(text, begin, end) {
-        this.text = text;
-        this.begin = begin;
-        this.end = end;
-    }
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-exports.ProgramAnnotation = ProgramAnnotation;
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(39));
+__export(__webpack_require__(40));
+__export(__webpack_require__(17));
+__export(__webpack_require__(41));
 
 
 /***/ }),
@@ -201,7 +223,7 @@ exports.ProgramAnnotation = ProgramAnnotation;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FloppyDisk = exports.SectorData = exports.numberToSide = exports.Side = void 0;
-const Trs80File_1 = __webpack_require__(1);
+const Trs80File_1 = __webpack_require__(2);
 // Side of a floppy disk.
 var Side;
 (function (Side) {
@@ -278,10 +300,10 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(38));
-__export(__webpack_require__(39));
-__export(__webpack_require__(14));
-__export(__webpack_require__(40));
+__export(__webpack_require__(48));
+__export(__webpack_require__(49));
+__export(__webpack_require__(23));
+__export(__webpack_require__(50));
 
 
 /***/ }),
@@ -301,12 +323,185 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(__webpack_require__(48), exports);
-__exportStar(__webpack_require__(49), exports);
+__exportStar(__webpack_require__(37), exports);
+__exportStar(__webpack_require__(38), exports);
 
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CSS_PREFIX = void 0;
+exports.CSS_PREFIX = "trs80-emulator";
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Tools for dealing with SYSTEM (machine language) programs.
+ *
+ * http://www.trs-80.com/wordpress/zaps-patches-pokes-tips/tape-and-file-formats-structures/
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.decodeSystemProgram = exports.SystemProgram = exports.SystemChunk = void 0;
+const teamten_ts_utils_1 = __webpack_require__(7);
+const z80_base_1 = __webpack_require__(4);
+const ProgramAnnotation_1 = __webpack_require__(1);
+const Trs80File_1 = __webpack_require__(2);
+const FILE_HEADER = 0x55;
+const DATA_HEADER = 0x3C;
+const END_OF_FILE_MARKER = 0x78;
+const FILENAME_LENGTH = 6;
+/**
+ * Represents a chunk of bytes from the file, with a checksum.
+ */
+class SystemChunk {
+    constructor(loadAddress, data, checksum) {
+        this.loadAddress = loadAddress;
+        this.data = data;
+        this.checksum = checksum;
+    }
+    /**
+     * Whether the checksum supplied on tape matches what we compute.
+     */
+    isChecksumValid() {
+        let checksum = 0;
+        // Include load address and data.
+        checksum += (this.loadAddress >> 8) & 0xFF;
+        checksum += this.loadAddress & 0xFF;
+        for (const b of this.data) {
+            checksum += b;
+        }
+        checksum &= 0xFF;
+        return checksum === this.checksum;
+    }
+}
+exports.SystemChunk = SystemChunk;
+/**
+ * Class representing a SYSTEM (machine language) program. If the "error" field is set, then something
+ * went wrong with the program and the data may be partially loaded.
+ */
+class SystemProgram extends Trs80File_1.Trs80File {
+    constructor(binary, error, filename, chunks, entryPointAddress, annotations) {
+        super(binary, error, annotations);
+        this.filename = filename;
+        this.chunks = chunks;
+        this.entryPointAddress = entryPointAddress;
+        this.annotations = annotations;
+    }
+    getDescription() {
+        return "System program (" + this.filename + ")";
+    }
+    /**
+     * Convert an address in memory to the original byte offset in the binary. Returns undefined if
+     * not found in any chunk.
+     */
+    addressToByteOffset(address) {
+        // Skip file header and block header.
+        let offset = 1 + FILENAME_LENGTH + 4;
+        for (const chunk of this.chunks) {
+            if (address >= chunk.loadAddress && address < chunk.loadAddress + chunk.data.length) {
+                return offset + (address - chunk.loadAddress);
+            }
+            // Skip checksum and block header of the next block.
+            offset += chunk.data.length + 5;
+        }
+        return undefined;
+    }
+}
+exports.SystemProgram = SystemProgram;
+/**
+ * Decodes a system program from the binary. If the binary is not at all a system
+ * program, returns undefined. If it's a system program with decoding errors, returns
+ * partially-decoded binary and sets the "error" field.
+ */
+function decodeSystemProgram(binary) {
+    const chunks = [];
+    const annotations = [];
+    let entryPointAddress = 0;
+    const b = new teamten_ts_utils_1.ByteReader(binary);
+    const headerByte = b.read();
+    if (headerByte === teamten_ts_utils_1.EOF) {
+        return undefined;
+    }
+    if (headerByte !== FILE_HEADER) {
+        return undefined;
+    }
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("System file header", b.addr() - 1, b.addr()));
+    let filename = b.readString(FILENAME_LENGTH);
+    // Make a SystemProgram object with what we have so far.
+    const makeSystemProgram = (error) => {
+        const programBinary = binary.subarray(0, b.addr());
+        return new SystemProgram(programBinary, error, filename, chunks, entryPointAddress, annotations);
+    };
+    if (filename.length < FILENAME_LENGTH) {
+        // Binary is truncated.
+        return makeSystemProgram("File is truncated at filename");
+    }
+    filename = filename.trim();
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(`Filename "${filename}"`, b.addr() - FILENAME_LENGTH, b.addr()));
+    while (true) {
+        const marker = b.read();
+        if (marker === teamten_ts_utils_1.EOF) {
+            return makeSystemProgram("File is truncated at start of block");
+        }
+        if (marker === END_OF_FILE_MARKER) {
+            annotations.push(new ProgramAnnotation_1.ProgramAnnotation("End of file marker", b.addr() - 1, b.addr()));
+            break;
+        }
+        if (marker !== DATA_HEADER) {
+            // Here if the marker is 0x55, we could guess that it's a high-speed cassette header.
+            return makeSystemProgram("Unexpected byte " + z80_base_1.toHexByte(marker) + " at start of block");
+        }
+        annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Data chunk marker", b.addr() - 1, b.addr()));
+        let length = b.read();
+        if (length === teamten_ts_utils_1.EOF) {
+            return makeSystemProgram("File is truncated at block length");
+        }
+        // 0 means 256.
+        if (length === 0) {
+            length = 256;
+        }
+        annotations.push(new ProgramAnnotation_1.ProgramAnnotation(`Length (${length} byte${length === 1 ? "" : "s"})`, b.addr() - 1, b.addr()));
+        const loadAddress = b.readShort(false);
+        if (loadAddress === teamten_ts_utils_1.EOF) {
+            return makeSystemProgram("File is truncated at load address");
+        }
+        annotations.push(new ProgramAnnotation_1.ProgramAnnotation(`Address (0x${z80_base_1.toHexWord(loadAddress)})`, b.addr() - 2, b.addr()));
+        const dataStartAddr = b.addr();
+        const data = b.readBytes(length);
+        if (data.length < length) {
+            return makeSystemProgram("File is truncated at data");
+        }
+        annotations.push(new ProgramAnnotation_1.ProgramAnnotation(`Chunk data`, dataStartAddr, b.addr()));
+        const checksum = b.read();
+        if (loadAddress === teamten_ts_utils_1.EOF) {
+            return makeSystemProgram("File is truncated at checksum");
+        }
+        const systemChunk = new SystemChunk(loadAddress, data, checksum);
+        chunks.push(systemChunk);
+        annotations.push(new ProgramAnnotation_1.ProgramAnnotation(`Checksum (0x${z80_base_1.toHexByte(checksum)}, ${systemChunk.isChecksumValid() ? "" : "in"}valid)`, b.addr() - 1, b.addr()));
+    }
+    entryPointAddress = b.readShort(false);
+    if (entryPointAddress === teamten_ts_utils_1.EOF) {
+        entryPointAddress = 0;
+        return makeSystemProgram("File is truncated at entry point address");
+    }
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(`Jump address (0x${z80_base_1.toHexWord(entryPointAddress)})`, b.addr() - 2, b.addr()));
+    return makeSystemProgram();
+}
+exports.decodeSystemProgram = decodeSystemProgram;
+
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -466,7 +661,7 @@ exports.Config = Config;
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -534,7 +729,7 @@ exports.EventDispatcher = EventDispatcher;
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -602,7 +797,7 @@ exports.SimpleEventDispatcher = SimpleEventDispatcher;
 
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -667,7 +862,7 @@ exports.PromiseEventDispatcher = PromiseEventDispatcher;
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -725,18 +920,18 @@ exports.PromiseSimpleEventDispatcher = PromiseSimpleEventDispatcher;
 
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CanvasScreen = exports.phosphorToRgb = exports.BLACK_BACKGROUND = exports.AUTHENTIC_BACKGROUND = void 0;
-const Trs80Screen_1 = __webpack_require__(35);
-const Utils_1 = __webpack_require__(2);
-const Fonts_1 = __webpack_require__(36);
-const Config_1 = __webpack_require__(8);
+const Trs80Screen_1 = __webpack_require__(36);
+const Fonts_1 = __webpack_require__(47);
+const Config_1 = __webpack_require__(10);
 const z80_base_1 = __webpack_require__(6);
+const trs80_base_1 = __webpack_require__(3);
 exports.AUTHENTIC_BACKGROUND = "#334843";
 exports.BLACK_BACKGROUND = "#000000";
 const PADDING = 10;
@@ -769,7 +964,7 @@ class CanvasScreen extends Trs80Screen_1.Trs80Screen {
     constructor(scale = 1) {
         super();
         this.scale = 1;
-        this.memory = new Uint8Array(Utils_1.SCREEN_END - Utils_1.SCREEN_BEGIN);
+        this.memory = new Uint8Array(trs80_base_1.TRS80_SCREEN_END - trs80_base_1.TRS80_SCREEN_BEGIN);
         this.glyphs = [];
         this.config = Config_1.Config.makeDefault();
         this.glyphWidth = 0;
@@ -830,7 +1025,7 @@ class CanvasScreen extends Trs80Screen_1.Trs80Screen {
         this.refresh();
     }
     writeChar(address, value) {
-        const offset = address - Utils_1.SCREEN_BEGIN;
+        const offset = address - trs80_base_1.TRS80_SCREEN_BEGIN;
         this.memory[offset] = value;
         this.drawChar(offset, value);
     }
@@ -913,171 +1108,44 @@ class CanvasScreen extends Trs80Screen_1.Trs80Screen {
     /**
      * Returns the canvas as an <img> element that can be resized. This is relatively
      * expensive.
+     *
+     * This method is deprecated, use asImageAsync instead.
      */
     asImage() {
         const image = document.createElement("img");
-        // TODO use canvas.toBlob() instead, it might not block the UI thread.
         image.src = this.canvas.toDataURL();
         return image;
     }
+    /**
+     * Returns the canvas as an <img> element that can be resized. Despite the
+     * "async" name, there's still some synchronous work, about 13ms.
+     */
+    asImageAsync() {
+        return new Promise((resolve, reject) => {
+            // According to this answer:
+            //     https://stackoverflow.com/a/59025746/211234
+            // the toBlob() method still has to copy the image synchronously, so this whole method still
+            // takes about 13ms. It's better than toDataUrl() because it doesn't have to make an actual
+            // base64 string. The Object URL is just a reference to the blob.
+            this.canvas.toBlob(blob => {
+                if (blob === null) {
+                    reject("Cannot make image from screen");
+                }
+                else {
+                    const image = document.createElement("img");
+                    const url = URL.createObjectURL(blob);
+                    image.addEventListener("load", () => {
+                        URL.revokeObjectURL(url);
+                        // Resolve when the image is fully loaded so that there's no UI glitching.
+                        resolve(image);
+                    });
+                    image.src = url;
+                }
+            });
+        });
+    }
 }
 exports.CanvasScreen = CanvasScreen;
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// Various utility functions.
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Convert a number to hex and zero-pad to the specified number of hex digits.
- */
-function toHex(value, digits) {
-    return value.toString(16).toUpperCase().padStart(digits, "0");
-}
-exports.toHex = toHex;
-/**
- * Convert a byte to hex.
- */
-function toHexByte(value) {
-    return toHex(value, 2);
-}
-exports.toHexByte = toHexByte;
-/**
- * Convert a word to hex.
- */
-function toHexWord(value) {
-    return toHex(value, 4);
-}
-exports.toHexWord = toHexWord;
-/**
- * Convert a long (32-bit value) to hex.
- */
-function toHexLong(value) {
-    value &= 0xFFFFFFFF;
-    // Convert two's complement negative numbers to positive numbers.
-    if (value < 0) {
-        value += 0x100000000;
-    }
-    return value.toString(16).toUpperCase().padStart(8, "0");
-}
-exports.toHexLong = toHexLong;
-/**
- * Return the high byte of a word.
- */
-function hi(value) {
-    return (value >> 8) & 0xFF;
-}
-exports.hi = hi;
-/**
- * Return the low byte of a word.
- */
-function lo(value) {
-    return value & 0xFF;
-}
-exports.lo = lo;
-/**
- * Create a word from a high and low byte.
- */
-function word(highByte, lowByte) {
-    return ((highByte & 0xFF) << 8) | (lowByte & 0xFF);
-}
-exports.word = word;
-/**
- * Increment a byte.
- */
-function inc8(value) {
-    return add8(value, 1);
-}
-exports.inc8 = inc8;
-/**
- * Increment a word.
- */
-function inc16(value) {
-    return add16(value, 1);
-}
-exports.inc16 = inc16;
-/**
- * Decrement a byte.
- */
-function dec8(value) {
-    return sub8(value, 1);
-}
-exports.dec8 = dec8;
-/**
- * Decrement a word.
- */
-function dec16(value) {
-    return sub16(value, 1);
-}
-exports.dec16 = dec16;
-/**
- * Add two bytes together.
- */
-function add8(a, b) {
-    return (a + b) & 0xFF;
-}
-exports.add8 = add8;
-/**
- * Add two words together.
- */
-function add16(a, b) {
-    return (a + b) & 0xFFFF;
-}
-exports.add16 = add16;
-/**
- * Subtract two bytes.
- */
-function sub8(a, b) {
-    return (a - b) & 0xFF;
-}
-exports.sub8 = sub8;
-/**
- * Subtract two words.
- */
-function sub16(a, b) {
-    return (a - b) & 0xFFFF;
-}
-exports.sub16 = sub16;
-/**
- * Convert a byte to a signed number (e.g., 0xff to -1).
- */
-function signedByte(value) {
-    return value >= 128 ? value - 256 : value;
-}
-exports.signedByte = signedByte;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(__webpack_require__(16), exports);
-__exportStar(__webpack_require__(18), exports);
-__exportStar(__webpack_require__(19), exports);
-__exportStar(__webpack_require__(20), exports);
-__exportStar(__webpack_require__(1), exports);
-__exportStar(__webpack_require__(22), exports);
-__exportStar(__webpack_require__(21), exports);
-__exportStar(__webpack_require__(5), exports);
-__exportStar(__webpack_require__(23), exports);
-__exportStar(__webpack_require__(56), exports);
 
 
 /***/ }),
@@ -1090,9 +1158,9 @@ __exportStar(__webpack_require__(56), exports);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseBasicText = exports.decodeBasicProgram = exports.wrapBasic = exports.BasicProgram = exports.BasicElement = exports.ElementType = exports.getToken = exports.BASIC_HEADER_BYTE = exports.BASIC_TAPE_HEADER_BYTE = void 0;
 const teamten_ts_utils_1 = __webpack_require__(7);
-const z80_base_1 = __webpack_require__(3);
-const ProgramAnnotation_1 = __webpack_require__(4);
-const Trs80File_1 = __webpack_require__(1);
+const z80_base_1 = __webpack_require__(4);
+const ProgramAnnotation_1 = __webpack_require__(1);
+const Trs80File_1 = __webpack_require__(2);
 exports.BASIC_TAPE_HEADER_BYTE = 0xD3;
 exports.BASIC_HEADER_BYTE = 0xFF;
 const FIRST_TOKEN = 0x80;
@@ -1105,12 +1173,12 @@ const TOKENS = [
     "MERGE", "NAME", "KILL", "LSET", "RSET", "SAVE", "SYSTEM", "LPRINT",
     "DEF", "POKE", "PRINT", "CONT", "LIST", "LLIST", "DELETE", "AUTO",
     "CLEAR", "CLOAD", "CSAVE", "NEW", "TAB(", "TO", "FN", "USING",
-    "VARPTR", "USR", "ERL", "ERR", "STRING", "INSTR", "POINT", "TIME$",
+    "VARPTR", "USR", "ERL", "ERR", "STRING$", "INSTR", "POINT", "TIME$",
     "MEM", "INKEY$", "THEN", "NOT", "STEP", "+", "-", "*",
     "/", "[", "AND", "OR", ">", "=", "<", "SGN",
     "INT", "ABS", "FRE", "INP", "POS", "SQR", "RND", "LOG",
     "EXP", "COS", "SIN", "TAN", "ATN", "PEEK", "CVI", "CVS",
-    "CVD", "EOF", "LOC", "LOF", "MKI", "MKS$", "MKD$", "CINT",
+    "CVD", "EOF", "LOC", "LOF", "MKI$", "MKS$", "MKD$", "CINT",
     "CSNG", "CDBL", "FIX", "LEN", "STR$", "VAL", "ASC", "CHR$",
     "LEFT$", "RIGHT$", "MID$",
 ];
@@ -1358,7 +1426,7 @@ function decodeBasicProgram(binary) {
         for (let i = lineElementsIndex; i < elements.length; i++) {
             textLineParts.push(elements[i].text);
         }
-        let textLine = textLineParts.join("");
+        let textLine = textLineParts.join("").replace(/[\n\r]+/, " ");
         if (textLine.length > 33) {
             textLine = textLine.substr(0, 30) + "...";
         }
@@ -1688,9 +1756,9 @@ exports.signedByte = signedByte;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decodeCmdProgram = exports.CmdProgram = exports.CMD_CHUNK_TYPE_NAME = exports.CmdLoadModuleHeaderChunk = exports.CmdTransferAddressChunk = exports.CmdLoadBlockChunk = exports.CmdChunk = exports.CMD_MAX_TYPE = exports.CMD_LOAD_MODULE_HEADER = exports.CMD_TRANSFER_ADDRESS = exports.CMD_LOAD_BLOCK = void 0;
 const teamten_ts_utils_1 = __webpack_require__(7);
-const z80_base_1 = __webpack_require__(3);
-const ProgramAnnotation_1 = __webpack_require__(4);
-const Trs80File_1 = __webpack_require__(1);
+const z80_base_1 = __webpack_require__(4);
+const ProgramAnnotation_1 = __webpack_require__(1);
+const Trs80File_1 = __webpack_require__(2);
 // Chunk types.
 exports.CMD_LOAD_BLOCK = 0x01;
 exports.CMD_TRANSFER_ADDRESS = 0x02;
@@ -1828,7 +1896,14 @@ function decodeCmdProgram(binary) {
     while (true) {
         // First byte is type of chunk.
         const type = b.read();
-        if (type === teamten_ts_utils_1.EOF || type > exports.CMD_MAX_TYPE || error !== undefined) {
+        // End of file?
+        if (type === teamten_ts_utils_1.EOF ||
+            // Invalid type byte?
+            type > exports.CMD_MAX_TYPE ||
+            // Error earlier?
+            error !== undefined ||
+            // Just saw jump? There's typically junk after this and it can make it seem like there's an error.
+            (chunks.length > 0 && chunks[chunks.length - 1] instanceof CmdTransferAddressChunk)) {
             if (chunks.length === 0) {
                 return undefined;
             }
@@ -1899,9 +1974,10 @@ exports.decodeCmdProgram = decodeCmdProgram;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decodeCassette = exports.Cassette = exports.CassetteFile = exports.CassetteSpeed = void 0;
-const SystemProgram_1 = __webpack_require__(20);
-const Trs80File_1 = __webpack_require__(1);
-const Trs80FileDecoder_1 = __webpack_require__(21);
+const SystemProgram_1 = __webpack_require__(9);
+const Trs80File_1 = __webpack_require__(2);
+const Trs80FileDecoder_1 = __webpack_require__(20);
+const ProgramAnnotation_1 = __webpack_require__(1);
 // Low-speed header and sync constants.
 const LOW_SPEED_HEADER_BYTE = 0x00;
 const LOW_SPEED_SYNC_BYTE = 0xA5;
@@ -1950,9 +2026,16 @@ function checkMatch(actual, reference) {
  * Represents a file on a cassette. (Not the CAS file itself.)
  */
 class CassetteFile {
-    constructor(speed, file) {
+    constructor(offset, speed, file) {
+        this.offset = offset;
         this.speed = speed;
         this.file = file;
+    }
+    /**
+     * Return the file's annotations adjusted by the offset into the cassette.
+     */
+    adjustedAnnotations() {
+        return this.file.annotations.map(annotation => annotation.adjusted(this.offset));
     }
 }
 exports.CassetteFile = CassetteFile;
@@ -1960,8 +2043,8 @@ exports.CassetteFile = CassetteFile;
  * Represents a cassette (CAS file).
  */
 class Cassette extends Trs80File_1.Trs80File {
-    constructor(binary, error, files) {
-        super(binary, error, []);
+    constructor(binary, error, annotations, files) {
+        super(binary, error, annotations);
         this.files = files;
     }
     getDescription() {
@@ -2012,6 +2095,7 @@ function stripStartBits(inBytes) {
  */
 function decodeCassette(binary) {
     const start = 0;
+    const annotations = [];
     const cassetteFiles = [];
     while (true) {
         let recentBits = 0xFFFFFFFF;
@@ -2027,6 +2111,8 @@ function decodeCassette(binary) {
                     // TODO
                     throw new Error("We don't yet handle low-speed cassettes with bit offsets of " + lowSpeedBitOffset);
                 }
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Low speed header", 0, i));
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Low speed sync byte", i, i + 1));
                 speed = CassetteSpeed.LOW_SPEED;
                 programStartIndex = i + 1;
                 programBinary = binary.subarray(programStartIndex);
@@ -2039,6 +2125,8 @@ function decodeCassette(binary) {
                     throw new Error("We don't yet handle high-speed cassettes with bit offsets of " +
                         highSpeedBitOffset);
                 }
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("High speed header", 0, i));
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("High speed sync byte", i, i + 1));
                 speed = CassetteSpeed.HIGH_SPEED;
                 programStartIndex = i + 1;
                 programBinary = stripStartBits(binary.subarray(programStartIndex));
@@ -2056,16 +2144,21 @@ function decodeCassette(binary) {
             // Not a CAS file.
             return undefined;
         }
-        // See what kind of file it is.
+        // See what kind of file it is. System program aren't decoded by decodeTrs80File() because
+        // these are always on cassettes or with a .3BN extension. So try that ourselves first.
         let file = SystemProgram_1.decodeSystemProgram(programBinary);
         if (file === undefined) {
             file = Trs80FileDecoder_1.decodeTrs80File(programBinary, undefined);
         }
-        cassetteFiles.push(new CassetteFile(speed, file));
+        cassetteFiles.push(new CassetteFile(programStartIndex, speed, file));
         // TODO handle multiple files. See HAUNT.CAS.
         break;
     }
-    return new Cassette(binary, undefined, cassetteFiles);
+    // Merge the annotations of the files into ours.
+    for (const file of cassetteFiles) {
+        annotations.push(...file.adjustedAnnotations());
+    }
+    return new Cassette(binary, undefined, annotations, cassetteFiles);
 }
 exports.decodeCassette = decodeCassette;
 
@@ -2076,173 +2169,16 @@ exports.decodeCassette = decodeCassette;
 
 "use strict";
 
-/**
- * Tools for dealing with SYSTEM (machine language) programs.
- *
- * http://www.trs-80.com/wordpress/zaps-patches-pokes-tips/tape-and-file-formats-structures/
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.decodeSystemProgram = exports.SystemProgram = exports.SystemChunk = void 0;
-const teamten_ts_utils_1 = __webpack_require__(7);
-const z80_base_1 = __webpack_require__(3);
-const ProgramAnnotation_1 = __webpack_require__(4);
-const Trs80File_1 = __webpack_require__(1);
-const FILE_HEADER = 0x55;
-const DATA_HEADER = 0x3C;
-const END_OF_FILE_MARKER = 0x78;
-const FILENAME_LENGTH = 6;
-/**
- * Represents a chunk of bytes from the file, with a checksum.
- */
-class SystemChunk {
-    constructor(loadAddress, data, checksum) {
-        this.loadAddress = loadAddress;
-        this.data = data;
-        this.checksum = checksum;
-    }
-    /**
-     * Whether the checksum supplied on tape matches what we compute.
-     */
-    isChecksumValid() {
-        let checksum = 0;
-        // Include load address and data.
-        checksum += (this.loadAddress >> 8) & 0xFF;
-        checksum += this.loadAddress & 0xFF;
-        for (const b of this.data) {
-            checksum += b;
-        }
-        checksum &= 0xFF;
-        return checksum === this.checksum;
-    }
-}
-exports.SystemChunk = SystemChunk;
-/**
- * Class representing a SYSTEM (machine language) program. If the "error" field is set, then something
- * went wrong with the program and the data may be partially loaded.
- */
-class SystemProgram extends Trs80File_1.Trs80File {
-    constructor(binary, error, filename, chunks, entryPointAddress, annotations) {
-        super(binary, error, annotations);
-        this.filename = filename;
-        this.chunks = chunks;
-        this.entryPointAddress = entryPointAddress;
-        this.annotations = annotations;
-    }
-    getDescription() {
-        return "System program (" + this.filename + ")";
-    }
-    /**
-     * Convert an address in memory to the original byte offset in the binary. Returns undefined if
-     * not found in any chunk.
-     */
-    addressToByteOffset(address) {
-        // Skip file header and block header.
-        let offset = 1 + FILENAME_LENGTH + 4;
-        for (const chunk of this.chunks) {
-            if (address >= chunk.loadAddress && address < chunk.loadAddress + chunk.data.length) {
-                return offset + (address - chunk.loadAddress);
-            }
-            // Skip checksum and block header of the next block.
-            offset += chunk.data.length + 5;
-        }
-        return undefined;
-    }
-}
-exports.SystemProgram = SystemProgram;
-/**
- * Decodes a system program from the binary. If the binary is not at all a system
- * program, returns undefined. If it's a system program with decoding errors, returns
- * partially-decoded binary and sets the "error" field.
- */
-function decodeSystemProgram(binary) {
-    const chunks = [];
-    const annotations = [];
-    let entryPointAddress = 0;
-    const b = new teamten_ts_utils_1.ByteReader(binary);
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("File\nHead", b.addr(), b.addr()));
-    const headerByte = b.read();
-    if (headerByte === teamten_ts_utils_1.EOF) {
-        return undefined;
-    }
-    if (headerByte !== FILE_HEADER) {
-        return undefined;
-    }
-    let filename = b.readString(FILENAME_LENGTH);
-    // Make a SystemProgram object with what we have so far.
-    const makeSystemProgram = (error) => {
-        const programBinary = binary.subarray(0, b.addr());
-        return new SystemProgram(programBinary, error, filename, chunks, entryPointAddress, annotations);
-    };
-    if (filename.length < FILENAME_LENGTH) {
-        // Binary is truncated.
-        return makeSystemProgram("File is truncated at filename");
-    }
-    filename = filename.trim();
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Filename\n\"" + filename + "\"", b.addr() - FILENAME_LENGTH, b.addr() - 1)); // TODO all these annotations need to have their "end" incremented.
-    while (true) {
-        annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Data\nHead", b.addr(), b.addr()));
-        const marker = b.read();
-        if (marker === teamten_ts_utils_1.EOF) {
-            return makeSystemProgram("File is truncated at start of block");
-        }
-        if (marker === END_OF_FILE_MARKER) {
-            break;
-        }
-        if (marker !== DATA_HEADER) {
-            // Here if the marker is 0x55, we could guess that it's a high-speed cassette header.
-            return makeSystemProgram("Unexpected byte " + z80_base_1.toHexByte(marker) + " at start of block");
-        }
-        let length = b.read();
-        if (length === teamten_ts_utils_1.EOF) {
-            return makeSystemProgram("File is truncated at block length");
-        }
-        // 0 means 256.
-        if (length === 0) {
-            length = 256;
-        }
-        annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Len\n" + length, b.addr() - 1, b.addr() - 1));
-        const loadAddress = b.readShort(false);
-        if (loadAddress === teamten_ts_utils_1.EOF) {
-            return makeSystemProgram("File is truncated at load address");
-        }
-        annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Addr\n" + z80_base_1.toHexWord(loadAddress), b.addr() - 2, b.addr() - 1));
-        const data = b.readBytes(length);
-        if (data.length < length) {
-            return makeSystemProgram("File is truncated at data");
-        }
-        const checksum = b.read();
-        if (loadAddress === teamten_ts_utils_1.EOF) {
-            return makeSystemProgram("File is truncated at checksum");
-        }
-        annotations.push(new ProgramAnnotation_1.ProgramAnnotation("XSum\n0x" + z80_base_1.toHexByte(checksum), b.addr() - 1, b.addr() - 1));
-        chunks.push(new SystemChunk(loadAddress, data, checksum));
-    }
-    entryPointAddress = b.readShort(false);
-    if (entryPointAddress === teamten_ts_utils_1.EOF) {
-        entryPointAddress = 0;
-        return makeSystemProgram("File is truncated at entry point address");
-    }
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Run\n" + z80_base_1.toHexWord(entryPointAddress), b.addr() - 2, b.addr() - 1));
-    return makeSystemProgram();
-}
-exports.decodeSystemProgram = decodeSystemProgram;
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decodeTrs80File = void 0;
 const Basic_1 = __webpack_require__(16);
 const Cassette_1 = __webpack_require__(19);
 const CmdProgram_1 = __webpack_require__(18);
-const RawBinaryFile_1 = __webpack_require__(22);
-const Jv1FloppyDisk_1 = __webpack_require__(23);
-const Jv3FloppyDisk_1 = __webpack_require__(53);
-const DmkFloppyDisk_1 = __webpack_require__(54);
+const RawBinaryFile_1 = __webpack_require__(21);
+const Jv1FloppyDisk_1 = __webpack_require__(22);
+const Jv3FloppyDisk_1 = __webpack_require__(42);
+const DmkFloppyDisk_1 = __webpack_require__(43);
+const SystemProgram_1 = __webpack_require__(9);
 /**
  * Get the extension of the filename, including the dot, in upper case, or
  * an empty string if the filename does not contain an extension.
@@ -2287,7 +2223,7 @@ function decodeDsk(binary) {
  * @param filename optional filename to help with detection.
  */
 function decodeTrs80File(binary, filename) {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     let trs80File;
     const extension = filename === undefined ? "" : getExtension(filename);
     if (extension === ".JV1") {
@@ -2298,6 +2234,11 @@ function decodeTrs80File(binary, filename) {
     }
     if (extension === ".DMK") {
         return (_c = DmkFloppyDisk_1.decodeDmkFloppyDisk(binary)) !== null && _c !== void 0 ? _c : new RawBinaryFile_1.RawBinaryFile(binary);
+    }
+    // "Model III BiNary" format, invented by George Phillips for trs80gp.
+    // Rarely used as a stand-alone file, usually just embedded in .CAS files.
+    if (extension === ".3BN") {
+        return (_d = SystemProgram_1.decodeSystemProgram(binary)) !== null && _d !== void 0 ? _d : new RawBinaryFile_1.RawBinaryFile(binary);
     }
     trs80File = Cassette_1.decodeCassette(binary);
     if (trs80File !== undefined) {
@@ -2317,14 +2258,14 @@ exports.decodeTrs80File = decodeTrs80File;
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RawBinaryFile = void 0;
-const Trs80File_1 = __webpack_require__(1);
+const Trs80File_1 = __webpack_require__(2);
 /**
  * File when we don't recognize the type.
  */
@@ -2340,7 +2281,7 @@ exports.RawBinaryFile = RawBinaryFile;
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2348,7 +2289,7 @@ exports.RawBinaryFile = RawBinaryFile;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decodeJv1FloppyDisk = exports.Jv1FloppyDisk = void 0;
 const FloppyDisk_1 = __webpack_require__(5);
-const ProgramAnnotation_1 = __webpack_require__(4);
+const ProgramAnnotation_1 = __webpack_require__(1);
 const BYTES_PER_SECTOR = 256;
 const SECTORS_PER_TRACK = 10;
 const BYTES_PER_TRACK = BYTES_PER_SECTOR * SECTORS_PER_TRACK;
@@ -2410,6 +2351,133 @@ exports.decodeJv1FloppyDisk = decodeJv1FloppyDisk;
 
 
 /***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Various utility functions.
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Convert a number to hex and zero-pad to the specified number of hex digits.
+ */
+function toHex(value, digits) {
+    return value.toString(16).toUpperCase().padStart(digits, "0");
+}
+exports.toHex = toHex;
+/**
+ * Convert a byte to hex.
+ */
+function toHexByte(value) {
+    return toHex(value, 2);
+}
+exports.toHexByte = toHexByte;
+/**
+ * Convert a word to hex.
+ */
+function toHexWord(value) {
+    return toHex(value, 4);
+}
+exports.toHexWord = toHexWord;
+/**
+ * Convert a long (32-bit value) to hex.
+ */
+function toHexLong(value) {
+    value &= 0xFFFFFFFF;
+    // Convert two's complement negative numbers to positive numbers.
+    if (value < 0) {
+        value += 0x100000000;
+    }
+    return value.toString(16).toUpperCase().padStart(8, "0");
+}
+exports.toHexLong = toHexLong;
+/**
+ * Return the high byte of a word.
+ */
+function hi(value) {
+    return (value >> 8) & 0xFF;
+}
+exports.hi = hi;
+/**
+ * Return the low byte of a word.
+ */
+function lo(value) {
+    return value & 0xFF;
+}
+exports.lo = lo;
+/**
+ * Create a word from a high and low byte.
+ */
+function word(highByte, lowByte) {
+    return ((highByte & 0xFF) << 8) | (lowByte & 0xFF);
+}
+exports.word = word;
+/**
+ * Increment a byte.
+ */
+function inc8(value) {
+    return add8(value, 1);
+}
+exports.inc8 = inc8;
+/**
+ * Increment a word.
+ */
+function inc16(value) {
+    return add16(value, 1);
+}
+exports.inc16 = inc16;
+/**
+ * Decrement a byte.
+ */
+function dec8(value) {
+    return sub8(value, 1);
+}
+exports.dec8 = dec8;
+/**
+ * Decrement a word.
+ */
+function dec16(value) {
+    return sub16(value, 1);
+}
+exports.dec16 = dec16;
+/**
+ * Add two bytes together.
+ */
+function add8(a, b) {
+    return (a + b) & 0xFF;
+}
+exports.add8 = add8;
+/**
+ * Add two words together.
+ */
+function add16(a, b) {
+    return (a + b) & 0xFFFF;
+}
+exports.add16 = add16;
+/**
+ * Subtract two bytes.
+ */
+function sub8(a, b) {
+    return (a - b) & 0xFF;
+}
+exports.sub8 = sub8;
+/**
+ * Subtract two words.
+ */
+function sub16(a, b) {
+    return (a - b) & 0xFFFF;
+}
+exports.sub16 = sub16;
+/**
+ * Convert a byte to a signed number (e.g., 0xff to -1).
+ */
+function signedByte(value) {
+    return value >= 128 ? value - 256 : value;
+}
+exports.signedByte = signedByte;
+
+
+/***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2418,7 +2486,7 @@ exports.decodeJv1FloppyDisk = decodeJv1FloppyDisk;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EventList = void 0;
 const ste_core_1 = __webpack_require__(0);
-const EventDispatcher_1 = __webpack_require__(9);
+const EventDispatcher_1 = __webpack_require__(11);
 /**
  * Storage class for multiple events that are accessible by name.
  * Events dispatchers are automatically created.
@@ -2449,7 +2517,7 @@ exports.EventList = EventList;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SimpleEventList = void 0;
 const ste_core_1 = __webpack_require__(0);
-const SimpleEventDispatcher_1 = __webpack_require__(10);
+const SimpleEventDispatcher_1 = __webpack_require__(12);
 /**
  * Storage class for multiple simple events that are accessible by name.
  * Events dispatchers are automatically created.
@@ -2575,7 +2643,7 @@ exports.SignalList = SignalList;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PromiseEventList = void 0;
 const ste_core_1 = __webpack_require__(0);
-const PromiseEventDispatcher_1 = __webpack_require__(11);
+const PromiseEventDispatcher_1 = __webpack_require__(13);
 /**
  * Storage class for multiple events that are accessible by name.
  * Events dispatchers are automatically created.
@@ -2613,9 +2681,9 @@ exports.PromiseEventList = PromiseEventList;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PromiseSignalList = exports.PromiseSignalHandlingBase = exports.PromiseSignalDispatcher = void 0;
-const PromiseSignalDispatcher_1 = __webpack_require__(79);
+const PromiseSignalDispatcher_1 = __webpack_require__(81);
 Object.defineProperty(exports, "PromiseSignalDispatcher", { enumerable: true, get: function () { return PromiseSignalDispatcher_1.PromiseSignalDispatcher; } });
-const PromiseSignalHandlingBase_1 = __webpack_require__(80);
+const PromiseSignalHandlingBase_1 = __webpack_require__(82);
 Object.defineProperty(exports, "PromiseSignalHandlingBase", { enumerable: true, get: function () { return PromiseSignalHandlingBase_1.PromiseSignalHandlingBase; } });
 const PromiseSignalList_1 = __webpack_require__(30);
 Object.defineProperty(exports, "PromiseSignalList", { enumerable: true, get: function () { return PromiseSignalList_1.PromiseSignalList; } });
@@ -2661,7 +2729,7 @@ exports.PromiseSignalList = PromiseSignalList;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PromiseSimpleEventList = void 0;
 const ste_core_1 = __webpack_require__(0);
-const PromiseSimpleEventDispatcher_1 = __webpack_require__(12);
+const PromiseSimpleEventDispatcher_1 = __webpack_require__(14);
 /**
  * Storage class for multiple simple events that are accessible by name.
  * Events dispatchers are automatically created.
@@ -2742,7 +2810,7 @@ class EventScheduler {
         }
     }
     /**
-     * Schedule an event to happen tStateCount clocks. The callback will be called
+     * Schedule an event to happen at tStateCount clocks. The callback will be called
      * at the end of an instruction step.
      *
      * @return a handle that can be passed to cancel().
@@ -2804,9 +2872,9 @@ exports.EventScheduler = EventScheduler;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SettingsPanel = exports.PanelType = void 0;
-const Utils_1 = __webpack_require__(2);
-const Config_1 = __webpack_require__(8);
-const CanvasScreen_1 = __webpack_require__(13);
+const Utils_1 = __webpack_require__(8);
+const Config_1 = __webpack_require__(10);
+const CanvasScreen_1 = __webpack_require__(15);
 const gCssPrefix = Utils_1.CSS_PREFIX + "-settings-panel";
 const gScreenNodeCssClass = gCssPrefix + "-screen-node";
 const gPanelCssClass = gCssPrefix + "-panel";
@@ -3315,15 +3383,257 @@ exports.SettingsPanel = SettingsPanel;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CanvasScreen_1 = __webpack_require__(13);
-const Trs80_1 = __webpack_require__(37);
+exports.ControlPanel = void 0;
+const Utils_1 = __webpack_require__(8);
 const SettingsPanel_1 = __webpack_require__(33);
-const ControlPanel_1 = __webpack_require__(84);
-const ProgressBar_1 = __webpack_require__(85);
-const CassettePlayer_1 = __webpack_require__(86);
-const Editor_1 = __webpack_require__(87);
-const teamten_ts_utils_1 = __webpack_require__(88);
-const trs80_base_1 = __webpack_require__(15);
+const gCssPrefix = Utils_1.CSS_PREFIX + "-control-panel";
+const gScreenNodeCssClass = gCssPrefix + "-screen-node";
+const gPanelCssClass = gCssPrefix + "-panel";
+const gButtonCssClass = gCssPrefix + "-button";
+const gShowingOtherPanelCssClass = gCssPrefix + "-showing-other-panel";
+// https://thenounproject.com/search/?q=reset&i=3012384
+const RESET_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" xml:space="preserve">
+    <switch>
+        <g fill="white">
+            <path d="M5273.1,2400.1v-2c0-2.8-5-4-9.7-4s-9.7,1.3-9.7,4v2c0,1.8,0.7,3.6,2,4.9l5,4.9c0.3,0.3,0.4,0.6,0.4,1v6.4     c0,0.4,0.2,0.7,0.6,0.8l2.9,0.9c0.5,0.1,1-0.2,1-0.8v-7.2c0-0.4,0.2-0.7,0.4-1l5.1-5C5272.4,2403.7,5273.1,2401.9,5273.1,2400.1z      M5263.4,2400c-4.8,0-7.4-1.3-7.5-1.8v0c0.1-0.5,2.7-1.8,7.5-1.8c4.8,0,7.3,1.3,7.5,1.8C5270.7,2398.7,5268.2,2400,5263.4,2400z"/>
+            <path d="M5268.4,2410.3c-0.6,0-1,0.4-1,1c0,0.6,0.4,1,1,1h4.3c0.6,0,1-0.4,1-1c0-0.6-0.4-1-1-1H5268.4z"/>
+            <path d="M5272.7,2413.7h-4.3c-0.6,0-1,0.4-1,1c0,0.6,0.4,1,1,1h4.3c0.6,0,1-0.4,1-1C5273.7,2414.1,5273.3,2413.7,5272.7,2413.7z"/>
+            <path d="M5272.7,2417h-4.3c-0.6,0-1,0.4-1,1c0,0.6,0.4,1,1,1h4.3c0.6,0,1-0.4,1-1C5273.7,2417.5,5273.3,2417,5272.7,2417z"/>
+            <path d="M84.3,18C67.1,0.8,39.5,0.4,21.8,16.5l-4.1-4.1c-1.6-1.6-4-2.2-6.2-1.6c-2.2,0.7-3.9,2.5-4.3,4.7L2.6,36.9    c-0.4,2.1,0.2,4.2,1.7,5.7c1.5,1.5,3.6,2.1,5.7,1.7l21.4-4.5c1.2-0.3,2.3-0.9,3.1-1.7c0.7-0.7,1.3-1.6,1.6-2.6    c0.6-2.2,0-4.6-1.6-6.2l-3.9-3.9C43.5,14,63.1,14.5,75.4,26.8c12.8,12.8,12.8,33.6,0,46.4C62.6,86,41.8,86,29,73.2    c-4.1-4.1-7-9.2-8.5-14.8c-0.9-3.3-4.3-5.3-7.6-4.4c-3.3,0.9-5.3,4.3-4.4,7.6c2,7.7,6.1,14.8,11.8,20.4    c17.7,17.7,46.4,17.7,64.1,0C101.9,64.4,101.9,35.6,84.3,18z"/>
+        </g>
+    </switch>
+</svg>
+`;
+// https://thenounproject.com/search/?q=camera&i=1841396
+const CAMERA_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100">
+    <g fill="white">
+        <circle cx="50" cy="55.4" r="13.8"/>
+        <path d="M80.6,25.4H67.1l-1.8-7.2c-0.5-2.1-2.5-3.6-4.7-3.6H39.3c-2.2,0-4.1,1.5-4.7,3.6l-1.8,7.2H19.4C11.5,25.4,5,31.9,5,39.8V71   c0,7.9,6.5,14.4,14.4,14.4h61.2C88.5,85.4,95,78.9,95,71V39.8C95,31.9,88.5,25.4,80.6,25.4z M50,76.4c-11.6,0-21-9.4-21-21   s9.4-21,21-21s21,9.4,21,21S61.6,76.4,50,76.4z M81.4,40.3c-2,0-3.6-1.6-3.6-3.6c0-2,1.6-3.6,3.6-3.6s3.6,1.6,3.6,3.6   C85,38.7,83.4,40.3,81.4,40.3z"/>
+    </g>
+</svg>
+`;
+// https://thenounproject.com/search/?q=previous%20track&i=658409
+const PREVIOUS_TRACK_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -2 16 21" version="1.1">
+    <g fill="white" fill-rule="evenodd">
+        <g transform="translate(-320.000000, -618.000000)">
+            <path d="M330,628.032958 L330,634.00004 C330,634.545291 330.45191,635 331.009369,635 L332.990631,635 C333.556647,635 334,634.552303 334,634.00004 L334,618.99996 C334,618.454709 333.54809,618 332.990631,618 L331.009369,618 C330.443353,618 330,618.447697 330,618.99996 L330,624.967057 C329.894605,624.850473 329.775773,624.739153 329.643504,624.634441 L322.356496,618.865559 C321.054403,617.834736 320,618.3432 320,620.000122 L320,632.999878 C320,634.663957 321.055039,635.164761 322.356496,634.134441 L329.643504,628.365559 C329.775779,628.260841 329.894611,628.149527 330,628.032958 Z" transform="translate(327.000000, 626.500000) scale(-1, 1) translate(-327.000000, -626.500000) "/>
+        </g>
+    </g>
+</svg>
+`;
+// https://thenounproject.com/search/?q=settings&i=3593545
+const HARDWARE_SETTINGS_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="7 7 121 121" version="1.1">
+    <g fill="white" transform="translate(0,-161.53332)">
+        <path d="m 61.57997,173.33818 c -1.653804,0 -3.159177,0.77847 -4.132553,1.85984 -0.973402,1.08136 -1.513575,2.40442 -1.771491,3.76721 a 2.1609049,2.1609049 0 0 0 0,0.002 l -1.654678,8.74831 c -2.047981,0.67947 -4.038494,1.50768 -5.964476,2.48047 l -7.367508,-5.02347 c -1.145302,-0.78076 -2.462953,-1.33572 -3.916045,-1.41232 -1.4546,-0.0764 -3.068029,0.44118 -4.235926,1.60921 l -8.699209,8.69921 c -1.169405,1.16909 -1.685211,2.78351 -1.609725,4.23643 0.07501,1.45291 0.629259,2.7738 1.410256,3.92018 l 5.001762,7.336 c -0.9702,1.93582 -1.794192,3.93628 -2.468589,5.99392 l -8.740034,1.65417 c -1.362789,0.25787 -2.688378,0.79815 -3.769783,1.77147 -1.081405,0.97346 -1.859333,2.4815 -1.859333,4.13526 v 12.30262 c 0,1.65378 0.777928,3.1592 1.859333,4.13255 1.081405,0.97338 2.406994,1.51567 3.769783,1.77353 l 8.754004,1.6583 c 0.679477,2.04603 1.506088,4.03461 2.478379,5.95882 l -5.025522,7.3675 c -0.781606,1.14644 -1.334744,2.4664 -1.410256,3.91967 -0.07498,1.45325 0.439817,3.06745 1.609725,4.23643 l 8.699209,8.69921 c 1.1693,1.16941 2.782914,1.68325 4.235926,1.60713 1.452986,-0.0761 2.771908,-0.63037 3.918109,-1.41179 l 7.33597,-5.00022 c 1.9363,0.97001 3.937926,1.79294 5.996014,2.46702 l 1.654175,8.74004 c 0.257889,1.36284 0.798486,2.68843 1.771994,3.76981 0.973402,1.08138 2.478749,1.8593 4.132553,1.8593 H 73.88672 c 1.653805,0 3.159152,-0.77792 4.132554,-1.8593 0.973005,-1.0809 1.513999,-2.40554 1.771994,-3.76772 v -0.003 l 1.656212,-8.74778 c 2.048113,-0.67943 4.038415,-1.50768 5.964502,-2.48047 l 7.365445,5.02142 c 1.146095,0.78144 2.465096,1.33567 3.918108,1.41179 1.452905,0.0761 3.068585,-0.43786 4.237995,-1.60713 l 8.6992,-8.69921 c 1.16931,-1.16946 1.68395,-2.78551 1.60767,-4.23852 -0.076,-1.45301 -0.63074,-2.77196 -1.41232,-3.91811 l -5.00177,-7.33547 c 0.9705,-1.93617 1.79398,-3.93639 2.46857,-5.99445 l 8.74003,-1.65418 c 1.36271,-0.25794 2.68841,-0.80018 3.76981,-1.77352 1.0813,-0.97335 1.85931,-2.47881 1.85931,-4.13256 v -12.30312 c 0,-1.65378 -0.77801,-3.16127 -1.85931,-4.13465 -1.0809,-0.97292 -2.40562,-1.51344 -3.76772,-1.77146 l -8.74988,-1.65624 c -0.67918,-2.04684 -1.50825,-4.03585 -2.48046,-5.96088 l 5.02348,-7.36698 c 0.78118,-1.14583 1.33572,-2.46501 1.41232,-3.91811 0.077,-1.45309 -0.43952,-3.06905 -1.60973,-4.2385 l -8.69714,-8.69921 c -1.16962,-1.16891 -2.78461,-1.68557 -4.238494,-1.6092 -1.4528,0.0768 -2.770425,0.63186 -3.915542,1.41232 l -7.33597,5.00176 c -1.9363,-0.96998 -3.937926,-1.79297 -5.996014,-2.46703 l -1.656768,-8.74211 c -0.257783,-1.36269 -0.798062,-2.68582 -1.771464,-3.76721 -0.973297,-1.0814 -2.478749,-1.85984 -4.132554,-1.85984 z m 6.152595,34.74051 c 11.726704,0 21.185664,9.46065 21.185267,21.18735 0,11.7262 -9.459066,21.18696 -21.185267,21.18733 -11.726704,0 -21.187463,-9.4606 -21.18786,-21.18733 0,-11.72726 9.460653,-21.18772 21.18786,-21.18735 z"/>
+    </g>
+</svg>
+`;
+// https://thenounproject.com/search/?q=view&i=485540
+const VIEW_SETTINGS_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="20 20 60 60">
+    <g fill="white">
+        <path d="M80,48.6c-7.8-10.4-18.4-16.7-30-16.7c-11.6,0-22.2,6.4-30,16.7c-0.6,0.9-0.6,2,0,2.9c7.8,10.4,18.4,16.7,30,16.7  s22.2-6.4,30-16.7C80.7,50.6,80.7,49.4,80,48.6z M62.8,50.8c-0.4,6.4-5.6,11.6-12,12c-7.7,0.5-14.1-5.9-13.6-13.6  c0.4-6.4,5.6-11.6,12-12C56.9,36.7,63.3,43.1,62.8,50.8z M56.9,50.4c-0.2,3.4-3,6.2-6.4,6.4c-4.2,0.3-7.6-3.2-7.3-7.3  c0.2-3.4,3-6.2,6.4-6.4C53.7,42.8,57.2,46.3,56.9,50.4z"/>
+    </g>
+</svg>
+`;
+// https://thenounproject.com/search/?q=edit&i=1072354
+const EDIT_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -25 562 562">
+    <g fill="white">
+        <path d="M318.37,85.45L422.53,190.11,158.89,455,54.79,350.38ZM501.56,60.2L455.11,13.53a45.93,45.93,0,0,0-65.11,0L345.51,58.24,449.66,162.9l51.9-52.15A35.8,35.8,0,0,0,501.56,60.2ZM0.29,497.49a11.88,11.88,0,0,0,14.34,14.17l116.06-28.28L26.59,378.72Z"/>
+    </g>
+</svg>
+`;
+// https://thenounproject.com/search/?q=checkmark&i=1409439
+const CHECK_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <g fill="white">
+        <line x1="19.713" y1="55.055" x2="33.258" y2="68.6"/>
+        <path d="M92.059,19.7c-2.733-2.733-7.165-2.734-9.9,0L33.258,68.6L17.841,53.183c-2.734-2.732-7.166-2.733-9.899,0.001   c-2.734,2.733-2.734,7.165,0,9.899l20.367,20.366c1.367,1.366,3.158,2.05,4.95,2.05s3.583-0.684,4.95-2.05l53.85-53.85   C94.792,26.866,94.792,22.434,92.059,19.7z"/>
+    </g>
+</svg>
+
+`;
+// https://thenounproject.com/search/?q=close&i=1609004
+const CROSS_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="-5 -5 110 110">
+    <style type="text/css">
+        .st0 {
+            fill-rule: evenodd;
+            clip-rule: evenodd;
+        }
+    </style>
+    <path fill="white" class="st0" d="M61.2,50.5l32.1,32.1c3,3,3,7.7,0,10.7c-3,3-7.7,3-10.7,0L50.5,61.2L18.4,93.3c-3,3-7.7,3-10.7,0  c-3-3-3-7.7,0-10.7l32.1-32.1L7.7,18.4c-3-3-3-7.7,0-10.7s7.7-3,10.7,0l32.1,32.1L82.6,7.7c3-3,7.7-3,10.7,0c3,3,3,7.7,0,10.7  L61.2,50.5z"/>
+</svg>
+`;
+const GLOBAL_CSS = `
+.${gPanelCssClass} {
+    background-color: rgba(40, 40, 40, 0.8);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity .20s ease-in-out;
+}
+
+.${gScreenNodeCssClass} {
+    /* Force the screen node to relative positioning. Hope that doesn't screw anything up. */
+    position: relative;
+}
+
+.${gScreenNodeCssClass}:hover .${gPanelCssClass} {
+    opacity: 1;
+}
+
+/* Hide the control panel if any other panel is showing (like settings). */
+.${gScreenNodeCssClass}.${gShowingOtherPanelCssClass}:hover .${gPanelCssClass} {
+    opacity: 0;
+}
+
+.${gButtonCssClass} {
+    display: block;
+    /* background-color: red; */
+    margin: 15px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity .05s ease-in-out, transform 0.05s ease-in-out;
+}
+
+.${gButtonCssClass}:hover {
+    opacity: 1;
+}
+
+.${gButtonCssClass}:active {
+    transform: scale(1.15);
+}
+`;
+/**
+ * Control panel that hovers in the screen for doing things like resetting the computer.
+ */
+class ControlPanel {
+    /**
+     * @param screenNode the node from the Trs80Screen object's getNode() method.
+     */
+    constructor(screenNode) {
+        // Make global CSS if necessary.
+        ControlPanel.configureStyle();
+        this.screenNode = screenNode;
+        screenNode.classList.add(gScreenNodeCssClass);
+        this.panelNode = document.createElement("div");
+        this.panelNode.classList.add(gPanelCssClass);
+        screenNode.appendChild(this.panelNode);
+    }
+    /**
+     * Generic function to add a button to the control panel.
+     */
+    addButton(iconSvg, title, callback) {
+        let icon = document.createElement("img");
+        icon.classList.add(gButtonCssClass);
+        icon.width = 30;
+        icon.height = 30;
+        icon.src = "data:image/svg+xml;base64," + btoa(iconSvg);
+        icon.title = title;
+        icon.addEventListener("click", callback);
+        this.panelNode.appendChild(icon);
+    }
+    /**
+     * Add a reset button.
+     */
+    addResetButton(callback) {
+        this.addButton(RESET_ICON, "Reboot the computer", callback);
+    }
+    /**
+     * Add a screenshot button.
+     */
+    addScreenshotButton(callback) {
+        this.addButton(CAMERA_ICON, "Take a screenshot", callback);
+    }
+    /**
+     * Add a tape rewind button.
+     */
+    addTapeRewindButton(callback) {
+        this.addButton(PREVIOUS_TRACK_ICON, "Rewind the cassette", callback);
+    }
+    /**
+     * Add a settings button.
+     */
+    addSettingsButton(settingsPanel) {
+        settingsPanel.onOpen = () => this.screenNode.classList.add(gShowingOtherPanelCssClass);
+        settingsPanel.onClose = () => this.screenNode.classList.remove(gShowingOtherPanelCssClass);
+        let iconSvg;
+        switch (settingsPanel.panelType) {
+            case SettingsPanel_1.PanelType.HARDWARE:
+            default:
+                iconSvg = HARDWARE_SETTINGS_ICON;
+                break;
+            case SettingsPanel_1.PanelType.VIEW:
+                iconSvg = VIEW_SETTINGS_ICON;
+                break;
+        }
+        let icon = document.createElement("img");
+        icon.classList.add(gButtonCssClass);
+        icon.src = "data:image/svg+xml;base64," + btoa(iconSvg);
+        icon.title = "Show the settings panel";
+        icon.addEventListener("click", () => settingsPanel.open());
+        this.panelNode.appendChild(icon);
+    }
+    /**
+     * Add a button to edit the program.
+     */
+    addEditorButton(callback) {
+        this.addButton(EDIT_ICON, "Edit the program (Ctrl-Enter)", callback);
+    }
+    /**
+     * Add a button to save.
+     */
+    addSaveButton(callback) {
+        this.addButton(CHECK_ICON, "Save (Ctrl-Enter)", callback);
+    }
+    /**
+     * Add a button to cancel.
+     */
+    addCancelButton(callback) {
+        this.addButton(CROSS_ICON, "Cancel", callback);
+    }
+    /**
+     * Make a global stylesheet for all TRS-80 emulators on this page.
+     */
+    static configureStyle() {
+        const styleId = gCssPrefix;
+        if (document.getElementById(styleId) !== null) {
+            // Already created.
+            return;
+        }
+        const node = document.createElement("style");
+        node.id = styleId;
+        node.innerHTML = GLOBAL_CSS;
+        document.head.appendChild(node);
+    }
+}
+exports.ControlPanel = ControlPanel;
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const CanvasScreen_1 = __webpack_require__(15);
+const Trs80_1 = __webpack_require__(51);
+const SettingsPanel_1 = __webpack_require__(33);
+const ControlPanel_1 = __webpack_require__(34);
+const ProgressBar_1 = __webpack_require__(86);
+const CassettePlayer_1 = __webpack_require__(87);
+const Editor_1 = __webpack_require__(88);
+const teamten_ts_utils_1 = __webpack_require__(90);
+const trs80_base_1 = __webpack_require__(3);
 const screenNode = document.getElementById("screen");
 const screen = new CanvasScreen_1.CanvasScreen(1.5);
 const trs80 = new Trs80_1.Trs80(screen, new CassettePlayer_1.CassettePlayer());
@@ -3399,14 +3709,14 @@ function updateProgram() {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Trs80Screen = void 0;
-const Utils_1 = __webpack_require__(2);
+const trs80_base_1 = __webpack_require__(3);
 /**
  * Abstract base class for displaying a screen.
  */
@@ -3478,7 +3788,7 @@ class Trs80Screen {
         }
         // Set expanded mode.
         this.setExpandedCharacters(s.charCodeAt(0) === 1);
-        let address = Utils_1.SCREEN_BEGIN;
+        let address = trs80_base_1.TRS80_SCREEN_BEGIN;
         for (let i = 1; i < s.length; i++) {
             const value = s.charCodeAt(i);
             let count = 1;
@@ -3497,7 +3807,7 @@ class Trs80Screen {
                 this.writeChar(address++, value);
             }
         }
-        if (address !== Utils_1.SCREEN_END) {
+        if (address !== trs80_base_1.TRS80_SCREEN_END) {
             throw new Error("Screenshot was of the wrong length");
         }
     }
@@ -3506,7 +3816,1417 @@ exports.Trs80Screen = Trs80Screen;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.concatByteArrays = exports.withCommas = exports.clearElement = void 0;
+/**
+ * Remove all children from element.
+ */
+function clearElement(e) {
+    while (e.firstChild) {
+        e.removeChild(e.firstChild);
+    }
+}
+exports.clearElement = clearElement;
+/**
+ * Generate the string version of a number, in base 10, with commas for thousands groups.
+ */
+function withCommas(n) {
+    let s = typeof n === "number" ? Math.round(n).toString(10) : n;
+    const negative = s.length >= 1 && s.charAt(0) === "-";
+    const firstDigit = negative ? 1 : 0;
+    if (s.length - firstDigit > 4) {
+        for (let i = s.length - 3; i > firstDigit; i -= 3) {
+            s = s.substring(0, i) + "," + s.substring(i);
+        }
+    }
+    return s;
+}
+exports.withCommas = withCommas;
+/**
+ * Concatenate a list of byte arrays into one.
+ */
+function concatByteArrays(samplesList) {
+    const length = samplesList.reduce((sum, samples) => sum + samples.length, 0);
+    const allBytes = new Uint8Array(length);
+    let offset = 0;
+    for (const samples of samplesList) {
+        allBytes.set(samples, offset);
+        offset += samples.length;
+    }
+    return allBytes;
+}
+exports.concatByteArrays = concatByteArrays;
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ByteReader = exports.EOF = void 0;
+exports.EOF = -1;
+/**
+ * Provides an API for reading through a byte array.
+ */
+class ByteReader {
+    constructor(b) {
+        this.b = b;
+        this.pos = 0;
+    }
+    /**
+     * Return the next byte, or EOF on end of array.
+     *
+     * @returns {number}
+     */
+    read() {
+        return this.pos < this.b.length ? this.b[this.pos++] : exports.EOF;
+    }
+    /**
+     * Return the next byte, not advancing the stream.
+     *
+     * @param ahead how many bytes ahead to peek, or 0 for the next byte
+     * to be returned by {@link #read()}.
+     */
+    peek(ahead = 0) {
+        const pos = this.pos + ahead;
+        return pos < this.b.length ? this.b[pos] : exports.EOF;
+    }
+    /**
+     * Return the byte address of the next byte to be read.
+     */
+    addr() {
+        return this.pos;
+    }
+    /**
+     * Reads a little-endian short (two-byte) integer.
+     *
+     * @param allowEofAfterFirstByte if true, an EOF after the first byte will result in just the
+     * first byte. Otherwise an EOF is returned.
+     * @returns the integer, or EOF on end of file.
+     */
+    readShort(allowEofAfterFirstByte) {
+        const low = this.read();
+        if (low === exports.EOF) {
+            return exports.EOF;
+        }
+        const high = this.read();
+        if (high === exports.EOF) {
+            return allowEofAfterFirstByte ? low : exports.EOF;
+        }
+        return low + high * 256;
+    }
+    /**
+     * Reads an ASCII string from the stream. If the returned string is shorter than "length", then we hit EOF.
+     */
+    readString(length) {
+        return new TextDecoder("ascii").decode(this.readBytes(length));
+    }
+    /**
+     * Returns the next "length" bytes. If the returned array is shorter than "length", then we hit EOF.
+     */
+    readBytes(length) {
+        const pos = this.pos;
+        length = Math.min(length, this.b.length - pos);
+        this.pos += length;
+        // So instead make a copy.
+        return this.b.slice(pos, pos + length);
+    }
+}
+exports.ByteReader = ByteReader;
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * List of all word registers.
+ */
+const WORD_REG = new Set(["af", "bc", "de", "hl", "af'", "bc'", "de'", "hl'", "ix", "iy", "sp", "pc"]);
+/**
+ * List of all byte registers.
+ */
+const BYTE_REG = new Set(["a", "f", "b", "c", "d", "e", "h", "l", "ixh", "ixl", "iyh", "iyl", "i", "r"]);
+/**
+ * Determine whether a register stores a word.
+ */
+function isWordReg(s) {
+    return WORD_REG.has(s.toLowerCase());
+}
+exports.isWordReg = isWordReg;
+/**
+ * Determine whether a register stores a byte.
+ */
+function isByteReg(s) {
+    return BYTE_REG.has(s.toLowerCase());
+}
+exports.isByteReg = isByteReg;
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Utils_1 = __webpack_require__(17);
+/**
+ * All registers in a Z80.
+ */
+class RegisterSet {
+    constructor() {
+        // External state:
+        this.af = 0;
+        this.bc = 0;
+        this.de = 0;
+        this.hl = 0;
+        this.afPrime = 0;
+        this.bcPrime = 0;
+        this.dePrime = 0;
+        this.hlPrime = 0;
+        this.ix = 0;
+        this.iy = 0;
+        this.sp = 0;
+        this.pc = 0;
+        // Internal state:
+        this.memptr = 0;
+        this.i = 0;
+        this.r = 0; // Low 7 bits of R.
+        this.r7 = 0; // Bit 7 of R.
+        this.iff1 = 0;
+        this.iff2 = 0;
+        this.im = 0;
+        this.halted = 0;
+    }
+    get a() {
+        return Utils_1.hi(this.af);
+    }
+    set a(value) {
+        this.af = Utils_1.word(value, this.f);
+    }
+    get f() {
+        return Utils_1.lo(this.af);
+    }
+    set f(value) {
+        this.af = Utils_1.word(this.a, value);
+    }
+    get b() {
+        return Utils_1.hi(this.bc);
+    }
+    set b(value) {
+        this.bc = Utils_1.word(value, this.c);
+    }
+    get c() {
+        return Utils_1.lo(this.bc);
+    }
+    set c(value) {
+        this.bc = Utils_1.word(this.b, value);
+    }
+    get d() {
+        return Utils_1.hi(this.de);
+    }
+    set d(value) {
+        this.de = Utils_1.word(value, this.e);
+    }
+    get e() {
+        return Utils_1.lo(this.de);
+    }
+    set e(value) {
+        this.de = Utils_1.word(this.d, value);
+    }
+    get h() {
+        return Utils_1.hi(this.hl);
+    }
+    set h(value) {
+        this.hl = Utils_1.word(value, this.l);
+    }
+    get l() {
+        return Utils_1.lo(this.hl);
+    }
+    set l(value) {
+        this.hl = Utils_1.word(this.h, value);
+    }
+    get ixh() {
+        return Utils_1.hi(this.ix);
+    }
+    set ixh(value) {
+        this.ix = Utils_1.word(value, this.ixl);
+    }
+    get ixl() {
+        return Utils_1.lo(this.ix);
+    }
+    set ixl(value) {
+        this.ix = Utils_1.word(this.ixh, value);
+    }
+    get iyh() {
+        return Utils_1.hi(this.iy);
+    }
+    set iyh(value) {
+        this.iy = Utils_1.word(value, this.iyl);
+    }
+    get iyl() {
+        return Utils_1.lo(this.iy);
+    }
+    set iyl(value) {
+        this.iy = Utils_1.word(this.iyh, value);
+    }
+    /**
+     * Combine the two R parts together.
+     */
+    get rCombined() {
+        return (this.r7 & 0x80) | (this.r & 0xF7);
+    }
+}
+exports.RegisterSet = RegisterSet;
+/**
+ * All real fields of RegisterSet, for enumeration.
+ */
+exports.registerSetFields = [
+    "af", "bc", "de", "hl",
+    "afPrime", "bcPrime", "dePrime", "hlPrime",
+    "ix", "iy", "sp", "pc",
+    "memptr", "i", "r", "iff1", "iff2", "im", "halted"
+];
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * The flag bits in the F register.
+ */
+var Flag;
+(function (Flag) {
+    /**
+     * Carry and borrow. Indicates that the addition or subtraction did not
+     * fit in the register.
+     */
+    Flag[Flag["C"] = 1] = "C";
+    /**
+     * Set if the last operation was a subtraction.
+     */
+    Flag[Flag["N"] = 2] = "N";
+    /**
+     * Parity: Indicates that the result has an even number of bits set.
+     */
+    Flag[Flag["P"] = 4] = "P";
+    /**
+     * Overflow: Indicates that two's complement does not fit in register.
+     */
+    Flag[Flag["V"] = 4] = "V";
+    /**
+     * Undocumented bit, but internal state can leak into it.
+     */
+    Flag[Flag["X3"] = 8] = "X3";
+    /**
+     * Half carry: Carry from bit 3 to bit 4 during BCD operations.
+     */
+    Flag[Flag["H"] = 16] = "H";
+    /**
+     * Undocumented bit, but internal state can leak into it.
+     */
+    Flag[Flag["X5"] = 32] = "X5";
+    /**
+     * Set if value is zero.
+     */
+    Flag[Flag["Z"] = 64] = "Z";
+    /**
+     * Set of value is negative.
+     */
+    Flag[Flag["S"] = 128] = "S";
+})(Flag = exports.Flag || (exports.Flag = {}));
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.decodeJv3FloppyDisk = exports.Jv3FloppyDisk = void 0;
+const z80_base_1 = __webpack_require__(4);
+const FloppyDisk_1 = __webpack_require__(5);
+const ProgramAnnotation_1 = __webpack_require__(1);
+// The JV3 file consists of sectors of different sizes all bunched together. Before that
+// comes a directory of these sectors, with three bytes per directory entry (track,
+// sector, and flags), mapping in order to the subsequent sectors.
+// The directory is in this header:
+const HEADER_SIZE = 34 * 256;
+// We can fit this many 3-byte records into it:
+const RECORD_COUNT = Math.floor(HEADER_SIZE / 3);
+// Flags for SectorInfo.
+var Flags;
+(function (Flags) {
+    Flags[Flags["SIZE_CODE_MASK"] = 3] = "SIZE_CODE_MASK";
+    Flags[Flags["NON_IBM"] = 4] = "NON_IBM";
+    Flags[Flags["BAD_CRC"] = 8] = "BAD_CRC";
+    Flags[Flags["SIDE"] = 16] = "SIDE";
+    Flags[Flags["DAM_MASK"] = 96] = "DAM_MASK";
+    // Single-density.
+    Flags[Flags["DAM_SD_FB"] = 0] = "DAM_SD_FB";
+    Flags[Flags["DAM_SD_FA"] = 32] = "DAM_SD_FA";
+    Flags[Flags["DAM_SD_F9"] = 64] = "DAM_SD_F9";
+    Flags[Flags["DAM_SD_F8"] = 96] = "DAM_SD_F8";
+    // Double-density.
+    Flags[Flags["DAM_DD_FB"] = 0] = "DAM_DD_FB";
+    Flags[Flags["DAM_DD_F8"] = 32] = "DAM_DD_F8";
+    Flags[Flags["DOUBLE_DENSITY"] = 128] = "DOUBLE_DENSITY";
+})(Flags || (Flags = {}));
+const FREE = 0xFF;
+const SIZE_CODE_MASK = 0x03;
+class SectorInfo {
+    constructor(track, sector, flags, offset) {
+        // Make both FREE to avoid confusion.
+        if (track === FREE || sector === FREE) {
+            track = FREE;
+            sector = FREE;
+        }
+        this.track = track;
+        this.sector = sector;
+        this.flags = flags;
+        this.offset = offset;
+        // In used sectors: 0=256,1=128,2=1024,3=512
+        // In free sectors: 0=512,1=1024,2=128,3=256
+        const sizeCode = (flags & SIZE_CODE_MASK) ^ (this.isFree() ? 0x02 : 0x01);
+        this.size = 128 << sizeCode;
+    }
+    getSide() {
+        return (this.flags & Flags.SIDE) === 0 ? FloppyDisk_1.Side.FRONT : FloppyDisk_1.Side.BACK;
+    }
+    /**
+     * Return the flags as a string, for debugging.
+     */
+    flagsToString() {
+        const parts = [];
+        parts.push(this.size + " bytes");
+        if ((this.flags & Flags.NON_IBM) !== 0) {
+            parts.push("non-IBM");
+        }
+        if ((this.flags & Flags.BAD_CRC) !== 0) {
+            parts.push("bad CRC");
+        }
+        parts.push("side " + ((this.flags & Flags.SIDE) === 0 ? 0 : 1));
+        if ((this.flags & Flags.DOUBLE_DENSITY) !== 0) {
+            parts.push("double density");
+        }
+        else {
+            parts.push("single density");
+        }
+        return parts.join(", ");
+    }
+    /**
+     * Whether the sector entry is free (doesn't represent real space in the file).
+     */
+    isFree() {
+        return this.track === FREE;
+    }
+    /**
+     * Whether the sector is encoded with MFM (instead of FM).
+     */
+    isDoubleDensity() {
+        return (this.flags & Flags.DOUBLE_DENSITY) !== 0;
+    }
+    /**
+     * Whether the sector's data is invalid.
+     *
+     * Normally FB is normal and F8 is deleted, but the single-density version has
+     * two other values (F9 and FA), which we also consider deleted, to match xtrs.
+     */
+    isDeleted() {
+        const dam = this.flags & Flags.DAM_MASK;
+        if (this.isDoubleDensity()) {
+            return dam === Flags.DAM_DD_F8;
+        }
+        else {
+            return dam !== Flags.DAM_SD_FB;
+        }
+    }
+    /**
+     * Whether the floppy had a bar CRC when reading it.
+     */
+    hasCrcError() {
+        return (this.flags & Flags.BAD_CRC) !== 0;
+    }
+}
+/**
+ * Floppy disk in the JV3 format.
+ */
+class Jv3FloppyDisk extends FloppyDisk_1.FloppyDisk {
+    constructor(binary, error, annotations, sectorInfos, writeProtected) {
+        super(binary, error, annotations, true);
+        this.sectorInfos = sectorInfos;
+        this.writeProtected = writeProtected;
+    }
+    getDescription() {
+        return "Floppy disk (JV3)";
+    }
+    readSector(trackNumber, side, sectorNumber) {
+        const sectorInfo = this.findSectorInfo(trackNumber, side, sectorNumber);
+        if (sectorInfo === undefined) {
+            return undefined;
+        }
+        const data = this.padSector(this.binary.subarray(sectorInfo.offset, sectorInfo.offset + sectorInfo.size), sectorInfo.size);
+        const sectorData = new FloppyDisk_1.SectorData(data);
+        sectorData.deleted = sectorInfo.isDeleted();
+        sectorData.crcError = sectorInfo.hasCrcError();
+        return sectorData;
+    }
+    /**
+     * Find the sector for the specified track and side.
+     */
+    findSectorInfo(track, side, sector) {
+        for (const sectorInfo of this.sectorInfos) {
+            if (!sectorInfo.isFree() &&
+                sectorInfo.track === track &&
+                sectorInfo.getSide() === side &&
+                (sector === undefined || sectorInfo.sector === sector)) {
+                return sectorInfo;
+            }
+        }
+        return undefined;
+    }
+}
+exports.Jv3FloppyDisk = Jv3FloppyDisk;
+/**
+ * Decode a JV3 floppy disk file.
+ */
+function decodeJv3FloppyDisk(binary) {
+    let error;
+    const annotations = [];
+    const sectorInfos = [];
+    // Read the directory.
+    let sectorOffset = HEADER_SIZE;
+    for (let i = 0; i < RECORD_COUNT; i++) {
+        const offset = i * 3;
+        if (offset + 2 >= binary.length) {
+            error = "Directory truncated at entry " + i;
+            break;
+        }
+        const track = binary[offset];
+        const sector = binary[offset + 1];
+        const flags = binary[offset + 2];
+        const sectorInfo = new SectorInfo(track, sector, flags, sectorOffset);
+        sectorOffset += sectorInfo.size;
+        if (!sectorInfo.isFree()) {
+            if (sectorOffset > binary.length) {
+                error = `Sector truncated at entry ${i} (${sectorOffset} > ${binary.length})`;
+                break;
+            }
+            annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Track " + sectorInfo.track + ", sector " +
+                sectorInfo.sector + ", " + sectorInfo.flagsToString(), offset, offset + 3));
+            sectorInfos.push(sectorInfo);
+        }
+    }
+    // Annotate the sectors themselves.
+    for (const sectorInfo of sectorInfos) {
+        annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Track " + sectorInfo.track + ", sector " + sectorInfo.sector, sectorInfo.offset, sectorInfo.offset + sectorInfo.size));
+    }
+    const writableOffset = RECORD_COUNT * 3;
+    const writable = binary[writableOffset];
+    if (writable !== 0 && writable !== 0xFF) {
+        error = "Invalid \"writable\" byte: 0x" + z80_base_1.toHexByte(writable);
+    }
+    const writeProtected = writable === 0;
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(writeProtected ? "Write protected" : "Writable", writableOffset, writableOffset + 1));
+    return new Jv3FloppyDisk(binary, error, annotations, sectorInfos, writeProtected);
+}
+exports.decodeJv3FloppyDisk = decodeJv3FloppyDisk;
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Handles DMK floppy disk images.
+ *
+ * https://retrocomputing.stackexchange.com/questions/15282/understanding-the-dmk-disk-image-file-format-used-by-trs-80-emulators
+ * http://www.classiccmp.org/cpmarchives/trs80/mirrors/trs-80.com/early/www.trs-80.com/trs80-dm.htm
+ * http://www.classiccmp.org/cpmarchives/trs80/mirrors/www.discover-net.net/~dmkeil/trs80/trstech.htm
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.decodeDmkFloppyDisk = exports.DmkFloppyDisk = void 0;
+const z80_base_1 = __webpack_require__(4);
+const z80_base_2 = __webpack_require__(4);
+const Crc16_1 = __webpack_require__(44);
+const FloppyDisk_1 = __webpack_require__(5);
+const ProgramAnnotation_1 = __webpack_require__(1);
+const FILE_HEADER_SIZE = 16;
+const TRACK_HEADER_SIZE = 128;
+/**
+ * Represents a single sector on a DMK floppy.
+ */
+class DmkSector {
+    constructor(track, doubleDensity, offset) {
+        this.track = track;
+        this.doubleDensity = doubleDensity;
+        this.offset = offset;
+        this.dataIndex = this.findDataIndex();
+    }
+    /**
+     * Get the cylinder for this sector. This is 0-based.
+     */
+    getCylinder() {
+        return this.getByte(1);
+    }
+    /**
+     * Get the side for this sector.
+     */
+    getSide() {
+        return FloppyDisk_1.numberToSide(this.getByte(2));
+    }
+    /**
+     * Get the sector number for this sector. This is 1-based.
+     */
+    getSectorNumber() {
+        return this.getByte(3);
+    }
+    /**
+     * Get the sector length in bytes.
+     */
+    getLength() {
+        return 128 * (1 << this.getByte(4));
+    }
+    /**
+     * Get the CRC for the IDAM.
+     */
+    getIdamCrc() {
+        // Bit endian.
+        return (this.getByte(5) << 8) + this.getByte(6);
+    }
+    /**
+     * Compute the CRC for the IDAM.
+     */
+    computeIdemCrc() {
+        let crc = 0xFFFF;
+        for (let i = -3; i < 5; i++) {
+            crc = Crc16_1.CRC_16_CCITT.update(crc, this.getByte(i));
+        }
+        return crc;
+    }
+    /**
+     * Get the CRC for the data bytes.
+     */
+    getDataCrc() {
+        // Bit endian.
+        const index = this.dataIndex + this.getLength();
+        return (this.getByte(index) << 8) + this.getByte(index + 1);
+    }
+    /**
+     * Compute the CRC for the data bytes.
+     */
+    computeDataCrc() {
+        let crc = 0xFFFF;
+        const index = this.dataIndex;
+        const begin = index - 4;
+        const end = index + this.getLength();
+        for (let i = begin; i < end; i++) {
+            crc = Crc16_1.CRC_16_CCITT.update(crc, this.getByte(i));
+        }
+        return crc;
+    }
+    /**
+     * Whether the sector data should be considered invalid.
+     */
+    isDeleted() {
+        const dam = this.getByte(this.dataIndex - 1);
+        if (dam !== 0xF8 && dam !== 0xFB) {
+            console.error("Unknown DAM: " + z80_base_2.toHexByte(dam));
+        }
+        // Normally, 0xFB, but 0xF8 if sector is considered deleted.
+        return dam === 0xF8;
+    }
+    /**
+     * Get a byte from the sector data.
+     *
+     * @param index index into the sector, relative to the 0xFE byte. Can be negative.
+     */
+    getByte(index) {
+        return this.track.floppyDisk.binary[this.track.offset + this.offset + index];
+    }
+    /**
+     * Look for the byte that indicates the start of data (0xFB or 0xF8). Various
+     * floppy disk documentation specify an exact number here, but I've seen a variety
+     * of values, so just search.
+     */
+    findDataIndex() {
+        for (let i = 7; i < 55; i++) {
+            const byte = this.track.floppyDisk.binary[this.track.offset + this.offset + i];
+            if (byte === 0xFB || byte === 0xF8) {
+                // Maybe also check that the previous three bytes are 0xA1.
+                return i + 1;
+            }
+        }
+        // Not sure what to do here. trs80gp says that this is valid.
+        throw new Error(`Can't find byte at start of DAM (track ${this.track.trackNumber}, offset 0x${z80_base_1.toHexWord(this.offset)})`);
+    }
+}
+/**
+ * Represents a single track on a DMK floppy.
+ */
+class DmkTrack {
+    constructor(floppyDisk, trackNumber, side, offset) {
+        /**
+         * Sectors in this track.
+         */
+        this.sectors = [];
+        this.floppyDisk = floppyDisk;
+        this.trackNumber = trackNumber;
+        this.side = side;
+        this.offset = offset;
+    }
+}
+/**
+ * Handles the DMK floppy disk file format, developed by David M. Keil.
+ *
+ * http://www.classiccmp.org/cpmarchives/trs80/mirrors/trs-80.com/early/www.trs-80.com/trs80-dm.htm
+ * http://www.classiccmp.org/cpmarchives/trs80/mirrors/www.discover-net.net/~dmkeil/trs80/trstech.htm
+ */
+class DmkFloppyDisk extends FloppyDisk_1.FloppyDisk {
+    constructor(binary, error, annotations, supportsDoubleDensity, writeProtected, trackCount, trackLength, flags) {
+        super(binary, error, annotations, supportsDoubleDensity);
+        this.tracks = [];
+        this.writeProtected = writeProtected;
+        this.trackCount = trackCount;
+        this.trackLength = trackLength;
+        this.flags = flags;
+    }
+    getDescription() {
+        return "Floppy disk (DMK)";
+    }
+    readSector(trackNumber, side, sectorNumber) {
+        // console.log(`readSector(${trackNumber}, ${sectorNumber}, ${side})`);
+        for (const track of this.tracks) {
+            if (track.trackNumber === trackNumber) { // TODO not checking side.
+                for (const sector of track.sectors) {
+                    if (sectorNumber === undefined || (sector.getSectorNumber() === sectorNumber &&
+                        sector.getSide() === side)) {
+                        const begin = track.offset + sector.offset + sector.dataIndex;
+                        const end = begin + sector.getLength();
+                        const sectorData = new FloppyDisk_1.SectorData(this.binary.subarray(begin, end));
+                        sectorData.crcError = sector.getDataCrc() !== sector.computeDataCrc();
+                        sectorData.deleted = sector.isDeleted();
+                        // console.log(sectorData);
+                        return sectorData;
+                    }
+                }
+            }
+        }
+        return undefined;
+    }
+}
+exports.DmkFloppyDisk = DmkFloppyDisk;
+/**
+ * Decode a DMK floppy disk file.
+ */
+function decodeDmkFloppyDisk(binary) {
+    const error = undefined;
+    const annotations = [];
+    if (binary.length < FILE_HEADER_SIZE) {
+        return undefined;
+    }
+    // Decode the header. Comments marked [DMK] are from David Keil's original documentation.
+    // [DMK] If this byte is set to FFH the disk is `write protected', 00H allows writing.
+    const writeProtected = binary[0] === 0xFF;
+    if (binary[0] !== 0x00 && binary[0] !== 0xFF) {
+        return undefined;
+    }
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(writeProtected ? "Write protected" : "Writable", 0, 1));
+    // [DMK] Number of tracks on virtual disk. Since tracks start at 0 this value will be one greater
+    // than the highest track written to the disk. So a disk with 40 tracks will have a value
+    // of 40 (28H) in this field after formatting while the highest track written would be 39.
+    // This field is updated after a track is formatted if the track formatted is greater than
+    // or equal to the current number of tracks. Re-formatting a disk with fewer tracks will
+    // NOT reduce the number of tracks on the virtual disk. Once a virtual disk has allocated
+    // space for a track it will NEVER release it. Formatting a virtual disk with 80 tracks
+    // then re-formatting it with 40 tracks would waste space just like formatting only 40
+    // tracks on an 80 track drive. The emulator and TRS-80 operating system don't care.
+    // To re-format a virtual disk with fewer tracks use the /I option at start-up to
+    // delete and re-create the virtual disk first, then re-format to save space.
+    //
+    // [DMK] Note: This field should NEVER be modified. Changing this number will cause TRS-80
+    // operating system disk errors. (Like reading an 80 track disk in a 40 track drive)
+    const trackCount = binary[1];
+    if (trackCount > 160) {
+        // Not sure what a reasonable maximum is. I've only see 80.
+        return undefined;
+    }
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(trackCount + " tracks", 1, 2));
+    // [DMK] This is the track length for the virtual disk. By default the value is 1900H, 80H bytes
+    // more than the actual track length, this gives a track length of 6272 bytes. A real double
+    // density track length is approx. 6250 bytes. This is the default value when a virtual disk is created.
+    // Values for other disk and format types are 0CC0H for single density 5.25" floppies,
+    // 14E0H for single density 8" floppies and 2940H for double density 8" floppies. The max value is 2940H.
+    // For normal formatting of disks the values of 1900H and 2940H for 5.25" and 8" are used.
+    // The emulator will write two bytes and read every second byte when  in single density to maintain
+    // proper sector spacing, allowing mixed density disks. Setting the track length must be done before
+    // a virtual disk is formatted or the disk will have to be re-formatted and since the space for the
+    // disk has already been allocated no space will be saved.
+    //
+    // [DMK] WARNING: Bytes are entered in reverse order (ex. 2940H would be entered, byte 2=40, byte 3=29).
+    //
+    // [DMK] Note: No modification of the track length is necessary, doing so only saves space and is not
+    // necessary to normal operation. The values for all normal 5.25" and 8" disks are set when the
+    // virtual disk is created. DON'T modify the track length unless you understand these instructions completely.
+    // Nothing in the PC world can be messed up by improper modification but any other virtual disk mounted
+    // in the emulator with an improperly modified disk could have their data scrambled.
+    const trackLength = binary[2] + (binary[3] << 8);
+    if (trackLength > 0x2940) {
+        return undefined;
+    }
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(trackLength + " bytes per track", 2, 4));
+    // [DMK] Virtual disk option flags.
+    //
+    // [DMK] Bit 4 of this byte, if set, means this is a single sided ONLY disk. This bit is set if the
+    // user selects single sided during disk creation and should not require modification. This flag is
+    // used only to save PC hard disk space and is never required.
+    //
+    // [DMK] Bit 6 of this byte, if set, means this disk is to be single density size and the emulator
+    // will access one byte instead of two when doing I/O in single density. Double density can still
+    // be written to a single density disk but with half the track length only 10 256 byte sectors can be
+    // written in either density. Mixed density is also possible but sector timing may be off so protected
+    // disks may not work, a maximum of 10 256 byte sectors of mixed density can be written to a
+    // single density disk. A program like "Spook House" which has a mixed density track 0 with 1 SD sector
+    // and 1 DD sector and the rest of the disk consisting of 10 SD sectors/track will work with this flag set
+    // and save half the PC hard disk space. The protected disk "Super Utility + 3.0" however has 6 SD and 6 DD
+    // sectors/track for a total of 12 256 byte sectors/track. This disk cannot be single density.
+    // This bit is set if the user selects single density during disk creation and should
+    // not require modification. This flag is used only to save PC hard disk space and is never required.
+    //
+    // [DMK] Bit 7 of this byte, if set, means density is to be ignored when accessing this disk. The disk MUST
+    // be formatted in double density but the emulator will then read and write the sectors in either density.
+    // The emulator will access one byte instead of two when doing I/O in single density.
+    // This flag was an early way to support mixed density disks it is no longer needed for this purpose.
+    // It is now used for compatibility with old virtual disks created without the double byte now used when in
+    // single density. This bit can be set manually in a hex editor to access old virtual disks written
+    // in single density.
+    const flags = binary[4];
+    const flagParts = [];
+    const singleSided = (flags & 0x10) !== 0;
+    if (singleSided) {
+        flagParts.push("SS");
+    }
+    if ((flags & 0x40) !== 0) {
+        flagParts.push("SD");
+    }
+    if ((flags & 0x80) !== 0) {
+        flagParts.push("ignore density");
+    }
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Flags: [" + flagParts.join(",") + "]", 4, 5));
+    // Sanity check.
+    const sideCount = singleSided ? 1 : 2;
+    const expectedLength = FILE_HEADER_SIZE + sideCount * trackCount * trackLength;
+    if (binary.length !== expectedLength) {
+        console.error(`DMK file wrong size (${binary.length} != ${expectedLength})`);
+        return undefined;
+    }
+    // Check that these are zero.
+    for (let i = 5; i < 12; i++) {
+        if (binary[i] !== 0x00) {
+            console.error("DMK: Reserved byte " + i + " is not zero: 0x" + z80_base_2.toHexByte(binary[i]));
+            return undefined;
+        }
+    }
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Reserved", 5, 12));
+    // [DMK] Must be zero if virtual disk is in emulator's native format.
+    //
+    // [DMK] Must be 12345678h if virtual disk is a REAL disk specification file used to access
+    // REAL TRS-80 floppies in compatible PC drives.
+    if (binary[12] + binary[13] + binary[14] + binary[15] !== 0x00) {
+        return undefined;
+    }
+    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Virtual disk", 12, 16));
+    const floppyDisk = new DmkFloppyDisk(binary, error, annotations, true, writeProtected, trackCount, trackLength, flags);
+    // Read the tracks.
+    let binaryOffset = FILE_HEADER_SIZE;
+    for (let trackNumber = 0; trackNumber < trackCount; trackNumber++) {
+        for (let side = 0; side < sideCount; side++) {
+            const trackOffset = binaryOffset;
+            const track = new DmkTrack(floppyDisk, trackNumber, FloppyDisk_1.numberToSide(side), trackOffset);
+            // Read the track header. The term "IDAM" in the comment below refers to the "ID access mark",
+            // where "ID" is referring to the sector ID, the few byte just before the sector data.
+            // [DMK] Each side of each track has a 128 (80H) byte header which contains an offset pointer
+            // to each IDAM in the track. This allows a maximum of 64 sector IDAMs/track. This is more than
+            // twice what an 8 inch disk would require and 3.5 times that of a normal TRS-80 5 inch DD disk.
+            // This should more than enough for any protected disk also.
+            //
+            // [DMK] These IDAM pointers MUST adhere to the following rules:
+            //
+            // * Each pointer is a 2 byte offset to the FEh byte of the IDAM. In double byte single density
+            //   the pointer is to the first FEh.
+            // * The offset includes the 128 byte header. For example, an IDAM 10h bytes into the track would
+            //   have a pointer of 90h, 10h+80h=90h.
+            // * The IDAM offsets MUST be in ascending order with no unused or bad pointers.
+            // * If all the entries are not used the header is terminated with a 0000h entry. Unused entries
+            //   must also be zero filled..
+            // * Any IDAMs overwritten during a sector write command should have their entry removed from the
+            //   header and all other pointer entries shifted to fill in.
+            // * The IDAM pointers are created during the track write command (format). A completed track write
+            //   MUST remove all previous IDAM pointers. A partial track write (aborted with the forced interrupt
+            //   command) MUST have it's previous pointers that were not overwritten added to the new IDAM pointers.
+            // * The pointer bytes are stored in reverse order (LSB/MSB).
+            //
+            // [DMK] Each IDAM pointer has two flags. Bit 15 is set if the sector is double density. Bit 14 is
+            // currently undefined. These bits must be masked to get the actual sector offset. For example,
+            // an offset to an IDAM at byte 90h would be 0090h if single density and 8090h if double density.
+            for (let i = 0; i < TRACK_HEADER_SIZE; i += 2) {
+                const sectorOffset = binary[binaryOffset + i] + (binary[binaryOffset + i + 1] << 8);
+                if (sectorOffset !== 0) {
+                    track.sectors.push(new DmkSector(track, (sectorOffset & 0x8000) !== 0, sectorOffset & 0x3FFF));
+                }
+            }
+            annotations.push(new ProgramAnnotation_1.ProgramAnnotation(`Track ${trackNumber} header`, binaryOffset, binaryOffset + TRACK_HEADER_SIZE));
+            for (const sector of track.sectors) {
+                let i = trackOffset + sector.offset;
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Sector ID access mark", i, i + 1));
+                i++;
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Cylinder " + sector.getCylinder(), i, i + 1));
+                i++;
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Side " + sector.getSide(), i, i + 1));
+                i++;
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Sector " + sector.getSectorNumber(), i, i + 1));
+                i++;
+                const sectorLength = sector.getLength();
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Length " + sectorLength, i, i + 1));
+                i++;
+                const actualIdamCrc = sector.computeIdemCrc();
+                const expectedIdamCrc = sector.getIdamCrc();
+                let idamCrcLabel = "IDAM CRC";
+                if (actualIdamCrc === expectedIdamCrc) {
+                    idamCrcLabel += " (valid)";
+                }
+                else {
+                    idamCrcLabel += ` (got 0x${z80_base_1.toHexWord(actualIdamCrc)}, expected 0x${z80_base_1.toHexWord(expectedIdamCrc)})`;
+                }
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation(idamCrcLabel, i, i + 2));
+                i += 2;
+                i = trackOffset + sector.offset + sector.dataIndex;
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Sector data", i, i + sectorLength));
+                i += sectorLength;
+                const actualDataCrc = sector.computeDataCrc();
+                const expectedDataCrc = sector.getDataCrc();
+                let dataCrcLabel = "Data CRC";
+                if (actualDataCrc === expectedDataCrc) {
+                    dataCrcLabel += " (valid)";
+                }
+                else {
+                    dataCrcLabel += ` (got 0x${z80_base_1.toHexWord(actualDataCrc)}, expected 0x${z80_base_1.toHexWord(expectedDataCrc)})`;
+                }
+                annotations.push(new ProgramAnnotation_1.ProgramAnnotation(dataCrcLabel, i, i + 2));
+                i += 2;
+            }
+            floppyDisk.tracks.push(track);
+            binaryOffset += trackLength;
+        }
+    }
+    return floppyDisk;
+}
+exports.decodeDmkFloppyDisk = decodeDmkFloppyDisk;
+
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CRC_16_CCITT = exports.Crc16 = void 0;
+/**
+ * Performs CRC-16 operations treating bits as big-endian.
+ *
+ * https://en.wikipedia.org/wiki/Cyclic_redundancy_check
+ * https://en.wikipedia.org/wiki/Computation_of_cyclic_redundancy_checks
+ * https://en.wikipedia.org/wiki/Mathematics_of_cyclic_redundancy_checks
+ */
+class Crc16 {
+    /**
+     * Specifies the generator, which must be a 16-bit value.
+     */
+    constructor(generator) {
+        this.generator = generator;
+    }
+    /**
+     * Update the CRC with the new data, which must be a byte.
+     *
+     * @return the new CRC.
+     */
+    update(crc, data) {
+        for (let shift = 8; shift < 16; shift++) {
+            const isOne = ((crc ^ (data << shift)) & 0x8000) !== 0;
+            crc <<= 1;
+            if (isOne) {
+                crc ^= this.generator;
+            }
+        }
+        return crc & 0xFFFF;
+    }
+}
+exports.Crc16 = Crc16;
+/**
+ * The CRC-16-CCITT polynomial, used for floppy disks. The polynomial is
+ * x^16 + x^12 + x^5 + 1, which maps to 0x11021, but the leading 1 is
+ * removed because it doesn't affect the outcome.
+ */
+exports.CRC_16_CCITT = new Crc16(0x1021);
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Classes for handling TRSDOS diskettes.
+ *
+ * http://www.trs-80.com/wordpress/zaps-patches-pokes-tips/zaps-and-patches/#guidedtour
+ * http://www.manmrk.net/tutorials/TRS80/Software/ldos/trs80/doc/prgguide.pdf
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.decodeTrsdos = exports.Trsdos = exports.TrsdosDirEntry = exports.TrsdosHitInfo = exports.TrsdosGatInfo = exports.TrsdosExtent = exports.trsdosProtectionLevelToString = exports.TrsdosProtectionLevel = void 0;
+const teamten_ts_utils_1 = __webpack_require__(7);
+const FloppyDisk_1 = __webpack_require__(5);
+// Number of bytes per dir entry in the sector.
+const DIR_ENTRY_LENGTH = 48;
+// Apparently this is constant in TRSDOS.
+const BYTES_PER_SECTOR = 256;
+// Apparently this is 3, but somewhere else I read 6.
+const SECTORS_PER_GRANULE = 3;
+// The number of sectors on each track, numbered 1 to 18.
+const SECTORS_PER_TRACK = 18;
+// Copyright in the last 16 bytes of each directory sector.
+const EXPECTED_TANDY = "(c) 1980 Tandy";
+// Password value that means "no password".
+const NO_PASSWORD = 0xEF5C;
+// Password value for "PASSWORD".
+const PASSWORD = 0xD38F;
+/**
+ * Decodes binary into an ASCII string. Returns undefined if any non-ASCII value is
+ * found in the string, where "ASCII" is defined as being in the range 32 to 126 inclusive.
+ */
+function decodeAscii(binary, trim = true) {
+    const parts = [];
+    for (const b of binary) {
+        if (b < 32 || b >= 127) {
+            return undefined;
+        }
+        parts.push(String.fromCodePoint(b));
+    }
+    let s = parts.join("");
+    if (trim) {
+        s = s.trim();
+    }
+    return s;
+}
+/**
+ * Lowest three bits of the directory entry's flag.
+ */
+var TrsdosProtectionLevel;
+(function (TrsdosProtectionLevel) {
+    // Keep this values in this order, they match the bit values (0 to 7).
+    TrsdosProtectionLevel[TrsdosProtectionLevel["FULL"] = 0] = "FULL";
+    TrsdosProtectionLevel[TrsdosProtectionLevel["REMOVE"] = 1] = "REMOVE";
+    TrsdosProtectionLevel[TrsdosProtectionLevel["RENAME"] = 2] = "RENAME";
+    TrsdosProtectionLevel[TrsdosProtectionLevel["WRITE"] = 3] = "WRITE";
+    TrsdosProtectionLevel[TrsdosProtectionLevel["UPDATE"] = 4] = "UPDATE";
+    TrsdosProtectionLevel[TrsdosProtectionLevel["READ"] = 5] = "READ";
+    TrsdosProtectionLevel[TrsdosProtectionLevel["EXEC"] = 6] = "EXEC";
+    TrsdosProtectionLevel[TrsdosProtectionLevel["NO_ACCESS"] = 7] = "NO_ACCESS";
+})(TrsdosProtectionLevel = exports.TrsdosProtectionLevel || (exports.TrsdosProtectionLevel = {}));
+/**
+ * Gets the string version of the protection level enum.
+ * @param level
+ */
+function trsdosProtectionLevelToString(level) {
+    switch (level) {
+        case TrsdosProtectionLevel.FULL:
+            return "FULL";
+        case TrsdosProtectionLevel.REMOVE:
+            return "REMOVE";
+        case TrsdosProtectionLevel.RENAME:
+            return "RENAME";
+        case TrsdosProtectionLevel.WRITE:
+            return "WRITE";
+        case TrsdosProtectionLevel.UPDATE:
+            return "UPDATE";
+        case TrsdosProtectionLevel.READ:
+            return "READ";
+        case TrsdosProtectionLevel.EXEC:
+            return "EXEC";
+        case TrsdosProtectionLevel.NO_ACCESS:
+            return "NO_ACCESS";
+        default:
+            return "UNKNOWN";
+    }
+}
+exports.trsdosProtectionLevelToString = trsdosProtectionLevelToString;
+/**
+ * A contiguous number of sectors for storing part of a file.
+ */
+class TrsdosExtent {
+    constructor(trackNumber, granuleOffset, granuleCount) {
+        this.trackNumber = trackNumber;
+        this.granuleOffset = granuleOffset;
+        this.granuleCount = granuleCount;
+    }
+}
+exports.TrsdosExtent = TrsdosExtent;
+/**
+ * Decode an array of extents.
+ *
+ * @param binary byte we'll be pulling the extents from.
+ * @param begin index of first extent in binary.
+ * @param end index past last extent in binary.
+ * @param trackFirst whether the track comes first or second.
+ */
+function decodeExtents(binary, begin, end, trackFirst) {
+    const extents = [];
+    for (let i = begin; i < end; i += 2) {
+        if (binary[i] === 0xFF && binary[i + 1] === 0xFF) {
+            break;
+        }
+        const trackNumber = binary[trackFirst ? i : i + 1];
+        const granuleByte = binary[trackFirst ? i + 1 : i];
+        const granuleOffset = granuleByte >> 5;
+        const granuleCount = granuleByte & 0x1F;
+        if (trackNumber >= 40) {
+            // Not a TRSDOS disk.
+            return undefined;
+        }
+        extents.push(new TrsdosExtent(trackNumber, granuleOffset, granuleCount));
+    }
+    return extents;
+}
+/**
+ * The Granule Allocation Table sector info.
+ */
+class TrsdosGatInfo {
+    constructor(gat, password, name, date, autoCommand) {
+        this.gat = gat;
+        this.password = password;
+        this.name = name;
+        this.date = date;
+        this.autoCommand = autoCommand;
+    }
+}
+exports.TrsdosGatInfo = TrsdosGatInfo;
+/**
+ * Converts a sector to a GAT object, or undefined if we don't think this is a GAT sector.
+ */
+function decodeGatInfo(binary) {
+    // One byte for each track.
+    const gat = binary.subarray(0, 40);
+    // Top two bits don't map to anything, so must be zero.
+    for (const g of gat) {
+        if ((g & 0xC0) !== 0) {
+            return undefined;
+        }
+    }
+    // Assume big endian.
+    const password = (binary[0xCE] << 8) | binary[0xCF];
+    const name = decodeAscii(binary.subarray(0xD0, 0xD8));
+    const date = decodeAscii(binary.subarray(0xD8, 0xE0));
+    const autoCommand = binary[0xE0] === 0x0D ? "" : decodeAscii(binary.subarray(0xE0));
+    // Implies that this is not a TRSDOS disk.
+    if (name === undefined || date === undefined || autoCommand === undefined) {
+        return undefined;
+    }
+    return new TrsdosGatInfo(gat, password, name, date, autoCommand);
+}
+/**
+ * The Hash Allocation Table sector info.
+ */
+class TrsdosHitInfo {
+    constructor(hit, systemFiles) {
+        this.hit = hit;
+        this.systemFiles = systemFiles;
+    }
+}
+exports.TrsdosHitInfo = TrsdosHitInfo;
+/**
+ * Decode the Hash Index Table sector, or undefined if we don't think this is a TRSDOS disk.
+ */
+function decodeHitInfo(binary) {
+    // One byte for each file.
+    const hit = binary.subarray(0, 80);
+    const systemFiles = decodeExtents(binary, 0xE0, binary.length, false);
+    if (systemFiles === undefined) {
+        return undefined;
+    }
+    return new TrsdosHitInfo(hit, systemFiles);
+}
+/**
+ * Single (valid) directory entry for a file.
+ */
+class TrsdosDirEntry {
+    constructor(flags, month, year, lastSectorSize, lrl, filename, updatePassword, accessPassword, sectorCount, extents) {
+        this.flags = flags;
+        this.month = month;
+        this.year = year;
+        this.lastSectorSize = lastSectorSize;
+        this.lrl = lrl;
+        this.rawFilename = filename;
+        this.updatePassword = updatePassword;
+        this.accessPassword = accessPassword;
+        this.sectorCount = sectorCount;
+        this.extents = extents;
+    }
+    /**
+     * Get the protection level for the file.
+     */
+    getProtectionLevel() {
+        return (this.flags & 0x07);
+    }
+    /**
+     * Whether the file is hidden in a directory listing.
+     */
+    isHidden() {
+        return (this.flags & 0x08) !== 0;
+    }
+    /**
+     * Whether the file has an entry in the HIT table. This bit is set to 0 when
+     * deleting a file.
+     */
+    isActive() {
+        return (this.flags & 0x10) !== 0;
+    }
+    /**
+     * Whether there should be limitations to how many times you can copy this file.
+     * Other docs (maybe for LDOS) say that this indicates "Partitioned Data Set".
+     */
+    hasBackupLimitation() {
+        return (this.flags & 0x20) !== 0;
+    }
+    /**
+     * Whether this is a system file (as opposed to user file).
+     */
+    isSystemFile() {
+        return (this.flags & 0x40) !== 0;
+    }
+    /**
+     * Whether this is an extended entry (as opposed to primary entry). Each entry can
+     * only encode four extents, so subsequent extents are stored in extended entries.
+     * TODO this says max four extents, but we have space for 13 extents in the binary.
+     */
+    isExtendedEntry() {
+        return (this.flags & 0x80) !== 0;
+    }
+    getFlagsString() {
+        const parts = [];
+        parts.push(trsdosProtectionLevelToString(this.getProtectionLevel()));
+        if (this.isHidden()) {
+            parts.push("hidden");
+        }
+        if (!this.isActive()) {
+            // Should never happen.
+            parts.push("inactive");
+        }
+        if (this.hasBackupLimitation()) {
+            parts.push("limits");
+        }
+        if (this.isSystemFile()) {
+            parts.push("system");
+        }
+        if (this.isExtendedEntry()) {
+            parts.push("extended");
+        }
+        return "[" + parts.join(",") + "]";
+    }
+    /**
+     * Get the basename (part before the period) of the filename.
+     */
+    getBasename() {
+        return this.rawFilename.substr(0, 8).trim();
+    }
+    /**
+     * Get the extension of the filename.
+     */
+    getExtension() {
+        return this.rawFilename.substr(8).trim();
+    }
+    /**
+     * Get the full filename (without the internal spaces of the raw filename). If the
+     * file has an extension, it will be preceded by the specified separator.
+     */
+    getFilename(extensionSeparator) {
+        const extension = this.getExtension();
+        return this.getBasename() + (extension === "" ? "" : extensionSeparator + extension);
+    }
+    /**
+     * Return the size in bytes.
+     */
+    getSize() {
+        return this.sectorCount * BYTES_PER_SECTOR + this.lastSectorSize;
+    }
+    /**
+     * Return the date in MM/YY format.
+     */
+    getDateString() {
+        return this.month.toString().padStart(2, "0") + "/" + this.year.toString().padStart(2, "0");
+    }
+    /**
+     * Return the date as an object.
+     */
+    getDate() {
+        return new Date(1900 + this.year, this.month - 1);
+    }
+}
+exports.TrsdosDirEntry = TrsdosDirEntry;
+/**
+ * Decodes a directory entry from a 48-byte chunk, or undefined if the directory entry is empty.
+ */
+function decodeDirEntry(binary) {
+    const flags = binary[0];
+    // Check "active" bit. Setting this to zero is how files are deleted. Also check empty filename.
+    if ((flags & 0x10) === 0 || binary[5] === 0) {
+        return undefined;
+    }
+    const month = binary[1];
+    const year = binary[2];
+    const lastSectorSize = binary[3];
+    const lrl = ((binary[4] - 1) & 0xFF) + 1; // 0 -> 256.
+    const filename = decodeAscii(binary.subarray(5, 16));
+    // Not sure how to convert these two into a number. Just use big endian.
+    const updatePassword = (binary[16] << 8) | binary[17];
+    const accessPassword = (binary[18] << 8) | binary[19];
+    // Little endian.
+    const sectorCount = (binary[21] << 8) | binary[20];
+    const extents = decodeExtents(binary, 22, binary.length, true);
+    if (filename === undefined || extents === undefined) {
+        // This signals empty directory, but really should imply a non-TRSDOS disk.
+        return undefined;
+    }
+    return new TrsdosDirEntry(flags, month, year, lastSectorSize, lrl, filename, updatePassword, accessPassword, sectorCount, extents);
+}
+/**
+ * A decoded TRSDOS diskette.
+ */
+class Trsdos {
+    constructor(disk, gatInfo, hitInfo, dirEntries) {
+        this.disk = disk;
+        this.gatInfo = gatInfo;
+        this.hitInfo = hitInfo;
+        this.dirEntries = dirEntries;
+    }
+    /**
+     * Read the binary for a file on the diskette.
+     */
+    readFile(dirEntry) {
+        const parts = [];
+        let sectorCount = dirEntry.sectorCount + (dirEntry.lastSectorSize > 0 ? 1 : 0);
+        for (const extent of dirEntry.extents) {
+            let trackNumber = extent.trackNumber;
+            let sectorNumber = extent.granuleOffset * SECTORS_PER_GRANULE + 1;
+            for (let i = 0; i < extent.granuleCount * SECTORS_PER_GRANULE && sectorCount > 0; i++, sectorNumber++, sectorCount--) {
+                if (sectorNumber > SECTORS_PER_TRACK) {
+                    // Move to the next track.
+                    sectorNumber -= SECTORS_PER_TRACK;
+                    trackNumber += 1;
+                }
+                const sector = this.disk.readSector(trackNumber, FloppyDisk_1.Side.FRONT, sectorNumber);
+                if (sector === undefined) {
+                    console.log(`Sector couldn't be read ${trackNumber}, ${sectorNumber}`);
+                    // TODO
+                }
+                else {
+                    // TODO check deleted?
+                    if (sector.crcError) {
+                        console.log("Sector has CRC error");
+                    }
+                    if (sector.deleted) {
+                        // console.log("Sector " + sectorNumber + " is deleted");
+                    }
+                    parts.push(sector.data);
+                }
+            }
+        }
+        // Clip last sector.
+        if (parts.length > 0 && dirEntry.lastSectorSize > 0) {
+            parts[parts.length - 1] = parts[parts.length - 1].subarray(0, dirEntry.lastSectorSize);
+        }
+        return teamten_ts_utils_1.concatByteArrays(parts);
+    }
+}
+exports.Trsdos = Trsdos;
+/**
+ * Decode a TRSDOS diskette, or return undefined if this does not look like such a diskette.
+ */
+function decodeTrsdos(disk) {
+    // Decode Granule Allocation Table sector.
+    const gatSector = disk.readSector(17, FloppyDisk_1.Side.FRONT, 1);
+    if (gatSector === undefined || gatSector.deleted) {
+        return undefined;
+    }
+    const gatInfo = decodeGatInfo(gatSector.data);
+    if (gatInfo === undefined) {
+        return undefined;
+    }
+    // Decode Hash Index Table sector.
+    const hitSector = disk.readSector(17, FloppyDisk_1.Side.FRONT, 2);
+    if (hitSector === undefined || hitSector.deleted) {
+        return undefined;
+    }
+    const hitInfo = decodeHitInfo(hitSector.data);
+    if (hitInfo === undefined) {
+        return undefined;
+    }
+    // Decode directory entries.
+    const dirEntries = [];
+    for (let k = 0; k < 16; k++) {
+        const dirSector = disk.readSector(17, FloppyDisk_1.Side.FRONT, k + 3);
+        if (dirSector !== undefined) {
+            const tandy = decodeAscii(dirSector.data.subarray(5 * DIR_ENTRY_LENGTH));
+            if (tandy !== EXPECTED_TANDY) {
+                console.error(`Expected "${EXPECTED_TANDY}", got "${tandy}"`);
+                return undefined;
+            }
+            for (let j = 0; j < 5; j++) {
+                const dirEntry = decodeDirEntry(dirSector.data.subarray(j * DIR_ENTRY_LENGTH, (j + 1) * DIR_ENTRY_LENGTH));
+                if (dirEntry !== undefined) {
+                    dirEntries.push(dirEntry);
+                }
+            }
+        }
+    }
+    return new Trsdos(disk, gatInfo, hitInfo, dirEntries);
+}
+exports.decodeTrsdos = decodeTrsdos;
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TRS80_SCREEN_END = exports.TRS80_SCREEN_BEGIN = void 0;
+// RAM address range of screen.
+exports.TRS80_SCREEN_BEGIN = 15 * 1024;
+exports.TRS80_SCREEN_END = 16 * 1024;
+
+
+/***/ }),
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4185,7 +5905,217 @@ exports.MODEL3_ALT_FONT = new Font(GLYPH_CG4, 8, 12, [0, 64, -1, 192]);
 
 
 /***/ }),
-/* 37 */
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * List of all word registers.
+ */
+const WORD_REG = new Set(["af", "bc", "de", "hl", "af'", "bc'", "de'", "hl'", "ix", "iy", "sp", "pc"]);
+/**
+ * List of all byte registers.
+ */
+const BYTE_REG = new Set(["a", "f", "b", "c", "d", "e", "h", "l", "ixh", "ixl", "iyh", "iyl", "i", "r"]);
+/**
+ * Determine whether a register stores a word.
+ */
+function isWordReg(s) {
+    return WORD_REG.has(s.toLowerCase());
+}
+exports.isWordReg = isWordReg;
+/**
+ * Determine whether a register stores a byte.
+ */
+function isByteReg(s) {
+    return BYTE_REG.has(s.toLowerCase());
+}
+exports.isByteReg = isByteReg;
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Utils_1 = __webpack_require__(23);
+/**
+ * All registers in a Z80.
+ */
+class RegisterSet {
+    constructor() {
+        // External state:
+        this.af = 0;
+        this.bc = 0;
+        this.de = 0;
+        this.hl = 0;
+        this.afPrime = 0;
+        this.bcPrime = 0;
+        this.dePrime = 0;
+        this.hlPrime = 0;
+        this.ix = 0;
+        this.iy = 0;
+        this.sp = 0;
+        this.pc = 0;
+        // Internal state:
+        this.memptr = 0;
+        this.i = 0;
+        this.r = 0; // Low 7 bits of R.
+        this.r7 = 0; // Bit 7 of R.
+        this.iff1 = 0;
+        this.iff2 = 0;
+        this.im = 0;
+        this.halted = 0;
+    }
+    get a() {
+        return Utils_1.hi(this.af);
+    }
+    set a(value) {
+        this.af = Utils_1.word(value, this.f);
+    }
+    get f() {
+        return Utils_1.lo(this.af);
+    }
+    set f(value) {
+        this.af = Utils_1.word(this.a, value);
+    }
+    get b() {
+        return Utils_1.hi(this.bc);
+    }
+    set b(value) {
+        this.bc = Utils_1.word(value, this.c);
+    }
+    get c() {
+        return Utils_1.lo(this.bc);
+    }
+    set c(value) {
+        this.bc = Utils_1.word(this.b, value);
+    }
+    get d() {
+        return Utils_1.hi(this.de);
+    }
+    set d(value) {
+        this.de = Utils_1.word(value, this.e);
+    }
+    get e() {
+        return Utils_1.lo(this.de);
+    }
+    set e(value) {
+        this.de = Utils_1.word(this.d, value);
+    }
+    get h() {
+        return Utils_1.hi(this.hl);
+    }
+    set h(value) {
+        this.hl = Utils_1.word(value, this.l);
+    }
+    get l() {
+        return Utils_1.lo(this.hl);
+    }
+    set l(value) {
+        this.hl = Utils_1.word(this.h, value);
+    }
+    get ixh() {
+        return Utils_1.hi(this.ix);
+    }
+    set ixh(value) {
+        this.ix = Utils_1.word(value, this.ixl);
+    }
+    get ixl() {
+        return Utils_1.lo(this.ix);
+    }
+    set ixl(value) {
+        this.ix = Utils_1.word(this.ixh, value);
+    }
+    get iyh() {
+        return Utils_1.hi(this.iy);
+    }
+    set iyh(value) {
+        this.iy = Utils_1.word(value, this.iyl);
+    }
+    get iyl() {
+        return Utils_1.lo(this.iy);
+    }
+    set iyl(value) {
+        this.iy = Utils_1.word(this.iyh, value);
+    }
+    /**
+     * Combine the two R parts together.
+     */
+    get rCombined() {
+        return (this.r7 & 0x80) | (this.r & 0xF7);
+    }
+}
+exports.RegisterSet = RegisterSet;
+/**
+ * All real fields of RegisterSet, for enumeration.
+ */
+exports.registerSetFields = [
+    "af", "bc", "de", "hl",
+    "afPrime", "bcPrime", "dePrime", "hlPrime",
+    "ix", "iy", "sp", "pc",
+    "memptr", "i", "r", "iff1", "iff2", "im", "halted"
+];
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * The flag bits in the F register.
+ */
+var Flag;
+(function (Flag) {
+    /**
+     * Carry and borrow. Indicates that the addition or subtraction did not
+     * fit in the register.
+     */
+    Flag[Flag["C"] = 1] = "C";
+    /**
+     * Set if the last operation was a subtraction.
+     */
+    Flag[Flag["N"] = 2] = "N";
+    /**
+     * Parity: Indicates that the result has an even number of bits set.
+     */
+    Flag[Flag["P"] = 4] = "P";
+    /**
+     * Overflow: Indicates that two's complement does not fit in register.
+     */
+    Flag[Flag["V"] = 4] = "V";
+    /**
+     * Undocumented bit, but internal state can leak into it.
+     */
+    Flag[Flag["X3"] = 8] = "X3";
+    /**
+     * Half carry: Carry from bit 3 to bit 4 during BCD operations.
+     */
+    Flag[Flag["H"] = 16] = "H";
+    /**
+     * Undocumented bit, but internal state can leak into it.
+     */
+    Flag[Flag["X5"] = 32] = "X5";
+    /**
+     * Set if value is zero.
+     */
+    Flag[Flag["Z"] = 64] = "Z";
+    /**
+     * Set of value is negative.
+     */
+    Flag[Flag["S"] = 128] = "S";
+})(Flag = exports.Flag || (exports.Flag = {}));
+
+
+/***/ }),
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4193,17 +6123,16 @@ exports.MODEL3_ALT_FONT = new Font(GLYPH_CG4, 8, 12, [0, 64, -1, 192]);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Trs80 = void 0;
 const z80_base_1 = __webpack_require__(6);
-const z80_emulator_1 = __webpack_require__(41);
-const Keyboard_1 = __webpack_require__(44);
-const Model1Level1Rom_1 = __webpack_require__(45);
-const Model1Level2Rom_1 = __webpack_require__(46);
-const Model3Rom_1 = __webpack_require__(47);
-const Utils_1 = __webpack_require__(2);
-const Config_1 = __webpack_require__(8);
-const trs80_base_1 = __webpack_require__(15);
+const z80_emulator_1 = __webpack_require__(52);
+const Keyboard_1 = __webpack_require__(55);
+const Model1Level1Rom_1 = __webpack_require__(56);
+const Model1Level2Rom_1 = __webpack_require__(57);
+const Model3Rom_1 = __webpack_require__(58);
+const Config_1 = __webpack_require__(10);
+const trs80_base_1 = __webpack_require__(3);
 const z80_base_2 = __webpack_require__(6);
 const FloppyDisk_1 = __webpack_require__(5);
-const FloppyDiskController_1 = __webpack_require__(57);
+const FloppyDiskController_1 = __webpack_require__(59);
 const EventScheduler_1 = __webpack_require__(32);
 // IRQs
 const M1_TIMER_IRQ_MASK = 0x80;
@@ -4249,7 +6178,7 @@ var CassetteValue;
  * Whether the memory address maps to a screen location.
  */
 function isScreenAddress(address) {
-    return address >= Utils_1.SCREEN_BEGIN && address < Utils_1.SCREEN_END;
+    return address >= trs80_base_1.TRS80_SCREEN_BEGIN && address < trs80_base_1.TRS80_SCREEN_END;
 }
 /**
  * See the FONT.md file for an explanation of this, but basically bit 6 is the NOR of bits 5 and 7.
@@ -4259,6 +6188,17 @@ function computeVideoBit6(value) {
     const bit7 = (value >> 7) & 1;
     const bit6 = (bit5 | bit7) ^ 1;
     return (value & 0xBF) | (bit6 << 6);
+}
+const WARN_ONCE_SET = new Set();
+/**
+ * Send this warning message to the console once. This is to avoid a program repeatedly doing something
+ * that results in a warning (such as reading from an unmapped memory address) and crashing the browser.
+ */
+function warnOnce(message) {
+    if (!WARN_ONCE_SET.has(message)) {
+        WARN_ONCE_SET.add(message);
+        console.warn(message + " (further warnings suppressed)");
+    }
 }
 /**
  * HAL for the TRS-80 Model III.
@@ -4394,6 +6334,24 @@ class Trs80 {
         this.z80.regs.pc = address;
     }
     /**
+     * Set the stack pointer to the specified address.
+     */
+    setStackPointer(address) {
+        this.z80.regs.sp = address;
+    }
+    /**
+     * Start the executable at the given address. This sets up some
+     * state and jumps to the address.
+     */
+    startExecutable(address) {
+        // Disable the cursor.
+        this.writeMemory(0x4022, 0);
+        // Disable interrupts.
+        this.z80.regs.iff1 = 0;
+        this.z80.regs.iff2 = 0;
+        this.jumpTo(address);
+    }
+    /**
      * Start the CPU and intercept browser keys.
      */
     start() {
@@ -4490,7 +6448,7 @@ class Trs80 {
         }
         else {
             // Unmapped memory.
-            console.error("Reading from unmapped memory at 0x" + z80_base_1.toHex(address, 4));
+            warnOnce("Reading from unmapped memory at 0x" + z80_base_1.toHex(address, 4));
             return 0;
         }
     }
@@ -4555,7 +6513,7 @@ class Trs80 {
                 break;
             default:
                 // Not sure what a good default value is, but other emulators use 0xFF.
-                console.error("Reading from unknown port 0x" + z80_base_1.toHex(z80_base_1.lo(address), 2));
+                warnOnce("Reading from unknown port 0x" + z80_base_1.toHex(z80_base_1.lo(address), 2));
                 value = 0xFF;
                 break;
         }
@@ -4635,17 +6593,17 @@ class Trs80 {
                 }
                 break;
             default:
-                console.error("Writing 0x" + z80_base_1.toHex(value, 2) + " to unknown port 0x" + z80_base_1.toHex(port, 2));
+                warnOnce("Writing 0x" + z80_base_1.toHex(value, 2) + " to unknown port 0x" + z80_base_1.toHex(port, 2));
                 return;
         }
         // console.log("Wrote 0x" + toHex(value, 2) + " to port 0x" + toHex(port, 2));
     }
     writeMemory(address, value) {
         if (address < ROM_SIZE) {
-            console.log("Warning: Writing to ROM location 0x" + z80_base_1.toHex(address, 4));
+            warnOnce("Warning: Writing to ROM location 0x" + z80_base_1.toHex(address, 4));
         }
         else {
-            if (address >= Utils_1.SCREEN_BEGIN && address < Utils_1.SCREEN_END) {
+            if (address >= trs80_base_1.TRS80_SCREEN_BEGIN && address < trs80_base_1.TRS80_SCREEN_END) {
                 if (this.config.cgChip === Config_1.CGChip.ORIGINAL) {
                     // No bit 6 in video memory, need to compute it.
                     value = computeVideoBit6(value);
@@ -4653,7 +6611,7 @@ class Trs80 {
                 this.screen.writeChar(address, value);
             }
             else if (address < RAM_START) {
-                console.log("Writing to unmapped memory at 0x" + z80_base_1.toHex(address, 4));
+                warnOnce("Writing to unmapped memory at 0x" + z80_base_1.toHex(address, 4));
             }
             this.memory[address] = value;
         }
@@ -4691,7 +6649,7 @@ class Trs80 {
         buf.push(this.screen.isExpandedCharacters() ? 1 : 0);
         // Run-length encode bytes with (value,count) pairs, with a max count of 255. Bytes
         // in the range 33 to 127 inclusive have an implicit count of 1.
-        for (let address = Utils_1.SCREEN_BEGIN; address < Utils_1.SCREEN_END; address++) {
+        for (let address = trs80_base_1.TRS80_SCREEN_BEGIN; address < trs80_base_1.TRS80_SCREEN_END; address++) {
             const value = this.memory[address];
             if (value > 32 && value < 128) {
                 // Bytes in this range don't store a count.
@@ -5015,7 +6973,7 @@ class Trs80 {
      * Clear screen and home cursor.
      */
     cls() {
-        for (let address = Utils_1.SCREEN_BEGIN; address < Utils_1.SCREEN_END; address++) {
+        for (let address = trs80_base_1.TRS80_SCREEN_BEGIN; address < trs80_base_1.TRS80_SCREEN_END; address++) {
             this.writeMemory(address, 32);
         }
         this.positionCursor(0, 0);
@@ -5028,7 +6986,7 @@ class Trs80 {
      * @param row 0-based text row.
      */
     positionCursor(col, row) {
-        const address = Utils_1.SCREEN_BEGIN + row * 64 + col;
+        const address = trs80_base_1.TRS80_SCREEN_BEGIN + row * 64 + col;
         // This works on Model III, not sure if it works on Model I or in wide mode.
         this.writeMemory(0x4020, z80_base_1.lo(address));
         this.writeMemory(0x4021, z80_base_1.hi(address));
@@ -5075,7 +7033,7 @@ class Trs80 {
                     this.writeMemoryBlock(chunk.address, chunk.loadData);
                 }
                 else if (chunk instanceof trs80_base_1.CmdTransferAddressChunk) {
-                    this.jumpTo(chunk.address);
+                    this.startExecutable(chunk.address);
                     // Don't load any more after this. I assume on a real machine the jump
                     // happens immediately and CMD parsing ends.
                     break;
@@ -5093,7 +7051,9 @@ class Trs80 {
             for (const chunk of systemProgram.chunks) {
                 this.writeMemoryBlock(chunk.loadAddress, chunk.data);
             }
-            this.jumpTo(systemProgram.entryPointAddress);
+            // Do what the SYSTEM command does.
+            this.setStackPointer(0x4288);
+            this.startExecutable(systemProgram.entryPointAddress);
         });
     }
     /**
@@ -5159,11 +7119,19 @@ class Trs80 {
         this.writeMemory(0x40FE, z80_base_1.hi(addr));
     }
     /**
+     * Load the floppy disk into the specified drive.
+     * @param floppyDisk the floppy, or undefined to unmount.
+     * @param driveNumber the drive number, 0-based.
+     */
+    loadFloppyDisk(floppyDisk, driveNumber) {
+        this.fdc.loadFloppyDisk(floppyDisk, driveNumber);
+    }
+    /**
      * Load a floppy and reboot into it.
      */
     runFloppyDisk(floppyDisk) {
         // Mount floppy.
-        this.fdc.loadFloppyDisk(floppyDisk, 0);
+        this.loadFloppyDisk(floppyDisk, 0);
         // Reboot.
         this.reset();
     }
@@ -5206,217 +7174,7 @@ exports.Trs80 = Trs80;
 
 
 /***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * List of all word registers.
- */
-const WORD_REG = new Set(["af", "bc", "de", "hl", "af'", "bc'", "de'", "hl'", "ix", "iy", "sp", "pc"]);
-/**
- * List of all byte registers.
- */
-const BYTE_REG = new Set(["a", "f", "b", "c", "d", "e", "h", "l", "ixh", "ixl", "iyh", "iyl", "i", "r"]);
-/**
- * Determine whether a register stores a word.
- */
-function isWordReg(s) {
-    return WORD_REG.has(s.toLowerCase());
-}
-exports.isWordReg = isWordReg;
-/**
- * Determine whether a register stores a byte.
- */
-function isByteReg(s) {
-    return BYTE_REG.has(s.toLowerCase());
-}
-exports.isByteReg = isByteReg;
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Utils_1 = __webpack_require__(14);
-/**
- * All registers in a Z80.
- */
-class RegisterSet {
-    constructor() {
-        // External state:
-        this.af = 0;
-        this.bc = 0;
-        this.de = 0;
-        this.hl = 0;
-        this.afPrime = 0;
-        this.bcPrime = 0;
-        this.dePrime = 0;
-        this.hlPrime = 0;
-        this.ix = 0;
-        this.iy = 0;
-        this.sp = 0;
-        this.pc = 0;
-        // Internal state:
-        this.memptr = 0;
-        this.i = 0;
-        this.r = 0; // Low 7 bits of R.
-        this.r7 = 0; // Bit 7 of R.
-        this.iff1 = 0;
-        this.iff2 = 0;
-        this.im = 0;
-        this.halted = 0;
-    }
-    get a() {
-        return Utils_1.hi(this.af);
-    }
-    set a(value) {
-        this.af = Utils_1.word(value, this.f);
-    }
-    get f() {
-        return Utils_1.lo(this.af);
-    }
-    set f(value) {
-        this.af = Utils_1.word(this.a, value);
-    }
-    get b() {
-        return Utils_1.hi(this.bc);
-    }
-    set b(value) {
-        this.bc = Utils_1.word(value, this.c);
-    }
-    get c() {
-        return Utils_1.lo(this.bc);
-    }
-    set c(value) {
-        this.bc = Utils_1.word(this.b, value);
-    }
-    get d() {
-        return Utils_1.hi(this.de);
-    }
-    set d(value) {
-        this.de = Utils_1.word(value, this.e);
-    }
-    get e() {
-        return Utils_1.lo(this.de);
-    }
-    set e(value) {
-        this.de = Utils_1.word(this.d, value);
-    }
-    get h() {
-        return Utils_1.hi(this.hl);
-    }
-    set h(value) {
-        this.hl = Utils_1.word(value, this.l);
-    }
-    get l() {
-        return Utils_1.lo(this.hl);
-    }
-    set l(value) {
-        this.hl = Utils_1.word(this.h, value);
-    }
-    get ixh() {
-        return Utils_1.hi(this.ix);
-    }
-    set ixh(value) {
-        this.ix = Utils_1.word(value, this.ixl);
-    }
-    get ixl() {
-        return Utils_1.lo(this.ix);
-    }
-    set ixl(value) {
-        this.ix = Utils_1.word(this.ixh, value);
-    }
-    get iyh() {
-        return Utils_1.hi(this.iy);
-    }
-    set iyh(value) {
-        this.iy = Utils_1.word(value, this.iyl);
-    }
-    get iyl() {
-        return Utils_1.lo(this.iy);
-    }
-    set iyl(value) {
-        this.iy = Utils_1.word(this.iyh, value);
-    }
-    /**
-     * Combine the two R parts together.
-     */
-    get rCombined() {
-        return (this.r7 & 0x80) | (this.r & 0xF7);
-    }
-}
-exports.RegisterSet = RegisterSet;
-/**
- * All real fields of RegisterSet, for enumeration.
- */
-exports.registerSetFields = [
-    "af", "bc", "de", "hl",
-    "afPrime", "bcPrime", "dePrime", "hlPrime",
-    "ix", "iy", "sp", "pc",
-    "memptr", "i", "r", "iff1", "iff2", "im", "halted"
-];
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * The flag bits in the F register.
- */
-var Flag;
-(function (Flag) {
-    /**
-     * Carry and borrow. Indicates that the addition or subtraction did not
-     * fit in the register.
-     */
-    Flag[Flag["C"] = 1] = "C";
-    /**
-     * Set if the last operation was a subtraction.
-     */
-    Flag[Flag["N"] = 2] = "N";
-    /**
-     * Parity: Indicates that the result has an even number of bits set.
-     */
-    Flag[Flag["P"] = 4] = "P";
-    /**
-     * Overflow: Indicates that two's complement does not fit in register.
-     */
-    Flag[Flag["V"] = 4] = "V";
-    /**
-     * Undocumented bit, but internal state can leak into it.
-     */
-    Flag[Flag["X3"] = 8] = "X3";
-    /**
-     * Half carry: Carry from bit 3 to bit 4 during BCD operations.
-     */
-    Flag[Flag["H"] = 16] = "H";
-    /**
-     * Undocumented bit, but internal state can leak into it.
-     */
-    Flag[Flag["X5"] = 32] = "X5";
-    /**
-     * Set if value is zero.
-     */
-    Flag[Flag["Z"] = 64] = "Z";
-    /**
-     * Set of value is negative.
-     */
-    Flag[Flag["S"] = 128] = "S";
-})(Flag = exports.Flag || (exports.Flag = {}));
-
-
-/***/ }),
-/* 41 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5425,18 +7183,18 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(42));
+__export(__webpack_require__(53));
 
 
 /***/ }),
-/* 42 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const z80_base_1 = __webpack_require__(6);
-const Decode_1 = __webpack_require__(43);
+const Decode_1 = __webpack_require__(54);
 /**
  * Emulated Z80 processor.
  */
@@ -5625,7 +7383,7 @@ exports.Z80 = Z80;
 
 
 /***/ }),
-/* 43 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14506,7 +16264,7 @@ exports.decode = decode;
 
 
 /***/ }),
-/* 44 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14516,8 +16274,11 @@ exports.decode = decode;
 // really not.
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Keyboard = void 0;
+// Keyboard is in several identical (mirrored) banks.
+const BANK_SIZE = 0x100;
+const BANK_COUNT = 4;
 const BEGIN_ADDR = 0x3800;
-const END_ADDR = BEGIN_ADDR + 256;
+const END_ADDR = BEGIN_ADDR + BANK_SIZE * BANK_COUNT;
 const KEY_DELAY_CLOCK_CYCLES = 50000;
 // Whether to force a Shift key, and how.
 var ShiftState;
@@ -14664,7 +16425,7 @@ class Keyboard {
     // addresses to read more than one byte at a time. For the last byte we fake
     // the Shift key if necessary.
     readKeyboard(addr, clock) {
-        addr -= BEGIN_ADDR;
+        addr = (addr - BEGIN_ADDR) % BANK_SIZE;
         let b = 0;
         // Dequeue if necessary.
         if (clock > this.keyProcessMinClock) {
@@ -14784,7 +16545,7 @@ exports.Keyboard = Keyboard;
 
 
 /***/ }),
-/* 45 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14797,7 +16558,7 @@ exports.model1Level1Rom = `
 
 
 /***/ }),
-/* 46 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14810,7 +16571,7 @@ exports.model1Level2Rom = `
 
 
 /***/ }),
-/* 47 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14823,1404 +16584,7 @@ exports.model3Rom = `
 
 
 /***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.concatByteArrays = exports.withCommas = exports.clearElement = void 0;
-/**
- * Remove all children from element.
- */
-function clearElement(e) {
-    while (e.firstChild) {
-        e.removeChild(e.firstChild);
-    }
-}
-exports.clearElement = clearElement;
-/**
- * Generate the string version of a number, in base 10, with commas for thousands groups.
- */
-function withCommas(n) {
-    let s = typeof n === "number" ? Math.round(n).toString(10) : n;
-    const negative = s.length >= 1 && s.charAt(0) === "-";
-    const firstDigit = negative ? 1 : 0;
-    if (s.length - firstDigit > 4) {
-        for (let i = s.length - 3; i > firstDigit; i -= 3) {
-            s = s.substring(0, i) + "," + s.substring(i);
-        }
-    }
-    return s;
-}
-exports.withCommas = withCommas;
-/**
- * Concatenate a list of byte arrays into one.
- */
-function concatByteArrays(samplesList) {
-    const length = samplesList.reduce((sum, samples) => sum + samples.length, 0);
-    const allBytes = new Uint8Array(length);
-    let offset = 0;
-    for (const samples of samplesList) {
-        allBytes.set(samples, offset);
-        offset += samples.length;
-    }
-    return allBytes;
-}
-exports.concatByteArrays = concatByteArrays;
-
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ByteReader = exports.EOF = void 0;
-exports.EOF = -1;
-/**
- * Provides an API for reading through a byte array.
- */
-class ByteReader {
-    constructor(b) {
-        this.b = b;
-        this.pos = 0;
-    }
-    /**
-     * Return the next byte, or EOF on end of array.
-     *
-     * @returns {number}
-     */
-    read() {
-        return this.pos < this.b.length ? this.b[this.pos++] : exports.EOF;
-    }
-    /**
-     * Return the next byte, not advancing the stream.
-     *
-     * @param ahead how many bytes ahead to peek, or 0 for the next byte
-     * to be returned by {@link #read()}.
-     */
-    peek(ahead = 0) {
-        const pos = this.pos + ahead;
-        return pos < this.b.length ? this.b[pos] : exports.EOF;
-    }
-    /**
-     * Return the byte address of the next byte to be read.
-     */
-    addr() {
-        return this.pos;
-    }
-    /**
-     * Reads a little-endian short (two-byte) integer.
-     *
-     * @param allowEofAfterFirstByte if true, an EOF after the first byte will result in just the
-     * first byte. Otherwise an EOF is returned.
-     * @returns the integer, or EOF on end of file.
-     */
-    readShort(allowEofAfterFirstByte) {
-        const low = this.read();
-        if (low === exports.EOF) {
-            return exports.EOF;
-        }
-        const high = this.read();
-        if (high === exports.EOF) {
-            return allowEofAfterFirstByte ? low : exports.EOF;
-        }
-        return low + high * 256;
-    }
-    /**
-     * Reads an ASCII string from the stream. If the returned string is shorter than "length", then we hit EOF.
-     */
-    readString(length) {
-        return new TextDecoder("ascii").decode(this.readBytes(length));
-    }
-    /**
-     * Returns the next "length" bytes. If the returned array is shorter than "length", then we hit EOF.
-     */
-    readBytes(length) {
-        const pos = this.pos;
-        length = Math.min(length, this.b.length - pos);
-        this.pos += length;
-        // So instead make a copy.
-        return this.b.slice(pos, pos + length);
-    }
-}
-exports.ByteReader = ByteReader;
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * List of all word registers.
- */
-const WORD_REG = new Set(["af", "bc", "de", "hl", "af'", "bc'", "de'", "hl'", "ix", "iy", "sp", "pc"]);
-/**
- * List of all byte registers.
- */
-const BYTE_REG = new Set(["a", "f", "b", "c", "d", "e", "h", "l", "ixh", "ixl", "iyh", "iyl", "i", "r"]);
-/**
- * Determine whether a register stores a word.
- */
-function isWordReg(s) {
-    return WORD_REG.has(s.toLowerCase());
-}
-exports.isWordReg = isWordReg;
-/**
- * Determine whether a register stores a byte.
- */
-function isByteReg(s) {
-    return BYTE_REG.has(s.toLowerCase());
-}
-exports.isByteReg = isByteReg;
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Utils_1 = __webpack_require__(17);
-/**
- * All registers in a Z80.
- */
-class RegisterSet {
-    constructor() {
-        // External state:
-        this.af = 0;
-        this.bc = 0;
-        this.de = 0;
-        this.hl = 0;
-        this.afPrime = 0;
-        this.bcPrime = 0;
-        this.dePrime = 0;
-        this.hlPrime = 0;
-        this.ix = 0;
-        this.iy = 0;
-        this.sp = 0;
-        this.pc = 0;
-        // Internal state:
-        this.memptr = 0;
-        this.i = 0;
-        this.r = 0; // Low 7 bits of R.
-        this.r7 = 0; // Bit 7 of R.
-        this.iff1 = 0;
-        this.iff2 = 0;
-        this.im = 0;
-        this.halted = 0;
-    }
-    get a() {
-        return Utils_1.hi(this.af);
-    }
-    set a(value) {
-        this.af = Utils_1.word(value, this.f);
-    }
-    get f() {
-        return Utils_1.lo(this.af);
-    }
-    set f(value) {
-        this.af = Utils_1.word(this.a, value);
-    }
-    get b() {
-        return Utils_1.hi(this.bc);
-    }
-    set b(value) {
-        this.bc = Utils_1.word(value, this.c);
-    }
-    get c() {
-        return Utils_1.lo(this.bc);
-    }
-    set c(value) {
-        this.bc = Utils_1.word(this.b, value);
-    }
-    get d() {
-        return Utils_1.hi(this.de);
-    }
-    set d(value) {
-        this.de = Utils_1.word(value, this.e);
-    }
-    get e() {
-        return Utils_1.lo(this.de);
-    }
-    set e(value) {
-        this.de = Utils_1.word(this.d, value);
-    }
-    get h() {
-        return Utils_1.hi(this.hl);
-    }
-    set h(value) {
-        this.hl = Utils_1.word(value, this.l);
-    }
-    get l() {
-        return Utils_1.lo(this.hl);
-    }
-    set l(value) {
-        this.hl = Utils_1.word(this.h, value);
-    }
-    get ixh() {
-        return Utils_1.hi(this.ix);
-    }
-    set ixh(value) {
-        this.ix = Utils_1.word(value, this.ixl);
-    }
-    get ixl() {
-        return Utils_1.lo(this.ix);
-    }
-    set ixl(value) {
-        this.ix = Utils_1.word(this.ixh, value);
-    }
-    get iyh() {
-        return Utils_1.hi(this.iy);
-    }
-    set iyh(value) {
-        this.iy = Utils_1.word(value, this.iyl);
-    }
-    get iyl() {
-        return Utils_1.lo(this.iy);
-    }
-    set iyl(value) {
-        this.iy = Utils_1.word(this.iyh, value);
-    }
-    /**
-     * Combine the two R parts together.
-     */
-    get rCombined() {
-        return (this.r7 & 0x80) | (this.r & 0xF7);
-    }
-}
-exports.RegisterSet = RegisterSet;
-/**
- * All real fields of RegisterSet, for enumeration.
- */
-exports.registerSetFields = [
-    "af", "bc", "de", "hl",
-    "afPrime", "bcPrime", "dePrime", "hlPrime",
-    "ix", "iy", "sp", "pc",
-    "memptr", "i", "r", "iff1", "iff2", "im", "halted"
-];
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * The flag bits in the F register.
- */
-var Flag;
-(function (Flag) {
-    /**
-     * Carry and borrow. Indicates that the addition or subtraction did not
-     * fit in the register.
-     */
-    Flag[Flag["C"] = 1] = "C";
-    /**
-     * Set if the last operation was a subtraction.
-     */
-    Flag[Flag["N"] = 2] = "N";
-    /**
-     * Parity: Indicates that the result has an even number of bits set.
-     */
-    Flag[Flag["P"] = 4] = "P";
-    /**
-     * Overflow: Indicates that two's complement does not fit in register.
-     */
-    Flag[Flag["V"] = 4] = "V";
-    /**
-     * Undocumented bit, but internal state can leak into it.
-     */
-    Flag[Flag["X3"] = 8] = "X3";
-    /**
-     * Half carry: Carry from bit 3 to bit 4 during BCD operations.
-     */
-    Flag[Flag["H"] = 16] = "H";
-    /**
-     * Undocumented bit, but internal state can leak into it.
-     */
-    Flag[Flag["X5"] = 32] = "X5";
-    /**
-     * Set if value is zero.
-     */
-    Flag[Flag["Z"] = 64] = "Z";
-    /**
-     * Set of value is negative.
-     */
-    Flag[Flag["S"] = 128] = "S";
-})(Flag = exports.Flag || (exports.Flag = {}));
-
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.decodeJv3FloppyDisk = exports.Jv3FloppyDisk = void 0;
-const z80_base_1 = __webpack_require__(3);
-const FloppyDisk_1 = __webpack_require__(5);
-const ProgramAnnotation_1 = __webpack_require__(4);
-// The JV3 file consists of sectors of different sizes all bunched together. Before that
-// comes a directory of these sectors, with three bytes per directory entry (track,
-// sector, and flags), mapping in order to the subsequent sectors.
-// The directory is in this header:
-const HEADER_SIZE = 34 * 256;
-// We can fit this many 3-byte records into it:
-const RECORD_COUNT = Math.floor(HEADER_SIZE / 3);
-// Flags for SectorInfo.
-var Flags;
-(function (Flags) {
-    Flags[Flags["SIZE_CODE_MASK"] = 3] = "SIZE_CODE_MASK";
-    Flags[Flags["NON_IBM"] = 4] = "NON_IBM";
-    Flags[Flags["BAD_CRC"] = 8] = "BAD_CRC";
-    Flags[Flags["SIDE"] = 16] = "SIDE";
-    Flags[Flags["DAM_MASK"] = 96] = "DAM_MASK";
-    // Single-density.
-    Flags[Flags["DAM_SD_FB"] = 0] = "DAM_SD_FB";
-    Flags[Flags["DAM_SD_FA"] = 32] = "DAM_SD_FA";
-    Flags[Flags["DAM_SD_F9"] = 64] = "DAM_SD_F9";
-    Flags[Flags["DAM_SD_F8"] = 96] = "DAM_SD_F8";
-    // Double-density.
-    Flags[Flags["DAM_DD_FB"] = 0] = "DAM_DD_FB";
-    Flags[Flags["DAM_DD_F8"] = 32] = "DAM_DD_F8";
-    Flags[Flags["DOUBLE_DENSITY"] = 128] = "DOUBLE_DENSITY";
-})(Flags || (Flags = {}));
-const FREE = 0xFF;
-const SIZE_CODE_MASK = 0x03;
-class SectorInfo {
-    constructor(track, sector, flags, offset) {
-        // Make both FREE to avoid confusion.
-        if (track === FREE || sector === FREE) {
-            track = FREE;
-            sector = FREE;
-        }
-        this.track = track;
-        this.sector = sector;
-        this.flags = flags;
-        this.offset = offset;
-        // In used sectors: 0=256,1=128,2=1024,3=512
-        // In free sectors: 0=512,1=1024,2=128,3=256
-        const sizeCode = (flags & SIZE_CODE_MASK) ^ (this.isFree() ? 0x02 : 0x01);
-        this.size = 128 << sizeCode;
-    }
-    getSide() {
-        return (this.flags & Flags.SIDE) === 0 ? FloppyDisk_1.Side.FRONT : FloppyDisk_1.Side.BACK;
-    }
-    /**
-     * Return the flags as a string, for debugging.
-     */
-    flagsToString() {
-        const parts = [];
-        parts.push(this.size + " bytes");
-        if ((this.flags & Flags.NON_IBM) !== 0) {
-            parts.push("non-IBM");
-        }
-        if ((this.flags & Flags.BAD_CRC) !== 0) {
-            parts.push("bad CRC");
-        }
-        parts.push("side " + ((this.flags & Flags.SIDE) === 0 ? 0 : 1));
-        if ((this.flags & Flags.DOUBLE_DENSITY) !== 0) {
-            parts.push("double density");
-        }
-        else {
-            parts.push("single density");
-        }
-        return parts.join(", ");
-    }
-    /**
-     * Whether the sector entry is free (doesn't represent real space in the file).
-     */
-    isFree() {
-        return this.track === FREE;
-    }
-    /**
-     * Whether the sector is encoded with MFM (instead of FM).
-     */
-    isDoubleDensity() {
-        return (this.flags & Flags.DOUBLE_DENSITY) !== 0;
-    }
-    /**
-     * Whether the sector's data is invalid.
-     *
-     * Normally FB is normal and F8 is deleted, but the single-density version has
-     * two other values (F9 and FA), which we also consider deleted, to match xtrs.
-     */
-    isDeleted() {
-        const dam = this.flags & Flags.DAM_MASK;
-        if (this.isDoubleDensity()) {
-            return dam === Flags.DAM_DD_F8;
-        }
-        else {
-            return dam !== Flags.DAM_SD_FB;
-        }
-    }
-    /**
-     * Whether the floppy had a bar CRC when reading it.
-     */
-    hasCrcError() {
-        return (this.flags & Flags.BAD_CRC) !== 0;
-    }
-}
-/**
- * Floppy disk in the JV3 format.
- */
-class Jv3FloppyDisk extends FloppyDisk_1.FloppyDisk {
-    constructor(binary, error, annotations, sectorInfos, writeProtected) {
-        super(binary, error, annotations, true);
-        this.sectorInfos = sectorInfos;
-        this.writeProtected = writeProtected;
-    }
-    getDescription() {
-        return "Floppy disk (JV3)";
-    }
-    readSector(trackNumber, side, sectorNumber) {
-        const sectorInfo = this.findSectorInfo(trackNumber, side, sectorNumber);
-        if (sectorInfo === undefined) {
-            return undefined;
-        }
-        const data = this.padSector(this.binary.subarray(sectorInfo.offset, sectorInfo.offset + sectorInfo.size), sectorInfo.size);
-        const sectorData = new FloppyDisk_1.SectorData(data);
-        sectorData.deleted = sectorInfo.isDeleted();
-        sectorData.crcError = sectorInfo.hasCrcError();
-        return sectorData;
-    }
-    /**
-     * Find the sector for the specified track and side.
-     */
-    findSectorInfo(track, side, sector) {
-        for (const sectorInfo of this.sectorInfos) {
-            if (!sectorInfo.isFree() &&
-                sectorInfo.track === track &&
-                sectorInfo.getSide() === side &&
-                (sector === undefined || sectorInfo.sector === sector)) {
-                return sectorInfo;
-            }
-        }
-        return undefined;
-    }
-}
-exports.Jv3FloppyDisk = Jv3FloppyDisk;
-/**
- * Decode a JV3 floppy disk file.
- */
-function decodeJv3FloppyDisk(binary) {
-    let error;
-    const annotations = [];
-    const sectorInfos = [];
-    // Read the directory.
-    let sectorOffset = HEADER_SIZE;
-    for (let i = 0; i < RECORD_COUNT; i++) {
-        const offset = i * 3;
-        if (offset + 2 >= binary.length) {
-            error = "Directory truncated at entry " + i;
-            break;
-        }
-        const track = binary[offset];
-        const sector = binary[offset + 1];
-        const flags = binary[offset + 2];
-        const sectorInfo = new SectorInfo(track, sector, flags, sectorOffset);
-        sectorOffset += sectorInfo.size;
-        if (!sectorInfo.isFree()) {
-            if (sectorOffset > binary.length) {
-                error = `Sector truncated at entry ${i} (${sectorOffset} > ${binary.length})`;
-                break;
-            }
-            annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Track " + sectorInfo.track + ", sector " +
-                sectorInfo.sector + ", " + sectorInfo.flagsToString(), offset, offset + 3));
-            sectorInfos.push(sectorInfo);
-        }
-    }
-    // Annotate the sectors themselves.
-    for (const sectorInfo of sectorInfos) {
-        annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Track " + sectorInfo.track + ", sector " + sectorInfo.sector, sectorInfo.offset, sectorInfo.offset + sectorInfo.size));
-    }
-    const writableOffset = RECORD_COUNT * 3;
-    const writable = binary[writableOffset];
-    if (writable !== 0 && writable !== 0xFF) {
-        error = "Invalid \"writable\" byte: 0x" + z80_base_1.toHexByte(writable);
-    }
-    const writeProtected = writable === 0;
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(writeProtected ? "Write protected" : "Writable", writableOffset, writableOffset + 1));
-    return new Jv3FloppyDisk(binary, error, annotations, sectorInfos, writeProtected);
-}
-exports.decodeJv3FloppyDisk = decodeJv3FloppyDisk;
-
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Handles DMK floppy disk images.
- *
- * https://retrocomputing.stackexchange.com/questions/15282/understanding-the-dmk-disk-image-file-format-used-by-trs-80-emulators
- * http://www.classiccmp.org/cpmarchives/trs80/mirrors/trs-80.com/early/www.trs-80.com/trs80-dm.htm
- * http://www.classiccmp.org/cpmarchives/trs80/mirrors/www.discover-net.net/~dmkeil/trs80/trstech.htm
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.decodeDmkFloppyDisk = exports.DmkFloppyDisk = void 0;
-const z80_base_1 = __webpack_require__(3);
-const z80_base_2 = __webpack_require__(3);
-const Crc16_1 = __webpack_require__(55);
-const FloppyDisk_1 = __webpack_require__(5);
-const ProgramAnnotation_1 = __webpack_require__(4);
-const FILE_HEADER_SIZE = 16;
-const TRACK_HEADER_SIZE = 128;
-/**
- * Represents a single sector on a DMK floppy.
- */
-class DmkSector {
-    constructor(track, doubleDensity, offset) {
-        this.track = track;
-        this.doubleDensity = doubleDensity;
-        this.offset = offset;
-        this.dataIndex = this.findDataIndex();
-    }
-    /**
-     * Get the cylinder for this sector. This is 0-based.
-     */
-    getCylinder() {
-        return this.getByte(1);
-    }
-    /**
-     * Get the side for this sector.
-     */
-    getSide() {
-        return FloppyDisk_1.numberToSide(this.getByte(2));
-    }
-    /**
-     * Get the sector number for this sector. This is 1-based.
-     */
-    getSectorNumber() {
-        return this.getByte(3);
-    }
-    /**
-     * Get the sector length in bytes.
-     */
-    getLength() {
-        return 128 * (1 << this.getByte(4));
-    }
-    /**
-     * Get the CRC for the IDAM.
-     */
-    getIdamCrc() {
-        // Bit endian.
-        return (this.getByte(5) << 8) + this.getByte(6);
-    }
-    /**
-     * Compute the CRC for the IDAM.
-     */
-    computeIdemCrc() {
-        let crc = 0xFFFF;
-        for (let i = -3; i < 5; i++) {
-            crc = Crc16_1.CRC_16_CCITT.update(crc, this.getByte(i));
-        }
-        return crc;
-    }
-    /**
-     * Get the CRC for the data bytes.
-     */
-    getDataCrc() {
-        // Bit endian.
-        const index = this.dataIndex + this.getLength();
-        return (this.getByte(index) << 8) + this.getByte(index + 1);
-    }
-    /**
-     * Compute the CRC for the data bytes.
-     */
-    computeDataCrc() {
-        let crc = 0xFFFF;
-        const index = this.dataIndex;
-        const begin = index - 4;
-        const end = index + this.getLength();
-        for (let i = begin; i < end; i++) {
-            crc = Crc16_1.CRC_16_CCITT.update(crc, this.getByte(i));
-        }
-        return crc;
-    }
-    /**
-     * Whether the sector data should be considered invalid.
-     */
-    isDeleted() {
-        const dam = this.getByte(this.dataIndex - 1);
-        if (dam !== 0xF8 && dam !== 0xFB) {
-            console.error("Unknown DAM: " + z80_base_2.toHexByte(dam));
-        }
-        // Normally, 0xFB, but 0xF8 if sector is considered deleted.
-        return dam === 0xF8;
-    }
-    /**
-     * Get a byte from the sector data.
-     *
-     * @param index index into the sector, relative to the 0xFE byte. Can be negative.
-     */
-    getByte(index) {
-        return this.track.floppyDisk.binary[this.track.offset + this.offset + index];
-    }
-    /**
-     * Look for the byte that indicates the start of data (0xFB or 0xF8). Various
-     * floppy disk documentation specify an exact number here, but I've seen a variety
-     * of values, so just search.
-     */
-    findDataIndex() {
-        for (let i = 7; i < 55; i++) {
-            const byte = this.track.floppyDisk.binary[this.track.offset + this.offset + i];
-            if (byte === 0xFB || byte === 0xF8) {
-                // Maybe also check that the previous three bytes are 0xA1.
-                return i + 1;
-            }
-        }
-        // Not sure what to do here. trs80gp says that this is valid.
-        throw new Error(`Can't find byte at start of DAM (track ${this.track.trackNumber}, offset 0x${z80_base_1.toHexWord(this.offset)})`);
-    }
-}
-/**
- * Represents a single track on a DMK floppy.
- */
-class DmkTrack {
-    constructor(floppyDisk, trackNumber, side, offset) {
-        /**
-         * Sectors in this track.
-         */
-        this.sectors = [];
-        this.floppyDisk = floppyDisk;
-        this.trackNumber = trackNumber;
-        this.side = side;
-        this.offset = offset;
-    }
-}
-/**
- * Handles the DMK floppy disk file format, developed by David M. Keil.
- *
- * http://www.classiccmp.org/cpmarchives/trs80/mirrors/trs-80.com/early/www.trs-80.com/trs80-dm.htm
- * http://www.classiccmp.org/cpmarchives/trs80/mirrors/www.discover-net.net/~dmkeil/trs80/trstech.htm
- */
-class DmkFloppyDisk extends FloppyDisk_1.FloppyDisk {
-    constructor(binary, error, annotations, supportsDoubleDensity, writeProtected, trackCount, trackLength, flags) {
-        super(binary, error, annotations, supportsDoubleDensity);
-        this.tracks = [];
-        this.writeProtected = writeProtected;
-        this.trackCount = trackCount;
-        this.trackLength = trackLength;
-        this.flags = flags;
-    }
-    getDescription() {
-        return "Floppy disk (DMK)";
-    }
-    readSector(trackNumber, side, sectorNumber) {
-        // console.log(`readSector(${trackNumber}, ${sectorNumber}, ${side})`);
-        for (const track of this.tracks) {
-            if (track.trackNumber === trackNumber) { // TODO not checking side.
-                for (const sector of track.sectors) {
-                    if (sectorNumber === undefined || (sector.getSectorNumber() === sectorNumber &&
-                        sector.getSide() === side)) {
-                        const begin = track.offset + sector.offset + sector.dataIndex;
-                        const end = begin + sector.getLength();
-                        const sectorData = new FloppyDisk_1.SectorData(this.binary.subarray(begin, end));
-                        sectorData.crcError = sector.getDataCrc() !== sector.computeDataCrc();
-                        sectorData.deleted = sector.isDeleted();
-                        // console.log(sectorData);
-                        return sectorData;
-                    }
-                }
-            }
-        }
-        return undefined;
-    }
-}
-exports.DmkFloppyDisk = DmkFloppyDisk;
-/**
- * Decode a DMK floppy disk file.
- */
-function decodeDmkFloppyDisk(binary) {
-    const error = undefined;
-    const annotations = [];
-    if (binary.length < FILE_HEADER_SIZE) {
-        return undefined;
-    }
-    // Decode the header. Comments marked [DMK] are from David Keil's original documentation.
-    // [DMK] If this byte is set to FFH the disk is `write protected', 00H allows writing.
-    const writeProtected = binary[0] === 0xFF;
-    if (binary[0] !== 0x00 && binary[0] !== 0xFF) {
-        return undefined;
-    }
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(writeProtected ? "Write protected" : "Writable", 0, 1));
-    // [DMK] Number of tracks on virtual disk. Since tracks start at 0 this value will be one greater
-    // than the highest track written to the disk. So a disk with 40 tracks will have a value
-    // of 40 (28H) in this field after formatting while the highest track written would be 39.
-    // This field is updated after a track is formatted if the track formatted is greater than
-    // or equal to the current number of tracks. Re-formatting a disk with fewer tracks will
-    // NOT reduce the number of tracks on the virtual disk. Once a virtual disk has allocated
-    // space for a track it will NEVER release it. Formatting a virtual disk with 80 tracks
-    // then re-formatting it with 40 tracks would waste space just like formatting only 40
-    // tracks on an 80 track drive. The emulator and TRS-80 operating system don't care.
-    // To re-format a virtual disk with fewer tracks use the /I option at start-up to
-    // delete and re-create the virtual disk first, then re-format to save space.
-    //
-    // [DMK] Note: This field should NEVER be modified. Changing this number will cause TRS-80
-    // operating system disk errors. (Like reading an 80 track disk in a 40 track drive)
-    const trackCount = binary[1];
-    if (trackCount > 160) {
-        // Not sure what a reasonable maximum is. I've only see 80.
-        return undefined;
-    }
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(trackCount + " tracks", 1, 2));
-    // [DMK] This is the track length for the virtual disk. By default the value is 1900H, 80H bytes
-    // more than the actual track length, this gives a track length of 6272 bytes. A real double
-    // density track length is approx. 6250 bytes. This is the default value when a virtual disk is created.
-    // Values for other disk and format types are 0CC0H for single density 5.25" floppies,
-    // 14E0H for single density 8" floppies and 2940H for double density 8" floppies. The max value is 2940H.
-    // For normal formatting of disks the values of 1900H and 2940H for 5.25" and 8" are used.
-    // The emulator will write two bytes and read every second byte when  in single density to maintain
-    // proper sector spacing, allowing mixed density disks. Setting the track length must be done before
-    // a virtual disk is formatted or the disk will have to be re-formatted and since the space for the
-    // disk has already been allocated no space will be saved.
-    //
-    // [DMK] WARNING: Bytes are entered in reverse order (ex. 2940H would be entered, byte 2=40, byte 3=29).
-    //
-    // [DMK] Note: No modification of the track length is necessary, doing so only saves space and is not
-    // necessary to normal operation. The values for all normal 5.25" and 8" disks are set when the
-    // virtual disk is created. DON'T modify the track length unless you understand these instructions completely.
-    // Nothing in the PC world can be messed up by improper modification but any other virtual disk mounted
-    // in the emulator with an improperly modified disk could have their data scrambled.
-    const trackLength = binary[2] + (binary[3] << 8);
-    if (trackLength > 0x2940) {
-        return undefined;
-    }
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation(trackLength + " bytes per track", 2, 4));
-    // [DMK] Virtual disk option flags.
-    //
-    // [DMK] Bit 4 of this byte, if set, means this is a single sided ONLY disk. This bit is set if the
-    // user selects single sided during disk creation and should not require modification. This flag is
-    // used only to save PC hard disk space and is never required.
-    //
-    // [DMK] Bit 6 of this byte, if set, means this disk is to be single density size and the emulator
-    // will access one byte instead of two when doing I/O in single density. Double density can still
-    // be written to a single density disk but with half the track length only 10 256 byte sectors can be
-    // written in either density. Mixed density is also possible but sector timing may be off so protected
-    // disks may not work, a maximum of 10 256 byte sectors of mixed density can be written to a
-    // single density disk. A program like "Spook House" which has a mixed density track 0 with 1 SD sector
-    // and 1 DD sector and the rest of the disk consisting of 10 SD sectors/track will work with this flag set
-    // and save half the PC hard disk space. The protected disk "Super Utility + 3.0" however has 6 SD and 6 DD
-    // sectors/track for a total of 12 256 byte sectors/track. This disk cannot be single density.
-    // This bit is set if the user selects single density during disk creation and should
-    // not require modification. This flag is used only to save PC hard disk space and is never required.
-    //
-    // [DMK] Bit 7 of this byte, if set, means density is to be ignored when accessing this disk. The disk MUST
-    // be formatted in double density but the emulator will then read and write the sectors in either density.
-    // The emulator will access one byte instead of two when doing I/O in single density.
-    // This flag was an early way to support mixed density disks it is no longer needed for this purpose.
-    // It is now used for compatibility with old virtual disks created without the double byte now used when in
-    // single density. This bit can be set manually in a hex editor to access old virtual disks written
-    // in single density.
-    const flags = binary[4];
-    const flagParts = [];
-    const singleSided = (flags & 0x10) !== 0;
-    if (singleSided) {
-        flagParts.push("SS");
-    }
-    if ((flags & 0x40) !== 0) {
-        flagParts.push("SD");
-    }
-    if ((flags & 0x80) !== 0) {
-        flagParts.push("ignore density");
-    }
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Flags: [" + flagParts.join(",") + "]", 4, 5));
-    // Sanity check.
-    const sideCount = singleSided ? 1 : 2;
-    const expectedLength = FILE_HEADER_SIZE + sideCount * trackCount * trackLength;
-    if (binary.length !== expectedLength) {
-        console.error(`DMK file wrong size (${binary.length} != ${expectedLength})`);
-        return undefined;
-    }
-    // Check that these are zero.
-    for (let i = 5; i < 12; i++) {
-        if (binary[i] !== 0x00) {
-            console.error("DMK: Reserved byte " + i + " is not zero: 0x" + z80_base_2.toHexByte(binary[i]));
-            return undefined;
-        }
-    }
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Reserved", 5, 12));
-    // [DMK] Must be zero if virtual disk is in emulator's native format.
-    //
-    // [DMK] Must be 12345678h if virtual disk is a REAL disk specification file used to access
-    // REAL TRS-80 floppies in compatible PC drives.
-    if (binary[12] + binary[13] + binary[14] + binary[15] !== 0x00) {
-        return undefined;
-    }
-    annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Virtual disk", 12, 16));
-    const floppyDisk = new DmkFloppyDisk(binary, error, annotations, true, writeProtected, trackCount, trackLength, flags);
-    // Read the tracks.
-    let binaryOffset = FILE_HEADER_SIZE;
-    for (let trackNumber = 0; trackNumber < trackCount; trackNumber++) {
-        for (let side = 0; side < sideCount; side++) {
-            const trackOffset = binaryOffset;
-            const track = new DmkTrack(floppyDisk, trackNumber, FloppyDisk_1.numberToSide(side), trackOffset);
-            // Read the track header. The term "IDAM" in the comment below refers to the "ID access mark",
-            // where "ID" is referring to the sector ID, the few byte just before the sector data.
-            // [DMK] Each side of each track has a 128 (80H) byte header which contains an offset pointer
-            // to each IDAM in the track. This allows a maximum of 64 sector IDAMs/track. This is more than
-            // twice what an 8 inch disk would require and 3.5 times that of a normal TRS-80 5 inch DD disk.
-            // This should more than enough for any protected disk also.
-            //
-            // [DMK] These IDAM pointers MUST adhere to the following rules:
-            //
-            // * Each pointer is a 2 byte offset to the FEh byte of the IDAM. In double byte single density
-            //   the pointer is to the first FEh.
-            // * The offset includes the 128 byte header. For example, an IDAM 10h bytes into the track would
-            //   have a pointer of 90h, 10h+80h=90h.
-            // * The IDAM offsets MUST be in ascending order with no unused or bad pointers.
-            // * If all the entries are not used the header is terminated with a 0000h entry. Unused entries
-            //   must also be zero filled..
-            // * Any IDAMs overwritten during a sector write command should have their entry removed from the
-            //   header and all other pointer entries shifted to fill in.
-            // * The IDAM pointers are created during the track write command (format). A completed track write
-            //   MUST remove all previous IDAM pointers. A partial track write (aborted with the forced interrupt
-            //   command) MUST have it's previous pointers that were not overwritten added to the new IDAM pointers.
-            // * The pointer bytes are stored in reverse order (LSB/MSB).
-            //
-            // [DMK] Each IDAM pointer has two flags. Bit 15 is set if the sector is double density. Bit 14 is
-            // currently undefined. These bits must be masked to get the actual sector offset. For example,
-            // an offset to an IDAM at byte 90h would be 0090h if single density and 8090h if double density.
-            for (let i = 0; i < TRACK_HEADER_SIZE; i += 2) {
-                const sectorOffset = binary[binaryOffset + i] + (binary[binaryOffset + i + 1] << 8);
-                if (sectorOffset !== 0) {
-                    track.sectors.push(new DmkSector(track, (sectorOffset & 0x8000) !== 0, sectorOffset & 0x3FFF));
-                }
-            }
-            annotations.push(new ProgramAnnotation_1.ProgramAnnotation(`Track ${trackNumber} header`, binaryOffset, binaryOffset + TRACK_HEADER_SIZE));
-            for (const sector of track.sectors) {
-                let i = trackOffset + sector.offset;
-                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Sector ID access mark", i, i + 1));
-                i++;
-                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Cylinder " + sector.getCylinder(), i, i + 1));
-                i++;
-                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Side " + sector.getSide(), i, i + 1));
-                i++;
-                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Sector " + sector.getSectorNumber(), i, i + 1));
-                i++;
-                const sectorLength = sector.getLength();
-                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Length " + sectorLength, i, i + 1));
-                i++;
-                const actualIdamCrc = sector.computeIdemCrc();
-                const expectedIdamCrc = sector.getIdamCrc();
-                let idamCrcLabel = "IDAM CRC";
-                if (actualIdamCrc === expectedIdamCrc) {
-                    idamCrcLabel += " (valid)";
-                }
-                else {
-                    idamCrcLabel += ` (got 0x${z80_base_1.toHexWord(actualIdamCrc)}, expected 0x${z80_base_1.toHexWord(expectedIdamCrc)})`;
-                }
-                annotations.push(new ProgramAnnotation_1.ProgramAnnotation(idamCrcLabel, i, i + 2));
-                i += 2;
-                i = trackOffset + sector.offset + sector.dataIndex;
-                annotations.push(new ProgramAnnotation_1.ProgramAnnotation("Sector data", i, i + sectorLength));
-                i += sectorLength;
-                const actualDataCrc = sector.computeDataCrc();
-                const expectedDataCrc = sector.getDataCrc();
-                let dataCrcLabel = "Data CRC";
-                if (actualDataCrc === expectedDataCrc) {
-                    dataCrcLabel += " (valid)";
-                }
-                else {
-                    dataCrcLabel += ` (got 0x${z80_base_1.toHexWord(actualDataCrc)}, expected 0x${z80_base_1.toHexWord(expectedDataCrc)})`;
-                }
-                annotations.push(new ProgramAnnotation_1.ProgramAnnotation(dataCrcLabel, i, i + 2));
-                i += 2;
-            }
-            floppyDisk.tracks.push(track);
-            binaryOffset += trackLength;
-        }
-    }
-    return floppyDisk;
-}
-exports.decodeDmkFloppyDisk = decodeDmkFloppyDisk;
-
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CRC_16_CCITT = exports.Crc16 = void 0;
-/**
- * Performs CRC-16 operations treating bits as big-endian.
- *
- * https://en.wikipedia.org/wiki/Cyclic_redundancy_check
- * https://en.wikipedia.org/wiki/Computation_of_cyclic_redundancy_checks
- * https://en.wikipedia.org/wiki/Mathematics_of_cyclic_redundancy_checks
- */
-class Crc16 {
-    /**
-     * Specifies the generator, which must be a 16-bit value.
-     */
-    constructor(generator) {
-        this.generator = generator;
-    }
-    /**
-     * Update the CRC with the new data, which must be a byte.
-     *
-     * @return the new CRC.
-     */
-    update(crc, data) {
-        for (let shift = 8; shift < 16; shift++) {
-            const isOne = ((crc ^ (data << shift)) & 0x8000) !== 0;
-            crc <<= 1;
-            if (isOne) {
-                crc ^= this.generator;
-            }
-        }
-        return crc & 0xFFFF;
-    }
-}
-exports.Crc16 = Crc16;
-/**
- * The CRC-16-CCITT polynomial, used for floppy disks. The polynomial is
- * x^16 + x^12 + x^5 + 1, which maps to 0x11021, but the leading 1 is
- * removed because it doesn't affect the outcome.
- */
-exports.CRC_16_CCITT = new Crc16(0x1021);
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Classes for handling TRSDOS diskettes.
- *
- * http://www.trs-80.com/wordpress/zaps-patches-pokes-tips/zaps-and-patches/#guidedtour
- * http://www.manmrk.net/tutorials/TRS80/Software/ldos/trs80/doc/prgguide.pdf
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.decodeTrsdos = exports.Trsdos = exports.TrsdosDirEntry = exports.TrsdosHitInfo = exports.TrsdosGatInfo = exports.TrsdosExtent = exports.trsdosProtectionLevelToString = exports.TrsdosProtectionLevel = void 0;
-const teamten_ts_utils_1 = __webpack_require__(7);
-const FloppyDisk_1 = __webpack_require__(5);
-// Number of bytes per dir entry in the sector.
-const DIR_ENTRY_LENGTH = 48;
-// Apparently this is constant in TRSDOS.
-const BYTES_PER_SECTOR = 256;
-// Apparently this is 3, but somewhere else I read 6.
-const SECTORS_PER_GRANULE = 3;
-// The number of sectors on each track, numbered 1 to 18.
-const SECTORS_PER_TRACK = 18;
-// Copyright in the last 16 bytes of each directory sector.
-const EXPECTED_TANDY = "(c) 1980 Tandy";
-// Password value that means "no password".
-const NO_PASSWORD = 0xEF5C;
-// Password value for "PASSWORD".
-const PASSWORD = 0xD38F;
-/**
- * Decodes binary into an ASCII string. Returns undefined if any non-ASCII value is
- * found in the string, where "ASCII" is defined as being in the range 32 to 126 inclusive.
- */
-function decodeAscii(binary, trim = true) {
-    const parts = [];
-    for (const b of binary) {
-        if (b < 32 || b >= 127) {
-            return undefined;
-        }
-        parts.push(String.fromCodePoint(b));
-    }
-    let s = parts.join("");
-    if (trim) {
-        s = s.trim();
-    }
-    return s;
-}
-/**
- * Lowest three bits of the directory entry's flag.
- */
-var TrsdosProtectionLevel;
-(function (TrsdosProtectionLevel) {
-    // Keep this values in this order, they match the bit values (0 to 7).
-    TrsdosProtectionLevel[TrsdosProtectionLevel["FULL"] = 0] = "FULL";
-    TrsdosProtectionLevel[TrsdosProtectionLevel["REMOVE"] = 1] = "REMOVE";
-    TrsdosProtectionLevel[TrsdosProtectionLevel["RENAME"] = 2] = "RENAME";
-    TrsdosProtectionLevel[TrsdosProtectionLevel["WRITE"] = 3] = "WRITE";
-    TrsdosProtectionLevel[TrsdosProtectionLevel["UPDATE"] = 4] = "UPDATE";
-    TrsdosProtectionLevel[TrsdosProtectionLevel["READ"] = 5] = "READ";
-    TrsdosProtectionLevel[TrsdosProtectionLevel["EXEC"] = 6] = "EXEC";
-    TrsdosProtectionLevel[TrsdosProtectionLevel["NO_ACCESS"] = 7] = "NO_ACCESS";
-})(TrsdosProtectionLevel = exports.TrsdosProtectionLevel || (exports.TrsdosProtectionLevel = {}));
-/**
- * Gets the string version of the protection level enum.
- * @param level
- */
-function trsdosProtectionLevelToString(level) {
-    switch (level) {
-        case TrsdosProtectionLevel.FULL:
-            return "FULL";
-        case TrsdosProtectionLevel.REMOVE:
-            return "REMOVE";
-        case TrsdosProtectionLevel.RENAME:
-            return "RENAME";
-        case TrsdosProtectionLevel.WRITE:
-            return "WRITE";
-        case TrsdosProtectionLevel.UPDATE:
-            return "UPDATE";
-        case TrsdosProtectionLevel.READ:
-            return "READ";
-        case TrsdosProtectionLevel.EXEC:
-            return "EXEC";
-        case TrsdosProtectionLevel.NO_ACCESS:
-            return "NO_ACCESS";
-        default:
-            return "UNKNOWN";
-    }
-}
-exports.trsdosProtectionLevelToString = trsdosProtectionLevelToString;
-/**
- * A contiguous number of sectors for storing part of a file.
- */
-class TrsdosExtent {
-    constructor(trackNumber, granuleOffset, granuleCount) {
-        this.trackNumber = trackNumber;
-        this.granuleOffset = granuleOffset;
-        this.granuleCount = granuleCount;
-    }
-}
-exports.TrsdosExtent = TrsdosExtent;
-/**
- * Decode an array of extents.
- *
- * @param binary byte we'll be pulling the extents from.
- * @param begin index of first extent in binary.
- * @param end index past last extent in binary.
- * @param trackFirst whether the track comes first or second.
- */
-function decodeExtents(binary, begin, end, trackFirst) {
-    const extents = [];
-    for (let i = begin; i < end; i += 2) {
-        if (binary[i] === 0xFF && binary[i + 1] === 0xFF) {
-            break;
-        }
-        const trackNumber = binary[trackFirst ? i : i + 1];
-        const granuleByte = binary[trackFirst ? i + 1 : i];
-        const granuleOffset = granuleByte >> 5;
-        const granuleCount = granuleByte & 0x1F;
-        if (trackNumber >= 40) {
-            // Not a TRSDOS disk.
-            return undefined;
-        }
-        extents.push(new TrsdosExtent(trackNumber, granuleOffset, granuleCount));
-    }
-    return extents;
-}
-/**
- * The Granule Allocation Table sector info.
- */
-class TrsdosGatInfo {
-    constructor(gat, password, name, date, autoCommand) {
-        this.gat = gat;
-        this.password = password;
-        this.name = name;
-        this.date = date;
-        this.autoCommand = autoCommand;
-    }
-}
-exports.TrsdosGatInfo = TrsdosGatInfo;
-/**
- * Converts a sector to a GAT object, or undefined if we don't think this is a GAT sector.
- */
-function decodeGatInfo(binary) {
-    // One byte for each track.
-    const gat = binary.subarray(0, 40);
-    // Top two bits don't map to anything, so must be zero.
-    for (const g of gat) {
-        if ((g & 0xC0) !== 0) {
-            return undefined;
-        }
-    }
-    // Assume big endian.
-    const password = (binary[0xCE] << 8) | binary[0xCF];
-    const name = decodeAscii(binary.subarray(0xD0, 0xD8));
-    const date = decodeAscii(binary.subarray(0xD8, 0xE0));
-    const autoCommand = binary[0xE0] === 0x0D ? "" : decodeAscii(binary.subarray(0xE0));
-    // Implies that this is not a TRSDOS disk.
-    if (name === undefined || date === undefined || autoCommand === undefined) {
-        return undefined;
-    }
-    return new TrsdosGatInfo(gat, password, name, date, autoCommand);
-}
-/**
- * The Hash Allocation Table sector info.
- */
-class TrsdosHitInfo {
-    constructor(hit, systemFiles) {
-        this.hit = hit;
-        this.systemFiles = systemFiles;
-    }
-}
-exports.TrsdosHitInfo = TrsdosHitInfo;
-/**
- * Decode the Hash Index Table sector, or undefined if we don't think this is a TRSDOS disk.
- */
-function decodeHitInfo(binary) {
-    // One byte for each file.
-    const hit = binary.subarray(0, 80);
-    const systemFiles = decodeExtents(binary, 0xE0, binary.length, false);
-    if (systemFiles === undefined) {
-        return undefined;
-    }
-    return new TrsdosHitInfo(hit, systemFiles);
-}
-/**
- * Single (valid) directory entry for a file.
- */
-class TrsdosDirEntry {
-    constructor(flags, month, year, lastSectorSize, lrl, filename, updatePassword, accessPassword, sectorCount, extents) {
-        this.flags = flags;
-        this.month = month;
-        this.year = year;
-        this.lastSectorSize = lastSectorSize;
-        this.lrl = lrl;
-        this.rawFilename = filename;
-        this.updatePassword = updatePassword;
-        this.accessPassword = accessPassword;
-        this.sectorCount = sectorCount;
-        this.extents = extents;
-    }
-    /**
-     * Get the protection level for the file.
-     */
-    getProtectionLevel() {
-        return (this.flags & 0x07);
-    }
-    /**
-     * Whether the file is hidden in a directory listing.
-     */
-    isHidden() {
-        return (this.flags & 0x08) !== 0;
-    }
-    /**
-     * Whether the file has an entry in the HIT table. This bit is set to 0 when
-     * deleting a file.
-     */
-    isActive() {
-        return (this.flags & 0x10) !== 0;
-    }
-    /**
-     * Whether there should be limitations to how many times you can copy this file.
-     * Other docs (maybe for LDOS) say that this indicates "Partitioned Data Set".
-     */
-    hasBackupLimitation() {
-        return (this.flags & 0x20) !== 0;
-    }
-    /**
-     * Whether this is a system file (as opposed to user file).
-     */
-    isSystemFile() {
-        return (this.flags & 0x40) !== 0;
-    }
-    /**
-     * Whether this is an extended entry (as opposed to primary entry). Each entry can
-     * only encode four extents, so subsequent extents are stored in extended entries.
-     * TODO this says max four extents, but we have space for 13 extents in the binary.
-     */
-    isExtendedEntry() {
-        return (this.flags & 0x80) !== 0;
-    }
-    getFlagsString() {
-        const parts = [];
-        parts.push(trsdosProtectionLevelToString(this.getProtectionLevel()));
-        if (this.isHidden()) {
-            parts.push("hidden");
-        }
-        if (!this.isActive()) {
-            // Should never happen.
-            parts.push("inactive");
-        }
-        if (this.hasBackupLimitation()) {
-            parts.push("limits");
-        }
-        if (this.isSystemFile()) {
-            parts.push("system");
-        }
-        if (this.isExtendedEntry()) {
-            parts.push("extended");
-        }
-        return "[" + parts.join(",") + "]";
-    }
-    /**
-     * Get the basename (part before the period) of the filename.
-     */
-    getBasename() {
-        return this.rawFilename.substr(0, 8).trim();
-    }
-    /**
-     * Get the extension of the filename.
-     */
-    getExtension() {
-        return this.rawFilename.substr(8).trim();
-    }
-    /**
-     * Get the full filename (without the internal spaces of the raw filename). If the
-     * file has an extension, it will be preceded by the specified separator.
-     */
-    getFilename(extensionSeparator) {
-        const extension = this.getExtension();
-        return this.getBasename() + (extension === "" ? "" : extensionSeparator + extension);
-    }
-    /**
-     * Return the size in bytes.
-     */
-    getSize() {
-        return this.sectorCount * BYTES_PER_SECTOR + this.lastSectorSize;
-    }
-    /**
-     * Return the date in MM/YY format.
-     */
-    getDateString() {
-        return this.month.toString().padStart(2, "0") + "/" + this.year.toString().padStart(2, "0");
-    }
-    /**
-     * Return the date as an object.
-     */
-    getDate() {
-        return new Date(1900 + this.year, this.month - 1);
-    }
-}
-exports.TrsdosDirEntry = TrsdosDirEntry;
-/**
- * Decodes a directory entry from a 48-byte chunk, or undefined if the directory entry is empty.
- */
-function decodeDirEntry(binary) {
-    const flags = binary[0];
-    // Check "active" bit. Setting this to zero is how files are deleted. Also check empty filename.
-    if ((flags & 0x10) === 0 || binary[5] === 0) {
-        return undefined;
-    }
-    const month = binary[1];
-    const year = binary[2];
-    const lastSectorSize = binary[3];
-    const lrl = ((binary[4] - 1) & 0xFF) + 1; // 0 -> 256.
-    const filename = decodeAscii(binary.subarray(5, 16));
-    // Not sure how to convert these two into a number. Just use big endian.
-    const updatePassword = (binary[16] << 8) | binary[17];
-    const accessPassword = (binary[18] << 8) | binary[19];
-    // Little endian.
-    const sectorCount = (binary[21] << 8) | binary[20];
-    const extents = decodeExtents(binary, 22, binary.length, true);
-    if (filename === undefined || extents === undefined) {
-        // This signals empty directory, but really should imply a non-TRSDOS disk.
-        return undefined;
-    }
-    return new TrsdosDirEntry(flags, month, year, lastSectorSize, lrl, filename, updatePassword, accessPassword, sectorCount, extents);
-}
-/**
- * A decoded TRSDOS diskette.
- */
-class Trsdos {
-    constructor(disk, gatInfo, hitInfo, dirEntries) {
-        this.disk = disk;
-        this.gatInfo = gatInfo;
-        this.hitInfo = hitInfo;
-        this.dirEntries = dirEntries;
-    }
-    /**
-     * Read the binary for a file on the diskette.
-     */
-    readFile(dirEntry) {
-        const parts = [];
-        let sectorCount = dirEntry.sectorCount + (dirEntry.lastSectorSize > 0 ? 1 : 0);
-        for (const extent of dirEntry.extents) {
-            let trackNumber = extent.trackNumber;
-            let sectorNumber = extent.granuleOffset * SECTORS_PER_GRANULE + 1;
-            for (let i = 0; i < extent.granuleCount * SECTORS_PER_GRANULE && sectorCount > 0; i++, sectorNumber++, sectorCount--) {
-                if (sectorNumber > SECTORS_PER_TRACK) {
-                    // Move to the next track.
-                    sectorNumber -= SECTORS_PER_TRACK;
-                    trackNumber += 1;
-                }
-                const sector = this.disk.readSector(trackNumber, FloppyDisk_1.Side.FRONT, sectorNumber);
-                if (sector === undefined) {
-                    console.log(`Sector couldn't be read ${trackNumber}, ${sectorNumber}`);
-                    // TODO
-                }
-                else {
-                    // TODO check deleted?
-                    if (sector.crcError) {
-                        console.log("Sector has CRC error");
-                    }
-                    if (sector.deleted) {
-                        // console.log("Sector " + sectorNumber + " is deleted");
-                    }
-                    parts.push(sector.data);
-                }
-            }
-        }
-        // Clip last sector.
-        if (parts.length > 0 && dirEntry.lastSectorSize > 0) {
-            parts[parts.length - 1] = parts[parts.length - 1].subarray(0, dirEntry.lastSectorSize);
-        }
-        return teamten_ts_utils_1.concatByteArrays(parts);
-    }
-}
-exports.Trsdos = Trsdos;
-/**
- * Decode a TRSDOS diskette, or return undefined if this does not look like such a diskette.
- */
-function decodeTrsdos(disk) {
-    // Decode Granule Allocation Table sector.
-    const gatSector = disk.readSector(17, FloppyDisk_1.Side.FRONT, 1);
-    if (gatSector === undefined || gatSector.deleted) {
-        return undefined;
-    }
-    const gatInfo = decodeGatInfo(gatSector.data);
-    if (gatInfo === undefined) {
-        return undefined;
-    }
-    // Decode Hash Index Table sector.
-    const hitSector = disk.readSector(17, FloppyDisk_1.Side.FRONT, 2);
-    if (hitSector === undefined || hitSector.deleted) {
-        return undefined;
-    }
-    const hitInfo = decodeHitInfo(hitSector.data);
-    if (hitInfo === undefined) {
-        return undefined;
-    }
-    // Decode directory entries.
-    const dirEntries = [];
-    for (let k = 0; k < 16; k++) {
-        const dirSector = disk.readSector(17, FloppyDisk_1.Side.FRONT, k + 3);
-        if (dirSector !== undefined) {
-            const tandy = decodeAscii(dirSector.data.subarray(5 * DIR_ENTRY_LENGTH));
-            if (tandy !== EXPECTED_TANDY) {
-                console.error(`Expected "${EXPECTED_TANDY}", got "${tandy}"`);
-                return undefined;
-            }
-            for (let j = 0; j < 5; j++) {
-                const dirEntry = decodeDirEntry(dirSector.data.subarray(j * DIR_ENTRY_LENGTH, (j + 1) * DIR_ENTRY_LENGTH));
-                if (dirEntry !== undefined) {
-                    dirEntries.push(dirEntry);
-                }
-            }
-        }
-    }
-    return new Trsdos(disk, gatInfo, hitInfo, dirEntries);
-}
-exports.decodeTrsdos = decodeTrsdos;
-
-
-/***/ }),
-/* 57 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16234,8 +16598,8 @@ exports.decodeTrsdos = decodeTrsdos;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FloppyDiskController = void 0;
-const trs80_base_1 = __webpack_require__(15);
-const strongly_typed_events_1 = __webpack_require__(58);
+const trs80_base_1 = __webpack_require__(3);
+const strongly_typed_events_1 = __webpack_require__(60);
 const z80_base_1 = __webpack_require__(6);
 const EventScheduler_1 = __webpack_require__(32);
 // Whether this controller supports writing.
@@ -16764,7 +17128,7 @@ exports.FloppyDiskController = FloppyDiskController;
 
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16789,21 +17153,21 @@ Object.defineProperty(exports, "DispatchError", { enumerable: true, get: functio
 Object.defineProperty(exports, "PromiseSubscription", { enumerable: true, get: function () { return ste_core_1.PromiseSubscription; } });
 Object.defineProperty(exports, "PromiseDispatcherBase", { enumerable: true, get: function () { return ste_core_1.PromiseDispatcherBase; } });
 Object.defineProperty(exports, "HandlingBase", { enumerable: true, get: function () { return ste_core_1.HandlingBase; } });
-var ste_events_1 = __webpack_require__(68);
+var ste_events_1 = __webpack_require__(70);
 Object.defineProperty(exports, "EventDispatcher", { enumerable: true, get: function () { return ste_events_1.EventDispatcher; } });
 Object.defineProperty(exports, "EventHandlingBase", { enumerable: true, get: function () { return ste_events_1.EventHandlingBase; } });
 Object.defineProperty(exports, "EventList", { enumerable: true, get: function () { return ste_events_1.EventList; } });
 Object.defineProperty(exports, "NonUniformEventList", { enumerable: true, get: function () { return ste_events_1.NonUniformEventList; } });
-var ste_simple_events_1 = __webpack_require__(71);
+var ste_simple_events_1 = __webpack_require__(73);
 Object.defineProperty(exports, "SimpleEventDispatcher", { enumerable: true, get: function () { return ste_simple_events_1.SimpleEventDispatcher; } });
 Object.defineProperty(exports, "SimpleEventHandlingBase", { enumerable: true, get: function () { return ste_simple_events_1.SimpleEventHandlingBase; } });
 Object.defineProperty(exports, "SimpleEventList", { enumerable: true, get: function () { return ste_simple_events_1.SimpleEventList; } });
 Object.defineProperty(exports, "NonUniformSimpleEventList", { enumerable: true, get: function () { return ste_simple_events_1.NonUniformSimpleEventList; } });
-var ste_signals_1 = __webpack_require__(74);
+var ste_signals_1 = __webpack_require__(76);
 Object.defineProperty(exports, "SignalDispatcher", { enumerable: true, get: function () { return ste_signals_1.SignalDispatcher; } });
 Object.defineProperty(exports, "SignalHandlingBase", { enumerable: true, get: function () { return ste_signals_1.SignalHandlingBase; } });
 Object.defineProperty(exports, "SignalList", { enumerable: true, get: function () { return ste_signals_1.SignalList; } });
-var ste_promise_events_1 = __webpack_require__(76);
+var ste_promise_events_1 = __webpack_require__(78);
 Object.defineProperty(exports, "PromiseEventDispatcher", { enumerable: true, get: function () { return ste_promise_events_1.PromiseEventDispatcher; } });
 Object.defineProperty(exports, "PromiseEventHandlingBase", { enumerable: true, get: function () { return ste_promise_events_1.PromiseEventHandlingBase; } });
 Object.defineProperty(exports, "PromiseEventList", { enumerable: true, get: function () { return ste_promise_events_1.PromiseEventList; } });
@@ -16812,7 +17176,7 @@ var ste_promise_signals_1 = __webpack_require__(29);
 Object.defineProperty(exports, "PromiseSignalDispatcher", { enumerable: true, get: function () { return ste_promise_signals_1.PromiseSignalDispatcher; } });
 Object.defineProperty(exports, "PromiseSignalHandlingBase", { enumerable: true, get: function () { return ste_promise_signals_1.PromiseSignalHandlingBase; } });
 Object.defineProperty(exports, "PromiseSignalList", { enumerable: true, get: function () { return ste_promise_signals_1.PromiseSignalList; } });
-var ste_promise_simple_events_1 = __webpack_require__(81);
+var ste_promise_simple_events_1 = __webpack_require__(83);
 Object.defineProperty(exports, "PromiseSimpleEventDispatcher", { enumerable: true, get: function () { return ste_promise_simple_events_1.PromiseSimpleEventDispatcher; } });
 Object.defineProperty(exports, "PromiseSimpleEventHandlingBase", { enumerable: true, get: function () { return ste_promise_simple_events_1.PromiseSimpleEventHandlingBase; } });
 Object.defineProperty(exports, "PromiseSimpleEventList", { enumerable: true, get: function () { return ste_promise_simple_events_1.PromiseSimpleEventList; } });
@@ -16820,7 +17184,7 @@ Object.defineProperty(exports, "NonUniformPromiseSimpleEventList", { enumerable:
 
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16975,7 +17339,7 @@ exports.DispatcherBase = DispatcherBase;
 
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16998,7 +17362,7 @@ exports.DispatchError = DispatchError;
 
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17087,7 +17451,7 @@ exports.DispatcherWrapper = DispatcherWrapper;
 
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17126,7 +17490,7 @@ exports.EventListBase = EventListBase;
 
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17152,7 +17516,7 @@ exports.EventManagement = EventManagement;
 
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17228,7 +17592,7 @@ exports.HandlingBase = HandlingBase;
 
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17281,7 +17645,7 @@ exports.PromiseDispatcherBase = PromiseDispatcherBase;
 
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17330,7 +17694,7 @@ exports.PromiseSubscription = PromiseSubscription;
 
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17383,7 +17747,7 @@ exports.Subscription = Subscription;
 
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17398,18 +17762,18 @@ exports.Subscription = Subscription;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NonUniformEventList = exports.EventList = exports.EventHandlingBase = exports.EventDispatcher = void 0;
-const EventDispatcher_1 = __webpack_require__(9);
+const EventDispatcher_1 = __webpack_require__(11);
 Object.defineProperty(exports, "EventDispatcher", { enumerable: true, get: function () { return EventDispatcher_1.EventDispatcher; } });
-const EventHandlingBase_1 = __webpack_require__(69);
+const EventHandlingBase_1 = __webpack_require__(71);
 Object.defineProperty(exports, "EventHandlingBase", { enumerable: true, get: function () { return EventHandlingBase_1.EventHandlingBase; } });
 const EventList_1 = __webpack_require__(24);
 Object.defineProperty(exports, "EventList", { enumerable: true, get: function () { return EventList_1.EventList; } });
-const NonUniformEventList_1 = __webpack_require__(70);
+const NonUniformEventList_1 = __webpack_require__(72);
 Object.defineProperty(exports, "NonUniformEventList", { enumerable: true, get: function () { return NonUniformEventList_1.NonUniformEventList; } });
 
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17430,14 +17794,14 @@ exports.EventHandlingBase = EventHandlingBase;
 
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NonUniformEventList = void 0;
-const EventDispatcher_1 = __webpack_require__(9);
+const EventDispatcher_1 = __webpack_require__(11);
 /**
  * Similar to EventList, but instead of TArgs, a map of event names ang argument types is provided with TArgsMap.
  */
@@ -17476,25 +17840,25 @@ exports.NonUniformEventList = NonUniformEventList;
 
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NonUniformSimpleEventList = exports.SimpleEventList = exports.SimpleEventHandlingBase = exports.SimpleEventDispatcher = void 0;
-const SimpleEventDispatcher_1 = __webpack_require__(10);
+const SimpleEventDispatcher_1 = __webpack_require__(12);
 Object.defineProperty(exports, "SimpleEventDispatcher", { enumerable: true, get: function () { return SimpleEventDispatcher_1.SimpleEventDispatcher; } });
-const SimpleEventHandlingBase_1 = __webpack_require__(72);
+const SimpleEventHandlingBase_1 = __webpack_require__(74);
 Object.defineProperty(exports, "SimpleEventHandlingBase", { enumerable: true, get: function () { return SimpleEventHandlingBase_1.SimpleEventHandlingBase; } });
-const NonUniformSimpleEventList_1 = __webpack_require__(73);
+const NonUniformSimpleEventList_1 = __webpack_require__(75);
 Object.defineProperty(exports, "NonUniformSimpleEventList", { enumerable: true, get: function () { return NonUniformSimpleEventList_1.NonUniformSimpleEventList; } });
 const SimpleEventList_1 = __webpack_require__(25);
 Object.defineProperty(exports, "SimpleEventList", { enumerable: true, get: function () { return SimpleEventList_1.SimpleEventList; } });
 
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17515,14 +17879,14 @@ exports.SimpleEventHandlingBase = SimpleEventHandlingBase;
 
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NonUniformSimpleEventList = void 0;
-const SimpleEventDispatcher_1 = __webpack_require__(10);
+const SimpleEventDispatcher_1 = __webpack_require__(12);
 /**
  * Similar to EventList, but instead of TArgs, a map of event names ang argument types is provided with TArgsMap.
  */
@@ -17561,7 +17925,7 @@ exports.NonUniformSimpleEventList = NonUniformSimpleEventList;
 
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17578,14 +17942,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignalList = exports.SignalHandlingBase = exports.SignalDispatcher = void 0;
 const SignalDispatcher_1 = __webpack_require__(26);
 Object.defineProperty(exports, "SignalDispatcher", { enumerable: true, get: function () { return SignalDispatcher_1.SignalDispatcher; } });
-const SignalHandlingBase_1 = __webpack_require__(75);
+const SignalHandlingBase_1 = __webpack_require__(77);
 Object.defineProperty(exports, "SignalHandlingBase", { enumerable: true, get: function () { return SignalHandlingBase_1.SignalHandlingBase; } });
 const SignalList_1 = __webpack_require__(27);
 Object.defineProperty(exports, "SignalList", { enumerable: true, get: function () { return SignalList_1.SignalList; } });
 
 
 /***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17606,7 +17970,7 @@ exports.SignalHandlingBase = SignalHandlingBase;
 
 
 /***/ }),
-/* 76 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17621,18 +17985,18 @@ exports.SignalHandlingBase = SignalHandlingBase;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NonUniformPromiseEventList = exports.PromiseEventList = exports.PromiseEventHandlingBase = exports.PromiseEventDispatcher = void 0;
-const PromiseEventDispatcher_1 = __webpack_require__(11);
+const PromiseEventDispatcher_1 = __webpack_require__(13);
 Object.defineProperty(exports, "PromiseEventDispatcher", { enumerable: true, get: function () { return PromiseEventDispatcher_1.PromiseEventDispatcher; } });
-const PromiseEventHandlingBase_1 = __webpack_require__(77);
+const PromiseEventHandlingBase_1 = __webpack_require__(79);
 Object.defineProperty(exports, "PromiseEventHandlingBase", { enumerable: true, get: function () { return PromiseEventHandlingBase_1.PromiseEventHandlingBase; } });
 const PromiseEventList_1 = __webpack_require__(28);
 Object.defineProperty(exports, "PromiseEventList", { enumerable: true, get: function () { return PromiseEventList_1.PromiseEventList; } });
-const NonUniformPromiseEventList_1 = __webpack_require__(78);
+const NonUniformPromiseEventList_1 = __webpack_require__(80);
 Object.defineProperty(exports, "NonUniformPromiseEventList", { enumerable: true, get: function () { return NonUniformPromiseEventList_1.NonUniformPromiseEventList; } });
 
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17653,14 +18017,14 @@ exports.PromiseEventHandlingBase = PromiseEventHandlingBase;
 
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NonUniformPromiseEventList = void 0;
-const PromiseEventDispatcher_1 = __webpack_require__(11);
+const PromiseEventDispatcher_1 = __webpack_require__(13);
 /**
  * Similar to EventList, but instead of TArgs, a map of event names ang argument types is provided with TArgsMap.
  */
@@ -17699,7 +18063,7 @@ exports.NonUniformPromiseEventList = NonUniformPromiseEventList;
 
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17750,7 +18114,7 @@ exports.PromiseSignalDispatcher = PromiseSignalDispatcher;
 
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17771,7 +18135,7 @@ exports.PromiseSignalHandlingBase = PromiseSignalHandlingBase;
 
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17786,25 +18150,25 @@ exports.PromiseSignalHandlingBase = PromiseSignalHandlingBase;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NonUniformPromiseSimpleEventList = exports.PromiseSimpleEventList = exports.PromiseSimpleEventHandlingBase = exports.PromiseSimpleEventDispatcher = void 0;
-const NonUniformPromiseSimpleEventList_1 = __webpack_require__(82);
+const NonUniformPromiseSimpleEventList_1 = __webpack_require__(84);
 Object.defineProperty(exports, "NonUniformPromiseSimpleEventList", { enumerable: true, get: function () { return NonUniformPromiseSimpleEventList_1.NonUniformPromiseSimpleEventList; } });
-const PromiseSimpleEventDispatcher_1 = __webpack_require__(12);
+const PromiseSimpleEventDispatcher_1 = __webpack_require__(14);
 Object.defineProperty(exports, "PromiseSimpleEventDispatcher", { enumerable: true, get: function () { return PromiseSimpleEventDispatcher_1.PromiseSimpleEventDispatcher; } });
-const PromiseSimpleEventHandlingBase_1 = __webpack_require__(83);
+const PromiseSimpleEventHandlingBase_1 = __webpack_require__(85);
 Object.defineProperty(exports, "PromiseSimpleEventHandlingBase", { enumerable: true, get: function () { return PromiseSimpleEventHandlingBase_1.PromiseSimpleEventHandlingBase; } });
 const PromiseSimpleEventList_1 = __webpack_require__(31);
 Object.defineProperty(exports, "PromiseSimpleEventList", { enumerable: true, get: function () { return PromiseSimpleEventList_1.PromiseSimpleEventList; } });
 
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NonUniformPromiseSimpleEventList = void 0;
-const PromiseSimpleEventDispatcher_1 = __webpack_require__(12);
+const PromiseSimpleEventDispatcher_1 = __webpack_require__(14);
 /**
  * Similar to EventList, but instead of TArgs, a map of event names ang argument types is provided with TArgsMap.
  */
@@ -17843,7 +18207,7 @@ exports.NonUniformPromiseSimpleEventList = NonUniformPromiseSimpleEventList;
 
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17864,256 +18228,14 @@ exports.PromiseSimpleEventHandlingBase = PromiseSimpleEventHandlingBase;
 
 
 /***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ControlPanel = void 0;
-const Utils_1 = __webpack_require__(2);
-const SettingsPanel_1 = __webpack_require__(33);
-const gCssPrefix = Utils_1.CSS_PREFIX + "-control-panel";
-const gScreenNodeCssClass = gCssPrefix + "-screen-node";
-const gPanelCssClass = gCssPrefix + "-panel";
-const gButtonCssClass = gCssPrefix + "-button";
-const gShowingOtherPanelCssClass = gCssPrefix + "-showing-other-panel";
-// https://thenounproject.com/search/?q=reset&i=3012384
-const RESET_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" xml:space="preserve">
-    <switch>
-        <g fill="white">
-            <path d="M5273.1,2400.1v-2c0-2.8-5-4-9.7-4s-9.7,1.3-9.7,4v2c0,1.8,0.7,3.6,2,4.9l5,4.9c0.3,0.3,0.4,0.6,0.4,1v6.4     c0,0.4,0.2,0.7,0.6,0.8l2.9,0.9c0.5,0.1,1-0.2,1-0.8v-7.2c0-0.4,0.2-0.7,0.4-1l5.1-5C5272.4,2403.7,5273.1,2401.9,5273.1,2400.1z      M5263.4,2400c-4.8,0-7.4-1.3-7.5-1.8v0c0.1-0.5,2.7-1.8,7.5-1.8c4.8,0,7.3,1.3,7.5,1.8C5270.7,2398.7,5268.2,2400,5263.4,2400z"/>
-            <path d="M5268.4,2410.3c-0.6,0-1,0.4-1,1c0,0.6,0.4,1,1,1h4.3c0.6,0,1-0.4,1-1c0-0.6-0.4-1-1-1H5268.4z"/>
-            <path d="M5272.7,2413.7h-4.3c-0.6,0-1,0.4-1,1c0,0.6,0.4,1,1,1h4.3c0.6,0,1-0.4,1-1C5273.7,2414.1,5273.3,2413.7,5272.7,2413.7z"/>
-            <path d="M5272.7,2417h-4.3c-0.6,0-1,0.4-1,1c0,0.6,0.4,1,1,1h4.3c0.6,0,1-0.4,1-1C5273.7,2417.5,5273.3,2417,5272.7,2417z"/>
-            <path d="M84.3,18C67.1,0.8,39.5,0.4,21.8,16.5l-4.1-4.1c-1.6-1.6-4-2.2-6.2-1.6c-2.2,0.7-3.9,2.5-4.3,4.7L2.6,36.9    c-0.4,2.1,0.2,4.2,1.7,5.7c1.5,1.5,3.6,2.1,5.7,1.7l21.4-4.5c1.2-0.3,2.3-0.9,3.1-1.7c0.7-0.7,1.3-1.6,1.6-2.6    c0.6-2.2,0-4.6-1.6-6.2l-3.9-3.9C43.5,14,63.1,14.5,75.4,26.8c12.8,12.8,12.8,33.6,0,46.4C62.6,86,41.8,86,29,73.2    c-4.1-4.1-7-9.2-8.5-14.8c-0.9-3.3-4.3-5.3-7.6-4.4c-3.3,0.9-5.3,4.3-4.4,7.6c2,7.7,6.1,14.8,11.8,20.4    c17.7,17.7,46.4,17.7,64.1,0C101.9,64.4,101.9,35.6,84.3,18z"/>
-        </g>
-    </switch>
-</svg>
-`;
-// https://thenounproject.com/search/?q=camera&i=1841396
-const CAMERA_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100">
-    <g fill="white">
-        <circle cx="50" cy="55.4" r="13.8"/>
-        <path d="M80.6,25.4H67.1l-1.8-7.2c-0.5-2.1-2.5-3.6-4.7-3.6H39.3c-2.2,0-4.1,1.5-4.7,3.6l-1.8,7.2H19.4C11.5,25.4,5,31.9,5,39.8V71   c0,7.9,6.5,14.4,14.4,14.4h61.2C88.5,85.4,95,78.9,95,71V39.8C95,31.9,88.5,25.4,80.6,25.4z M50,76.4c-11.6,0-21-9.4-21-21   s9.4-21,21-21s21,9.4,21,21S61.6,76.4,50,76.4z M81.4,40.3c-2,0-3.6-1.6-3.6-3.6c0-2,1.6-3.6,3.6-3.6s3.6,1.6,3.6,3.6   C85,38.7,83.4,40.3,81.4,40.3z"/>
-    </g>
-</svg>
-`;
-// https://thenounproject.com/search/?q=previous%20track&i=658409
-const PREVIOUS_TRACK_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -2 16 21" version="1.1">
-    <g fill="white" fill-rule="evenodd">
-        <g transform="translate(-320.000000, -618.000000)">
-            <path d="M330,628.032958 L330,634.00004 C330,634.545291 330.45191,635 331.009369,635 L332.990631,635 C333.556647,635 334,634.552303 334,634.00004 L334,618.99996 C334,618.454709 333.54809,618 332.990631,618 L331.009369,618 C330.443353,618 330,618.447697 330,618.99996 L330,624.967057 C329.894605,624.850473 329.775773,624.739153 329.643504,624.634441 L322.356496,618.865559 C321.054403,617.834736 320,618.3432 320,620.000122 L320,632.999878 C320,634.663957 321.055039,635.164761 322.356496,634.134441 L329.643504,628.365559 C329.775779,628.260841 329.894611,628.149527 330,628.032958 Z" transform="translate(327.000000, 626.500000) scale(-1, 1) translate(-327.000000, -626.500000) "/>
-        </g>
-    </g>
-</svg>
-`;
-// https://thenounproject.com/search/?q=settings&i=3593545
-const HARDWARE_SETTINGS_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="7 7 121 121" version="1.1">
-    <g fill="white" transform="translate(0,-161.53332)">
-        <path d="m 61.57997,173.33818 c -1.653804,0 -3.159177,0.77847 -4.132553,1.85984 -0.973402,1.08136 -1.513575,2.40442 -1.771491,3.76721 a 2.1609049,2.1609049 0 0 0 0,0.002 l -1.654678,8.74831 c -2.047981,0.67947 -4.038494,1.50768 -5.964476,2.48047 l -7.367508,-5.02347 c -1.145302,-0.78076 -2.462953,-1.33572 -3.916045,-1.41232 -1.4546,-0.0764 -3.068029,0.44118 -4.235926,1.60921 l -8.699209,8.69921 c -1.169405,1.16909 -1.685211,2.78351 -1.609725,4.23643 0.07501,1.45291 0.629259,2.7738 1.410256,3.92018 l 5.001762,7.336 c -0.9702,1.93582 -1.794192,3.93628 -2.468589,5.99392 l -8.740034,1.65417 c -1.362789,0.25787 -2.688378,0.79815 -3.769783,1.77147 -1.081405,0.97346 -1.859333,2.4815 -1.859333,4.13526 v 12.30262 c 0,1.65378 0.777928,3.1592 1.859333,4.13255 1.081405,0.97338 2.406994,1.51567 3.769783,1.77353 l 8.754004,1.6583 c 0.679477,2.04603 1.506088,4.03461 2.478379,5.95882 l -5.025522,7.3675 c -0.781606,1.14644 -1.334744,2.4664 -1.410256,3.91967 -0.07498,1.45325 0.439817,3.06745 1.609725,4.23643 l 8.699209,8.69921 c 1.1693,1.16941 2.782914,1.68325 4.235926,1.60713 1.452986,-0.0761 2.771908,-0.63037 3.918109,-1.41179 l 7.33597,-5.00022 c 1.9363,0.97001 3.937926,1.79294 5.996014,2.46702 l 1.654175,8.74004 c 0.257889,1.36284 0.798486,2.68843 1.771994,3.76981 0.973402,1.08138 2.478749,1.8593 4.132553,1.8593 H 73.88672 c 1.653805,0 3.159152,-0.77792 4.132554,-1.8593 0.973005,-1.0809 1.513999,-2.40554 1.771994,-3.76772 v -0.003 l 1.656212,-8.74778 c 2.048113,-0.67943 4.038415,-1.50768 5.964502,-2.48047 l 7.365445,5.02142 c 1.146095,0.78144 2.465096,1.33567 3.918108,1.41179 1.452905,0.0761 3.068585,-0.43786 4.237995,-1.60713 l 8.6992,-8.69921 c 1.16931,-1.16946 1.68395,-2.78551 1.60767,-4.23852 -0.076,-1.45301 -0.63074,-2.77196 -1.41232,-3.91811 l -5.00177,-7.33547 c 0.9705,-1.93617 1.79398,-3.93639 2.46857,-5.99445 l 8.74003,-1.65418 c 1.36271,-0.25794 2.68841,-0.80018 3.76981,-1.77352 1.0813,-0.97335 1.85931,-2.47881 1.85931,-4.13256 v -12.30312 c 0,-1.65378 -0.77801,-3.16127 -1.85931,-4.13465 -1.0809,-0.97292 -2.40562,-1.51344 -3.76772,-1.77146 l -8.74988,-1.65624 c -0.67918,-2.04684 -1.50825,-4.03585 -2.48046,-5.96088 l 5.02348,-7.36698 c 0.78118,-1.14583 1.33572,-2.46501 1.41232,-3.91811 0.077,-1.45309 -0.43952,-3.06905 -1.60973,-4.2385 l -8.69714,-8.69921 c -1.16962,-1.16891 -2.78461,-1.68557 -4.238494,-1.6092 -1.4528,0.0768 -2.770425,0.63186 -3.915542,1.41232 l -7.33597,5.00176 c -1.9363,-0.96998 -3.937926,-1.79297 -5.996014,-2.46703 l -1.656768,-8.74211 c -0.257783,-1.36269 -0.798062,-2.68582 -1.771464,-3.76721 -0.973297,-1.0814 -2.478749,-1.85984 -4.132554,-1.85984 z m 6.152595,34.74051 c 11.726704,0 21.185664,9.46065 21.185267,21.18735 0,11.7262 -9.459066,21.18696 -21.185267,21.18733 -11.726704,0 -21.187463,-9.4606 -21.18786,-21.18733 0,-11.72726 9.460653,-21.18772 21.18786,-21.18735 z"/>
-    </g>
-</svg>
-`;
-// https://thenounproject.com/search/?q=view&i=485540
-const VIEW_SETTINGS_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="20 20 60 60">
-    <g fill="white">
-        <path d="M80,48.6c-7.8-10.4-18.4-16.7-30-16.7c-11.6,0-22.2,6.4-30,16.7c-0.6,0.9-0.6,2,0,2.9c7.8,10.4,18.4,16.7,30,16.7  s22.2-6.4,30-16.7C80.7,50.6,80.7,49.4,80,48.6z M62.8,50.8c-0.4,6.4-5.6,11.6-12,12c-7.7,0.5-14.1-5.9-13.6-13.6  c0.4-6.4,5.6-11.6,12-12C56.9,36.7,63.3,43.1,62.8,50.8z M56.9,50.4c-0.2,3.4-3,6.2-6.4,6.4c-4.2,0.3-7.6-3.2-7.3-7.3  c0.2-3.4,3-6.2,6.4-6.4C53.7,42.8,57.2,46.3,56.9,50.4z"/>
-    </g>
-</svg>
-`;
-// https://thenounproject.com/search/?q=edit&i=1072354
-const EDIT_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -25 562 562">
-    <g fill="white">
-        <path d="M318.37,85.45L422.53,190.11,158.89,455,54.79,350.38ZM501.56,60.2L455.11,13.53a45.93,45.93,0,0,0-65.11,0L345.51,58.24,449.66,162.9l51.9-52.15A35.8,35.8,0,0,0,501.56,60.2ZM0.29,497.49a11.88,11.88,0,0,0,14.34,14.17l116.06-28.28L26.59,378.72Z"/>
-    </g>
-</svg>
-`;
-// https://thenounproject.com/search/?q=checkmark&i=1409439
-const CHECK_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <g fill="white">
-        <line x1="19.713" y1="55.055" x2="33.258" y2="68.6"/>
-        <path d="M92.059,19.7c-2.733-2.733-7.165-2.734-9.9,0L33.258,68.6L17.841,53.183c-2.734-2.732-7.166-2.733-9.899,0.001   c-2.734,2.733-2.734,7.165,0,9.899l20.367,20.366c1.367,1.366,3.158,2.05,4.95,2.05s3.583-0.684,4.95-2.05l53.85-53.85   C94.792,26.866,94.792,22.434,92.059,19.7z"/>
-    </g>
-</svg>
-
-`;
-// https://thenounproject.com/search/?q=close&i=1609004
-const CROSS_ICON = `
-<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="-5 -5 110 110">
-    <style type="text/css">
-        .st0 {
-            fill-rule: evenodd;
-            clip-rule: evenodd;
-        }
-    </style>
-    <path fill="white" class="st0" d="M61.2,50.5l32.1,32.1c3,3,3,7.7,0,10.7c-3,3-7.7,3-10.7,0L50.5,61.2L18.4,93.3c-3,3-7.7,3-10.7,0  c-3-3-3-7.7,0-10.7l32.1-32.1L7.7,18.4c-3-3-3-7.7,0-10.7s7.7-3,10.7,0l32.1,32.1L82.6,7.7c3-3,7.7-3,10.7,0c3,3,3,7.7,0,10.7  L61.2,50.5z"/>
-</svg>
-`;
-const GLOBAL_CSS = `
-.${gPanelCssClass} {
-    background-color: rgba(40, 40, 40, 0.8);
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    border-radius: 5px;
-    opacity: 0;
-    transition: opacity .20s ease-in-out;
-}
-
-.${gScreenNodeCssClass} {
-    /* Force the screen node to relative positioning. Hope that doesn't screw anything up. */
-    position: relative;
-}
-
-.${gScreenNodeCssClass}:hover .${gPanelCssClass} {
-    opacity: 1;
-}
-
-/* Hide the control panel if any other panel is showing (like settings). */
-.${gScreenNodeCssClass}.${gShowingOtherPanelCssClass}:hover .${gPanelCssClass} {
-    opacity: 0;
-}
-
-.${gButtonCssClass} {
-    display: block;
-    /* background-color: red; */
-    margin: 15px;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: opacity .05s ease-in-out, transform 0.05s ease-in-out;
-}
-
-.${gButtonCssClass}:hover {
-    opacity: 1;
-}
-
-.${gButtonCssClass}:active {
-    transform: scale(1.15);
-}
-`;
-/**
- * Control panel that hovers in the screen for doing things like resetting the computer.
- */
-class ControlPanel {
-    /**
-     * @param screenNode the node from the Trs80Screen object's getNode() method.
-     */
-    constructor(screenNode) {
-        // Make global CSS if necessary.
-        ControlPanel.configureStyle();
-        this.screenNode = screenNode;
-        screenNode.classList.add(gScreenNodeCssClass);
-        this.panelNode = document.createElement("div");
-        this.panelNode.classList.add(gPanelCssClass);
-        screenNode.appendChild(this.panelNode);
-    }
-    /**
-     * Generic function to add a button to the control panel.
-     */
-    addButton(iconSvg, title, callback) {
-        let icon = document.createElement("img");
-        icon.classList.add(gButtonCssClass);
-        icon.width = 30;
-        icon.height = 30;
-        icon.src = "data:image/svg+xml;base64," + btoa(iconSvg);
-        icon.title = title;
-        icon.addEventListener("click", callback);
-        this.panelNode.appendChild(icon);
-    }
-    /**
-     * Add a reset button.
-     */
-    addResetButton(callback) {
-        this.addButton(RESET_ICON, "Reboot the computer", callback);
-    }
-    /**
-     * Add a screenshot button.
-     */
-    addScreenshotButton(callback) {
-        this.addButton(CAMERA_ICON, "Take a screenshot", callback);
-    }
-    /**
-     * Add a tape rewind button.
-     */
-    addTapeRewindButton(callback) {
-        this.addButton(PREVIOUS_TRACK_ICON, "Rewind the cassette", callback);
-    }
-    /**
-     * Add a settings button.
-     */
-    addSettingsButton(settingsPanel) {
-        settingsPanel.onOpen = () => this.screenNode.classList.add(gShowingOtherPanelCssClass);
-        settingsPanel.onClose = () => this.screenNode.classList.remove(gShowingOtherPanelCssClass);
-        let iconSvg;
-        switch (settingsPanel.panelType) {
-            case SettingsPanel_1.PanelType.HARDWARE:
-            default:
-                iconSvg = HARDWARE_SETTINGS_ICON;
-                break;
-            case SettingsPanel_1.PanelType.VIEW:
-                iconSvg = VIEW_SETTINGS_ICON;
-                break;
-        }
-        let icon = document.createElement("img");
-        icon.classList.add(gButtonCssClass);
-        icon.src = "data:image/svg+xml;base64," + btoa(iconSvg);
-        icon.title = "Show the settings panel";
-        icon.addEventListener("click", () => settingsPanel.open());
-        this.panelNode.appendChild(icon);
-    }
-    /**
-     * Add a button to edit the program.
-     */
-    addEditorButton(callback) {
-        this.addButton(EDIT_ICON, "Edit the program (Ctrl-Enter)", callback);
-    }
-    /**
-     * Add a button to save.
-     */
-    addSaveButton(callback) {
-        this.addButton(CHECK_ICON, "Save (Ctrl-Enter)", callback);
-    }
-    /**
-     * Add a button to cancel.
-     */
-    addCancelButton(callback) {
-        this.addButton(CROSS_ICON, "Cancel", callback);
-    }
-    /**
-     * Make a global stylesheet for all TRS-80 emulators on this page.
-     */
-    static configureStyle() {
-        const styleId = gCssPrefix;
-        if (document.getElementById(styleId) !== null) {
-            // Already created.
-            return;
-        }
-        const node = document.createElement("style");
-        node.id = styleId;
-        node.innerHTML = GLOBAL_CSS;
-        document.head.appendChild(node);
-    }
-}
-exports.ControlPanel = ControlPanel;
-
-
-/***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProgressBar = void 0;
-const Utils_1 = __webpack_require__(2);
+const Utils_1 = __webpack_require__(8);
 const gCssPrefix = Utils_1.CSS_PREFIX + "-progress-bar";
 const gScreenNodeCssClass = gCssPrefix + "-screen-node";
 const gBarCssClass = gCssPrefix + "-bar";
@@ -18193,7 +18315,7 @@ exports.ProgressBar = ProgressBar;
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18235,16 +18357,16 @@ exports.CassettePlayer = CassettePlayer;
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Editor = void 0;
-const trs80_base_1 = __webpack_require__(15);
-const EditorFont_1 = __webpack_require__(91);
-const ControlPanel_1 = __webpack_require__(84);
+const trs80_base_1 = __webpack_require__(3);
+const EditorFont_1 = __webpack_require__(89);
+const ControlPanel_1 = __webpack_require__(34);
 /**
  * Allows the user to edit the in-memory Basic program directly in an HTML text widget,
  * writing the result back into memory.
@@ -18440,7 +18562,40 @@ exports.Editor = Editor;
 
 
 /***/ }),
-/* 88 */
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Another Man's Treasure font, for the editor.
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addCssFontToPage = void 0;
+const Utils_1 = __webpack_require__(8);
+const FONT_CSS_ID_NAME = Utils_1.CSS_PREFIX + "-css-font";
+// Kept in a different file so the long text isn't in our way.
+const FONT_CSS = `
+@font-face {
+    /* http://www.kreativekorp.com/software/fonts/index.shtml#retro */
+    font-family: "TreasureMIII64C";
+    src: url("data:font/ttf;base64,AAEAAAAKAIAAAwAgT1MvMo/ITg4AAAEoAAAAYGNtYXDl2APGAAAQrAAAAiRnbHlmfKdewwAAIfgAAZTcaGVhZAblu0AAAACsAAAANmhoZWEOdglCAAAA5AAAACRobXR42mHlKAAAAYgAAA8kbG9jYQMSP6AAABLQAAAPKG1heHAD+gDCAAABCAAAACBuYW1lQWtiywABttQAAAdncG9zdIeZwIkAAb48AAAeKAABAAAAAQAAQWWVvF8PPPUAAwlgAAAAAM9qOacAAAAAz2o5pwAA/BgI/AV4AAAADAAAAAEAAAAAAAEAAAV4/BgAAAlgAAAAAAj8AAEAAAAAAAAAAAAAAAAAAAPJAAEAAAPJAMAAMAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAwMjAfQABQAABLAJYAAABLAEsAlgAAAEsADIArwAAAAAAAAAAAAAAACAAACvUAfwygAAADAAAAAAS0JuUAAAAAD//QV4/BgAAAV4A+ggAAABAAAAAAPoBXgAAAAgAAAAAAAAAyAAAAAAAAADIAAAAyABkAMgAMgDIABkAyAAyAMgAGQDIABkAyABLAMgASwDIADIAyAAyAMgAMgDIAEsAyAAZAMgAZADIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAZADIAEsAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgASwDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAyAMgAMgDIAAAAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyABLAMgAGQDIABkAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAZADIADIAyAAZAMgAAADIAGQAyAAyAMgAGQDIABkAyAAyAMgAZADIADIAyAAyAMgAAADIABkAyAAZAMgAGQDIABkAyAAAAMgAGQDIADIAyAAyAMgAMgDIADIAyABLAMgAMgDIABkAyABkAMgASwDIAEsAyAAZAMgAAADIABkAyAAZAMgAGQDIABkAyAAyAMgAMgDIADIAyAAZAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyABLAMgASwDIAEsAyABLAMgAGQDIABkAyAAyAMgAMgDIADIAyAAZAMgAMgDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIAEsAyABLAMgASwDIAEsAyAAZAMgAGQDIADIAyAAyAMgAMgDIABkAyAAyAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyABLAMgAGQDIAEsAyAAyAMgAMgDIABkAyAAZAMgAMgDIABkAyAAZAMgAAADIADIAyAAZAMgAGQDIADIAyAAyAMgASwDIAGQAyAAyAMgAZADIAEsAyABLAMgAGQDIADIAyAAAAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAZAMgASwDIADIAyAAZAMgAMgDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIAEsAyAAyAMgASwDIABkAyAAyAMgAMgDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAAAMgAAADIAEsAyABLAMgASwDIAEsAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIAGQAyAAyAMgAGQDIAGQAyAAZAMgAGQDIADIAyAAyAMgAMgDIABkAyAAAAMgAGQDIAAAAyAAAAMgAAADIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIAAAAyAAZAMgAGQDIADIAyAAyAMgAMgDIADIAyAAyAMgAGQDIABkAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAZADIAAAAyAAAAMgAAADIAAAAyACvAMgAAADIAGQAyAAAAMgAAADIAAAAyAAAAMgAAADIAGQAyAAAAMgAAADIABkAyAAZAMgAGQDIABkAyAAAAMgAAADIAAAAyAAAAMgAMgJYABkCWAAZAMgAAADIAAAAyAAAAMgAMgDIADIAyAAAAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyABLAMgASwDIAEsAyAAyAMgASwDIAEsAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyABLAMgAGQDIADIAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAAAMgAGQDIAAAAyAAZAMgAAADIABkAyAAAAMgAGQDIAAAAyAAZAMgAAADIABkAyAAAAMgAMgDIABkAyAAZAMgAAADIABkAyAAAAMgAGQDIAAAAyAAZAMgAAADIADIAyAAZAMgAAADIABkAyAAAAMgASwDIADIAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAAAMgAAADIABkAyAAAAMgAAADIABkAyAAAAMgAAADIABkAyAAAAMgAAADIABkAyAAAAMgAAADIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyAAyAMgAGQDIADIAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAAAMgAMgDIABkAyAAAAMgAAADIAAAAyAAAAMgASwDIADIAyAAAAMgAGQDIAGQAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAZAMgAGQDIAGQAyAAZAMgAGQDIADIAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIAAAAyABkAMgAMgDIABkAyAAyAMgAGQDIABkAyABLAMgASwDIADIAyAAyAMgAMgDIAEsAyAAZAMgAZADIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAZADIAEsAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgASwDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAyAMgAMgDIAAAAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyABLAMgAGQDIABkAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAZADIADIAyAAZAMgAMgDIAAAAyAAAAMgAZADIAAAAyAAAAMgAAADIAAAAyAAAAMgAZADIAAAAyABkAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAZADIAAAAyABkAMgAAADIAAAAyAAAAMgAAADIAAAAyABkAMgAAADIAGQAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAZAMgAGQDIABkAyAAZAMgAAADIAAAAyAAyAMgAMgDIABkAyAAZAMgAGQDIAEsAyAAyAMgASwDIABkAyAAyAMgAMgDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIAAAAyAAZAMgAGQDIADIAyAAAAMgAGQDIAAAAyAAAAMgAGQDIAAAAyAAAAMgAMgDIAGQAyAAAAMgAMgDIADIAyAAyAMgAMgDIABkAyAAyAMgAGQDIABkAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAMgDIADIAyAAyAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgASwDIAEsAyAAyAMgASwDIABkAyAAyAMgASwDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIAEsAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIAEsAyABLAMgAMgDIAEsAyAAZAMgAMgDIAEsAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyABLAMgAGQDIABkAyAAyAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAAAAAAACAAAAAwAAABQAAwABAAAAFAAEAhAAAACAAIAABgAAAAAAfgEBATEBQgFTAWEBeAF+AZICJwI3AscCywLdA6EDziAVICcgMSA6ID0gRCCsIQYhFyEeISAhIiEnIgIiDSISIhUiHiIrIkgiYCJlIwIjByMYI34lnyXIJcol5iYcJh4mOyZCJmcnEzACMBEwnDD84X/2GfcF+wL/n//9//8AAAAAACAAoAExAUEBUgFgAXgBfQGSAiYCNwLGAsoC2AOQA6MgECAYIDAgOSA8IEQgrCEFIRchHiEgISIhJiICIgYiDyIV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AAEG+AABBzwAAQekAAEICAABCLgAAQkMAAEJhAABCbQAAQowAAEKYAABCsgAAQroAAELLAABC6QAAQwcAAEMhAABDPwAAQ1YAAENvAABDjQAAQ6IAAEO1AABDzQAAQ/AAAEP+AABEFgAARCsAAERBAABEWwAARHUAAESKAABEpAAARL0AAETSAABE7AAARQYAAEUyAABFTAAARWUAAEV/AABFjAAARaYAAEXAAABF1QAARdUAAEXdAABF5QAARe0AAEX1AABF/QAARgoAAEYUAABGHAAARikAAEYxAABGOwAARkMAAEZNAABGVwAARl8AAEZnAABGdAAARoEAAEaOAABGlgAARp4AAEarAABGtQAARsIAAEbTAABG4AAARu8AAEb5AABHBQAARxEAAEcbAABHIwAARzAAAEc9AABHSgAAR1cAAEdkAABHdQAAR4QAAEeMAABHmQAAR6EAAEerAABHtQAAR8EAAEfNAABH1wAAR98AAEfsAABH+QAASAYAAEgQAABIGgAASCkAAEg1AABIPwAASE4AAEhYAABIZAAASGwAAEh2AABIgAAASIgAAEikAABIwAAASOAAAEkAAABJPgAASXwAAEmhAABJxgAASeUAAEoFAABKJQAASkoAAEpsAABKjQAASqcAAErSAABK4wAASwoAAEsrAABLQAAAS1cAAEt+AABLpgAAS7sAAEvQAABL5QAAS/YAAEwOAABMLwAATFsAAEx9AABMoAAATMYAAEzZAABM6gAATQwAAE00AABNUgAATXEAAE2SAABNtAAATfYAAE4cAABOPwAATl0AAE6FAABO4wAATxgAAE9SAABPaQAAT48AAE/BAABP6gAAUA8AAFAgAABQRwAAUI4AAFCuAABQ0AAAUNwAAFD7AABRNAAAUW8AAFGWAABRwAAAUdYAAFHgAABR6gAAUgAAAFIIAABSHQAAUjIAAFJHAABSXAAAUmwAAFKDAABSlQAAUqMAAFKzAABSzQAAUtUAAFLxAABTCwAAUykAAFM5AABTVgAAU3MAAFOLAABTqQAAU8IAAFPOAABT7wAAVA4AAFQ1AABUUgAAVHoAAFSYAABUuQAAVNUAAFTvAABVBAAAVR0AAFUqAABVVAAAVXgAAFWZAABVuAAAVc0AAFXpAABWCAAAViEAAFZCAABWbgAAVpgAAFbEAABW4QAAVvg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/zgAAAAAAAD/OAAAAMgAAP84AAAAAgDIAAACvAV4AAsADwAACQ8AyADIAAAAZAAAAMgAAP84AAD/nAAA/zgB9AAA/gwAAAPoAAABkAAA/nAAAP84AAD+cAAAAZAAAP2o/zgAAADIAAAAAQAAAlgBkAV4AAMAAAkDAAAAAAGQAAACWAMgAAD84AABAZACWAMgBXgAAwAACQMDIP5wAAABkAJYAAADIAAAAAEAAAJYAyAFeAADAAAJAwAAAAADIAAAAlgDIAAA/OAAAQAA/zgBkAJYAAMAAAkDAAAAAAGQAAD/OAMgAAD84AABAAD/OAGQBXgAAwAACQMAAAAAAZAAAP84BkAAAPnAAAIAAP84AyAFeAADAAcAAAkHAAAAAAGQAAABkP5wAAABkP84AyAAAPzgAyAAAAMgAAAAAAABAAD/OAMgBXgABQAACQUAAAAAAyAAAP5wAAD/OAZAAAD84AAA/OAAAQGQ/zgDIAJYAAMAAAkDAyD+cAAAAZD/OAAAAyAAAAACAAD/OAMgBXgAAwAHAAAJBwAAAAABkAAAAZD+cAAAAZACWAMgAAD84PzgAAADIAAAAAAAAQGQ/zgDIAV4AAMAAAkDAyD+cAAAAZD/OAAABkAAAAABAAD/OAMgBXgABQAACQUAAAAAAyAAAP5wAAACWAMgAAD5wAAAAyAAAQAA/zgDIAJYAAMAAAkDAAAAAAMgAAD/OAMgAAD84AABAAD/OAMgBXgABQAACQUAAAAAAZAAAAGQAAD/OAZAAAD84AAA/OAAAQAA/zgDIAV4AAUAAAkFAAAAAAGQAAABkAAA/zgDIAAAAyAAAPnAAAEAAP84AyAFeAADAAAJAwAAAAADIAAA/zgGQAAA+cAAAQAA/BgBkP84AAMAAAkDAAABkAAA/nD/OAAA/OAAAAACAAD8GAGQBXgAAwAHAAAJBwAAAZAAAP5wAAAAAAGQAAD/OAAA/OAAAAZAAyAAAPzgAAAAAgAA/BgDIAV4AAMABwAACQcAAAGQAAD+cAMg/nAAAAGQ/zgAAPzgAAAGQAAAAyAAAAAAAAIAAPwYAyAFeAADAAcAAAkHAAABkAAA/nAAAAAAAyAAAP84AAD84AAABkADIAAA/OAAAAABAAD8GAGQAlgAAwAACQMAAAGQAAD+cAJYAAD5wAAAAAEAAPwYAZAFeAADAAAJAwAAAZAAAP5wBXgAAPagAAAAAgAA/BgDIAV4AAMABwAACQcAAAGQAAD+cAMg/nAAAAGQAlgAAPnAAAAGQAAAAyAAAAAAAAEAAPwYAyAFeAAFAAAJBQAAAyAAAP5wAAD+cAV4AAD84AAA+cAAAAACAAD8GAMgAlgAAwAHAAAJBwAAAZAAAP5wAyD+cAAAAZD/OAAA/OAAAAMgAAADIAAAAAAAAwAA/BgDIAV4AAMABwALAAAJCwAAAZAAAP5wAAAAAAGQAAABkP5wAAABkP84AAD84AAABkADIAAA/OD84AAAAyAAAAACAAD8GAMgBXgAAwAHAAAJBwAAAZAAAP5wAyD+cAAAAZD/OAAA/OAAAAMgAAAGQAAAAAAAAgAA/BgDIAV4AAMACQAACQkAAAGQAAD+cAAAAAADIAAA/nAAAP84AAD84AAABkADIAAA+cAAAAMgAAAAAQAA/BgDIAJYAAUAAAkFAAADIAAA/nAAAP5wAlgAAPzgAAD84AAAAAEAAPwYAyAFeAAHAAAJBwAAAZAAAAGQAAD+cAAA/nAFeAAA/OAAAPzgAAD84AAAAAEAAPwYAyAFeAAHAAAJBwAAAZAAAAGQAAD+cAAA/nACWAAAAyAAAPnAAAD84AAAAAEAAPwYAyAFeAAFAAAJBQAAAyAAAP5wAAD+cAV4AAD5wAAA/OAAAAABAZD8GAMg/zgAAwAACQMDIP5wAAABkPwYAAADIAAAAAIAAPwYAyAFeAADAAcAAAkHAAAAAAGQAAABkP5wAAABkAJYAyAAAPzg+cAAAAMgAAAAAAACAZD8GAMgBXgAAwAHAAAJBwMg/nAAAAGQAAD+cAAAAZD8GAAAAyAAAAMgAAADIAAAAAAAAgAA/BgDIAV4AAMABwAACQcAAAAAAyAAAAAA/nAAAAGQAlgDIAAA/OD5wAAAAyAAAAAAAAIAAPwYAyACWAADAAcAAAkHAAAAAAGQAAABkP5wAAABkP84AyAAAPzg/OAAAAMgAAAAAAACAAD8GAMgBXgAAwAHAAAJBwAAAAABkAAAAZD+cAAAAZD/OAZAAAD5wPzgAAADIAAAAAAAAwAA/BgDIAV4AAMABwALAAAJCwAAAAABkAAAAZD+cAAAAZAAAP5wAAABkP84AyAAAPzg/OAAAAMgAAADIAAAAyAAAAACAAD8GAMgBXgABQAJAAAJCQAAAAADIAAA/nAAAAGQ/nAAAAGQ/zgGQAAA/OAAAPzg/OAAAAMgAAAAAAABAZD8GAMgAlgAAwAACQMDIP5wAAABkPwYAAAGQAAAAAIAAPwYAyAFeAADAAcAAAkHAAAAAAGQAAABkP5wAAABkAJYAyAAAPzg+cAAAAZAAAAAAAABAZD8GAMgBXgAAwAACQMDIP5wAAABkPwYAAAJYAAAAAEAAPwYAyAFeAAFAAAJBQAAAAADIAAA/nAAAAJYAyAAAPagAAAGQAABAAD8GAMgAlgABQAACQUAAAAAAyAAAP5wAAD/OAMgAAD5wAAAAyAAAQAA/BgDIAV4AAcAAAkHAAAAAAGQAAABkAAA/nAAAP84BkAAAPzgAAD5wAAAAyAAAQAA/BgDIAV4AAcAAAkHAAAAAAGQAAABkAAA/nAAAP84AyAAAAMgAAD2oAAAAyAAAQAA/BgDIAV4AAUAAAkFAAAAAAMgAAD+cAAA/zgGQAAA9qAAAAMgAAEAAPwYAyD/OAADAAAJAwAAAyAAAPzg/zgAAPzgAAAAAgAA/BgDIAV4AAMABwAACQcAAAMgAAD84AAAAAABkAAA/zgAAPzgAAAGQAMgAAD84AAAAAIAAPwYAyAFeAADAAcAAAkHAAADIAAA/OADIP5wAAABkP84AAD84AAABkAAAAMgAAAAAAACAAD8GAMgBXgAAwAHAAAJBwAAAyAAAPzgAAAAAAMgAAD/OAAA/OAAAAZAAyAAAPzgAAAAAQAA/BgDIAJYAAUAAAkFAAABkAAAAZAAAPzgAlgAAPzgAAD84AAAAAEAAPwYAyAFeAAFAAAJBQAAAZAAAAGQAAD84AV4AAD5wAAA/OAAAAACAAD8GAMgBXgABQAJAAAJCQAAAZAAAAGQAAD84AMg/nAAAAGQAlgAAPzgAAD84AAABkAAAAMgAAAAAAABAAD8GAMgBXgABwAACQcAAAMgAAD+cAAAAZAAAPzgBXgAAPzgAAD84AAA/OAAAAABAAD8GAMgAlgABQAACQUAAAGQAAABkAAA/OD/OAAAAyAAAPnAAAAAAgAA/BgDIAV4AAUACQAACQkAAAGQAAABkAAA/OAAAAAAAZAAAP84AAADIAAA+cAAAAZAAyAAAPzgAAAAAQAA/BgDIAV4AAUAAAkFAAABkAAAAZAAAPzg/zgAAAZAAAD2oAAAAAEAAPwYAyAFeAAHAAAJBwAAAZAAAP5w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Q01lZGl1bUJpdHNOUGljYXM6IEFub3RoZXJNYW5zVHJlYXN1cmVNSUlJNjRDOiAyMDE0QW5vdGhlciBNYW5zIFRyZWFzdXJlIE1JSUkgNjRDVmVyc2lvbiAxLjBBbm90aGVyTWFuc1RyZWFzdXJlTUlJSTY0Q01hZGUgd2l0aCBCaXRzJ24nUGljYXMgYnkgS3JlYXRpdmUgU29mdHdhcmVodHRwOi8vd3d3LmtyZWF0aXZla29ycC5jb20vc29mdHdhcmUvYml0c25waWNhcy8AQwByAGUAYQB0AGUAZAAgAGIAeQAgAFIAZQBiAGUAYwBjAGEAIABCAGUAdAB0AGUAbgBjAG8AdQByAHQAIAB3AGkAdABoACAARgBvAG4AdABGAG8AcgBnAGUAIAAyAC4AMAAgACgAaAB0AHQAcAA6AC8ALwBmAG8AbgB0AGYAbwByAGcAZQAuAHMAZgAuAG4AZQB0ACkAQQBuAG8AdABoAGUAcgAgAE0AYQBuAHMAIABUAHIAZQBhAHMAdQByAGUAIABNAEkASQBJACAANgA0AEMATQBlAGQAaQB1AG0AQgBpAHQAcwBOAFAAaQBjAGEAcwA6ACAAQQBuAG8AdABoAGUAcgBNAGEAbgBzAFQAcgBlAGEAcwB1AHIAZQBNAEkASQBJADYANABDADoAIAAyADAAMQA0AEEAbgBvAHQAaABlAHIAIABNAGEAbgBzACAAVAByAGUAYQBzAHUAcgBlACAATQBJAEkASQAgADYANABDAFYAZQByAHMAaQBvAG4AIAAxAC4AMABBAG4AbwB0AGgAZQByAE0AYQBuAHMAVAByAGUAYQBzAHUAcgBlAE0ASQBJAEkANgA0AEMATQBhAGQAZQAgAHcAaQB0AGgAIABCAGkAdABzACcAbgAnAFAAaQBjAGEAcwAgAGIAeQAgAEsAcgBlAGEAdABpAHYAZQAgAFMAbwBmAHQAdwBhAHIAZQBoAHQAdABwADoALwAvAHcAdwB3AC4AawByAGUAYQB0AGkAdgBlAGsAbwByAHAALgBjAG8AbQAvAHMAbwBmAHQAdwBhAHIAZQAvAGIAaQB0AHMAbgBwAGkAYwBhAHMALwAAAgAAAAAAAP84AMgAAAAAAAAAAAAAAAAAAAAAAAAAAAPJAAAAAQACAAMABAAFAAYABwAIAAkACgALAAwADQAOAA8AEAARABIAEwAUABUAFgAXABgAGQAaABsAHAAdAB4AHwAgACEAIgAjACQAJQAmACcAKAApACoAKwAsAC0ALgAvADAAMQAyADMANAA1ADYANwA4ADkAOgA7ADwAPQA+AD8AQABBAEIAQwBEAEUARgBHAEgASQBKAEsATABNAE4ATwBQAFEAUgBTAFQAVQBWAFcAWABZAFoAWwBcAF0AXgBfAGAAYQCsAKMAhACFAL0AlgDoAIYAjgCLAJ0AqQCkAQIAigDaAIMAkwDyAPMAjQCXAIgBAwDeAPEAngCqAPUA9AD2AKIArQDJAMcArgBiAGMAkABkAMsAZQDIAMoAzwDMAM0AzgDpAGYA0wDQANEArwBnAPAAkQDWANQA1QBoAOsA7QCJAGoAaQBrAG0AbABuAKAAbwBxAHAAcgBzAHUAdAB2AHcA6gB4AHoAeQB7AH0AfAC4AKEAfwB+AIAAgQDsAO4AugEEAQUA1wDiAOMAsACxAOQA5QC7AOYA5wCmAQYBBwEIANgA4QEJAQoA2wDcAN0A4AELAN8BDAENAQ4BDwEQAREBEgETARQBFQEWARcBGAEZARoBGwEcAR0BHgEfASABIQEiASMBJAElASYBJwEoASkBKgErASwBLQEuAS8BMAExATIBMwE0ATUBNgE3ATgBOQE6AJsBOwE8AT0BPgE/AUABQQFCAUMBRAFFAUYBRwFIAUkBSgFLALIAswFMALYAtwDEAU0AtAC1AMUBTgCCAMIAhwFPAVABUQCrAVIAxgFTAL4AvwFUAVUBVgFXAVgBWQFaAVsBXACMAJ8BXQCYAKgBXgFfAWABYQFiAWMBZACaAWUAmQDvALwApQFmAWcBaACSAJwApwCPAJQAlQFpAWoBawFsAW0BbgFvAXABcQFyAXMBdAF1AXYBdwF4AXkBegF7AXwBfQF+AX8BgAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQALkBkQGSAZMBlAGVAZYBlwGYAZkBmgGbAZwBnQGeAZ8BoAGhAaIBowGkAaUBpgGnAagBqQGqAasBrAGtAa4BrwGwAbEBsgGzAbQBtQG2AbcBuAG5AboBuwG8Ab0BvgG/AcABwQHCAcMBxAHFAcYBxwHIAckBygHLAcwBzQHOAc8B0AHRAdIB0wHUAdUB1gHXAdgB2QHaAdsB3AHdAd4B3wHgAeEB4gHjAeQB5QHmAecB6AHpAeoB6wHsAe0B7gHvAfAB8QHyAfMB9AH1AfYB9wH4AfkB+gH7AfwB/QH+Af8CAAIBAgICAwIEAgUCBgIHAggCCQIKAgsCDAINAg4CDwIQAhECEgITAhQCFQIWAhcCGAIZAhoCGwIcAh0CHgIfAiACIQIiAiMCJAIlAiYCJwIoAikCKgIrAiwCLQIuAi8CMAIxAjICMwI0AjUCNgI3AjgCOQI6AjsCPAI9Aj4CPwJAAkECQgJDAkQCRQJGAkcCSAJJAkoCSwJMAk0CTgJPAlACUQJSAlMCVAJVAlYCVwJYAlkCWgJbAlwCXQJeAl8CYAJhAmICYwJkAmUCZgJnAmgCaQJqAmsCbAJtAm4CbwJwAnECcgJzAnQCdQJ2AncCeAJ5AnoCewJ8An0CfgJ/AoACgQKCAoMChAKFAoYChwKIAokCigKLAowCjQKOAo8CkAKRApICkwKUApUClgKXApgCmQKaApsCnAKdAp4CnwKgAqECogKjAqQCpQKmAqcCqAKpAqoCqwKsAq0CrgKvArACsQKyArMCtAK1ArYCtwK4ArkCugK7ArwCvQK+Ar8CwALBAsICwwLEAsUCxgLHAsgCyQLKAssCzALNAs4CzwLQAtEC0gLTAtQC1QLWAtcC2ALZAtoC2wLcAt0C3gLfAuAC4QLiAuMC5ALlAuYC5wLoAukC6gLrAuwC7QLuAu8C8ALxAvIC8wL0AvUC9gL3AvgC+QL6AvsC/AL9Av4C/wMAAwEDAgMDAwQDBQMGAwcDCAMJAwoDCwMMAw0DDgMPAxADEQMSAxMDFAMVAxYDFwMYAxkDGgMbAxwDHQMeAx8DIAMhAyIDIwMkAyUDJgMnAygDKQMqAysDLAMtAy4DLwMwAzEDMgMzAzQDNQM2AzcDOAM5AzoDOwM8Az0DPgM/A0ADQQNCA0MDRANFA0YDRwNIA0kDSgNLA0wDTQNOA08DUANRA1IDUwNUA1UDVgNXA1gDWQNaA1sDXANdA14DXwNgA2EDYgNjA2QDZQNmA2cDaANpA2oDawNsA20DbgNvA3ADcQNyA3MDdAN1A3YDdwN4A3kDegN7A3wDfQN+A38DgAOBA4IDgwOEA4UDhgOHA4gDiQOKA4sDjAONA44DjwOQA5EDkgOTA5QDlQOWAMAAwQOXA5gDmQOaA5sDnAOdA54DnwOgA6EDogOjA6QDpQOmA6cDqAOpA6oDqwOsA60DrgOvA7ADsQOyA7MDtAO1A7YDtwO4A7kDugO7A7wDvQO+A78DwAPBA8IDwwPEA8UDxgPHA8gDyQPKA8sDzAPNA84DzwPQA9ED0gPTA9QD1QPWBmh5cGhlbg5wZXJpb2RjZW50ZXJlZAdBbWFjcm9uB2FtYWNyb24HdW5pMDIyNgd1bmkwMjI3B3VuaTAyMzcHdW5pMDJDQQd1bmkwMkNCBXRpbGRlEWlvdGFkaWVyZXNpc3Rvbm9zBUFscGhhBEJldGEFR2FtbWEFRGVsdGEHRXBzaWxvbgRaZXRhA0V0YQVUaGV0YQRJb3RhBUthcHBhBkxhbWJkYQJNdQJOdQJYaQdPbWljcm9uAlBpA1JobwVTaWdtYQNUYXUHVXBzaWxvbgNQaGkDQ2hpA1BzaQVPbWVnYQxJb3RhZGllcmVzaXMPVXBzaWxvbmRpZXJlc2lzCmFscGhhdG9ub3MMZXBzaWxvbnRvbm9zCGV0YXRvbm9zCWlvdGF0b25vcxR1cHNpbG9uZGllcmVzaXN0b25vcwVhbHBoYQRiZXRhBWdhbW1hBWRlbHRhB2Vwc2lsb24EemV0YQNldGEFdGhldGEEaW90YQVrYXBwYQZsYW1iZGECbXUCbnUCeGkHb21pY3JvbgNyaG8Gc2lnbWExBXNpZ21hA3RhdQd1cHNpbG9uA3BoaQNjaGkDcHNpBW9tZWdhDGlvdGFkaWVyZXNpcw91cHNpbG9uZGllcmVzaXMMb21pY3JvbnRvbm9zDHVwc2lsb250b25vcwpvbWVnYXRvbm9zB3VuaTIwMTAHdW5pMjAxMQd1bmkyMDEyCWFmaWkwMDIwOA1xdW90ZXJldmVyc2VkB3VuaTIwMUYHdW5pMjAyMwd1bmkyMDI0B3VuaTIwMjUHdW5pMjAyNwd1bmkyMDMxCWV4Y2xhbWRibAd1bmkyMDNECGZyYWN0aW9uBEV1cm8JYWZpaTYxMjQ4B3VuaTIxMDYHdW5pMjExNwd1bmkyMTFFB3VuaTIxMjAHdW5pMjEyNwd1bmkyMjA3B3VuaTIyMDgHdW5pMjIwOQd1bmkyMjBBB3VuaTIyMEIHdW5pMjIwQwd1bmkyMjBEB3VuaTIyMTAHdW5pMjIxQgd1bmkyMjFDB3VuaTIyMUQHdW5pMjMwMQVob3VzZQd1bmkyMzA3B3VuaTIzMTgHdW5pMjM3RQd1cGJsb2NrB3VuaTI1ODEHdW5pMjU4Mgd1bmkyNTgzB2RuYmxvY2sHdW5pMjU4NQd1bmkyNTg2B3VuaTI1ODcFYmxvY2sHdW5pMjU4OQd1bmkyNThBB3VuaTI1OEIHbGZibG9jawd1bmkyNThEB3VuaTI1OEUHdW5pMjU4RgdydGJsb2NrB2x0c2hhZGUFc2hhZGUHZGtzaGFkZQd1bmkyNTk0B3VuaTI1OTUHdW5pMjU5Ngd1bmkyNTk3B3VuaTI1OTgHdW5pMjU5OQd1bmkyNTlBB3VuaTI1OUIHdW5pMjU5Qwd1bmkyNTlEB3VuaTI1OUUHdW5pMjU5Rgd1bmkyNUM2B3VuaTI1QzcHdW5pMjVDOAd1bmkyNUUyB3VuaTI1RTMHdW5pMjVFNAd1bmkyNUU1Cm9wZW5idWxsZXQHdW5pMjYxQwd1bmkyNjFFB3VuaTI2MzkJc21pbGVmYWNlDGludnNtaWxlZmFjZQZmZW1hbGUHdW5pMjY0MQRtYWxlBXNwYWRlB3VuaTI2NjEHdW5pMjY2MgRjbHViB3VuaTI2NjQFaGVhcnQHZGlhbW9uZAd1bmkyNjY3B3VuaTI3MTMHdW5pMzAwMQd1bmkzMDAyB3VuaTMwMEMHdW5pMzAwRAd1bmkzMDBFB3VuaTMwMEYHdW5pMzAxMAd1bmkzMDExB3VuaTMwOTkHdW5pMzA5QQd1bmkzMDlCB3VuaTMwOUMHdW5pMzBBMQd1bmkzMEEyB3VuaTMwQTMHdW5pMzBBNAd1bmkzMEE1B3VuaTMwQTYHdW5pMzBBNwd1bmkzMEE4B3VuaTMwQTkHdW5pMzBBQQd1bmkzMEFCB3VuaTMwQUMHdW5pMzBBRAd1bmkzMEFFB3VuaTMwQUYHdW5pMzBCMAd1bmkzMEIxB3VuaTMwQjIHdW5pMzBCMwd1bmkzMEI0B3VuaTMwQjUHdW5pMzBCNgd1bmkzMEI3B3VuaTMwQjgHdW5pMzBCOQd1bmkzMEJBB3VuaTMwQkIHdW5pMzBCQwd1bmkzMEJEB3VuaTMwQkUHdW5pMzBCRgd1bmkzMEMwB3VuaTMwQzEHdW5pMzBDMgd1bmkzMEMzB3VuaTMwQzQHdW5pMzBDNQd1bmkzMEM2B3VuaTMwQzcHdW5pMzBDOAd1bmkzMEM5B3VuaTMwQ0EHdW5pMzBDQgd1bmkzMENDB3VuaTMwQ0QHdW5pMzBDRQd1bmkzMENGB3VuaTMwRDAHdW5pMzBEMQd1bmkzMEQyB3VuaTMwRDMHdW5pMzBENAd1bmkzMEQ1B3VuaTMwRDYHdW5pMzBENwd1bmkzMEQ4B3VuaTMwRDkHdW5pMzBEQQd1bmkzMERCB3VuaTMwREMHdW5pMzBERAd1bmkzMERFB3VuaTMwREYHdW5pMzBFMAd1bmkzMEUxB3VuaTMwRTIHdW5pMzBFMwd1bmkzMEU0B3VuaTMwRTUHdW5pMzBFNgd1bmkzMEU3B3VuaTMwRTgHdW5pMzBFOQd1bmkzMEVBB3VuaTMwRUIHdW5pMzBFQwd1bmkzMEVEB3VuaTMwRUUHdW5pMzBFRgd1bmkzMEYwB3VuaTMwRjEHdW5pMzBGMgd1bmkzMEYzB3VuaTMwRjQHdW5pMzBGNQd1bmkzMEY2B3VuaTMwRjcHdW5pMzBGOAd1bmkzMEY5B3VuaTMwRkEHdW5pMzBGQgd1bmkzMEZDB3VuaUUwMDAHdW5pRTAwMQd1bmlFMDAyB3VuaUUwMDMHdW5pRTAwNAd1bmlFMDA1B3VuaUUwMDYHdW5pRTAwNwd1bmlFMDA4B3VuaUUwMDkHdW5pRTAwQQd1bmlFMDBCB3VuaUUwMEMHdW5pRTAwRAd1bmlFMDBFB3VuaUUwMEYHdW5pRTAxMAd1bmlFMDExB3VuaUUwMTIHdW5pRTAxMwd1bmlFMDE0B3VuaUUwMTUHdW5pRTAxNgd1bmlFMDE3B3VuaUUwMTgHdW5pRTAxOQd1bmlFMDFBB3VuaUUwMUIHdW5pRTAxQwd1bmlFMDFEB3VuaUUwMUUHdW5pRTAxRgd1bmlFMDIwB3VuaUUwMjEHdW5pRTAyMgd1bmlFMDIzB3VuaUUwMjQHdW5pRTAyNQd1bmlFMDI2B3VuaUUwMjcHdW5pRTAyOAd1bmlFMDI5B3VuaUUwMkEHdW5pRTAyQgd1bmlFMDJDB3VuaUUwMkQHdW5pRTAyRQd1bmlFMDJGB3VuaUUwMzAHdW5pRTAzMQd1bmlFMDMyB3VuaUUwMzMHdW5pRTAzNAd1bmlFMDM1B3VuaUUwMzYHdW5pRTAzNwd1bmlFMDM4B3VuaUUwMzkHdW5pRTAzQQd1bmlFMDNCB3VuaUUwM0MHdW5pRTAzRAd1bmlFMDNFB3VuaUUwM0YHdW5pRTA0MAd1bmlFMDQxB3VuaUUwNDIHdW5pRTA0Mwd1bmlFMDQ0B3VuaUUwNDUHdW5pRTA0Ngd1bmlFMDQ3B3VuaUUwNDgHdW5pRTA0OQd1bmlFMDRBB3VuaUUwNEIHdW5pRTA0Qwd1bmlFMDREB3VuaUUwNEUHdW5pRTA0Rgd1bmlFMDUwB3VuaUUwNTEHdW5pRTA1Mgd1bmlFMDUzB3VuaUUwNTQHdW5pRTA1NQd1bmlFMDU2B3VuaUUwNTcHdW5pRTA1OAd1bmlFMDU5B3VuaUUwNUEHdW5pRTA1Qgd1bmlFMDVDB3VuaUUwNUQHdW5pRTA1RQd1bmlFMDVGB3VuaUUwNjAHdW5pRTA2MQd1bmlFMDYyB3VuaUUwNjMHdW5pRTA2NAd1bmlFMDY1B3VuaUUwNjYHdW5pRTA2Nwd1bmlFMDY4B3VuaUUwNjkHdW5pRTA2QQd1bmlFMDZCB3VuaUUwNkMHdW5pRTA2RAd1bmlFMDZFB3VuaUUwNkYHdW5pRTA3MAd1bmlFMDcxB3VuaUUwNzIHdW5pRTA3Mwd1bmlFMDc0B3VuaUUwNzUHdW5pRTA3Ngd1bmlFMDc3B3VuaUUwNzgHdW5pRTA3OQd1bmlFMDdBB3VuaUUwN0IHdW5pRTA3Qwd1bmlFMDdEB3VuaUUwN0UHdW5pRTA3Rgd1bmlFMDgwB3VuaUUwODEHdW5pRTA4Mgd1bmlFMDgzB3VuaUUwODQHdW5pRTA4NQd1bmlFMDg2B3VuaUUwODcHdW5pRTA4OAd1bmlFMDg5B3VuaUUwOEEHdW5pRTA4Qgd1bmlFMDhDB3VuaUUwOEQHdW5pRTA4RQd1bmlFMDhGB3VuaUUwOTAHdW5pRTA5MQd1bmlFMDkyB3VuaUUwOTMHdW5pRTA5NAd1bmlFMDk1B3VuaUUwOTYHdW5pRTA5Nwd1bmlFMDk4B3VuaUUwOTkHdW5pRTA5QQd1bmlFMDlCB3VuaUUwOUMHdW5pRTA5RAd1bmlFMDlFB3VuaUUwOUYHdW5pRTBBMAd1bmlFMEExB3VuaUUwQTIHdW5pRTBBMwd1bmlFMEE0B3VuaUUwQTUHdW5pRTBBNgd1bmlFMEE3B3VuaUUwQTgHdW5pRTBBOQd1bmlFMEFBB3VuaUUwQUIHdW5pRTBBQwd1bmlFMEFEB3VuaUUwQUUHdW5pRTBBRgd1bmlFMEIwB3VuaUUwQjEHdW5pRTBCMgd1bmlFMEIzB3VuaUUwQjQHdW5pRTBCNQd1bmlFMEI2B3VuaUUwQjcHdW5pRTBCOAd1bmlFMEI5B3VuaUUwQkEHdW5pRTBCQgd1bmlFMEJDB3VuaUUwQkQHdW5pRTBCRQd1bmlFMEJGB3VuaUUwQzAHdW5pRTBDMQd1bmlFMEMyB3VuaUUwQzMHdW5pRTBDNAd1bmlFMEM1B3VuaUUwQzYHdW5pRTBDNwd1bmlFMEM4B3VuaUUwQzkHdW5pRTBDQQd1bmlFMENCB3VuaUUwQ0MHdW5pRTBDRAd1bmlFMENFB3VuaUUwQ0YHdW5pRTBEMAd1bmlFMEQxB3VuaUUwRDIHdW5pRTBEMwd1bmlFMEQ0B3VuaUUwRDUHdW5pRTBENgd1bmlFMEQ3B3VuaUUwRDgHdW5pRTBEOQd1bmlFMERBB3VuaUUwREIHdW5pRTBEQwd1bmlFMEREB3VuaUUwREUHdW5pRTBERgd1bmlFMEUwB3VuaUUwRTEHdW5pRTBFMgd1bmlFMEUzB3VuaUUwRTQHdW5pRTBFNQd1bmlFMEU2B3VuaUUwRTcHdW5pRTBFOAd1bmlFMEU5B3VuaUUwRUEHdW5pRTBFQgd1bmlFMEVDB3VuaUUwRUQHdW5pRTBFRQd1bmlFMEVGB3VuaUUwRjAHdW5pRTBGMQd1bmlFMEYyB3VuaUUwRjMHdW5pRTBGNAd1bmlFMEY1B3VuaUUwRjYHdW5pRTBGNwd1bmlFMEY4B3VuaUUwRjkHdW5pRTBGQQd1bmlFMEZCB3VuaUUwRkMHdW5pRTBGRAd1bmlFMEZFB3VuaUUwRkYHdW5pRTEwMAd1bmlFMTAxB3VuaUUxMDIHdW5pRTEwMwd1bmlFMTA0B3VuaUUxMDUHdW5pRTEwNgd1bmlFMTA3B3VuaUUxMDgHdW5pRTEwOQd1bmlFMTBBB3VuaUUxMEIHdW5pRTEwQwd1bmlFMTBEB3VuaUUxMEUHdW5pRTEwRgd1bmlFMTEwB3VuaUUxMTEHdW5pRTExMgd1bmlFMTEzB3VuaUUxMTQHdW5pRTExNQd1bmlFMTE2B3VuaUUxMTcHdW5pRTExOAd1bmlFMTE5B3VuaUUxMUEHdW5pRTExQgd1bmlFMTFDB3VuaUUxMUQHdW5pRTExRQd1bmlFMTFGB3VuaUUxMjAHdW5pRTEyMQd1bmlFMTIyB3VuaUUxMjMHdW5pRTEyNAd1bmlFMTI1B3VuaUUxMjYHdW5pRTEyNwd1bmlFMTI4B3VuaUUxMjkHdW5pRTEyQQd1bmlFMTJCB3VuaUUxMkMHdW5pRTEyRAd1bmlFMTJFB3VuaUUxMkYHdW5pRTEzMAd1bmlFMTMxB3VuaUUxMzIHdW5pRTEzMwd1bmlFMTM0B3VuaUUxMzUHdW5pRTEzNgd1bmlFMTM3B3VuaUUxMzgHdW5pRTEzOQd1bmlFMTNBB3VuaUUxM0IHdW5pRTEzQwd1bmlFMTNEB3VuaUUxM0UHdW5pRTEzRgd1bmlFMTQwB3VuaUUxNDEHdW5pRTE0Mgd1bmlFMTQzB3VuaUUxNDQHdW5pRTE0NQd1bmlFMTQ2B3VuaUUxNDcHdW5pRTE0OAd1bmlFMTQ5B3VuaUUxNEEHdW5pRTE0Qgd1bmlFMTRDB3VuaUUxNEQHdW5pRTE0RQd1bmlFMTRGB3VuaUUxNTAHdW5pRTE1MQd1bmlFMTUyB3VuaUUxNTMHdW5pRTE1NAd1bmlFMTU1B3VuaUUxNTYHdW5pRTE1Nwd1bmlFMTU4B3VuaUUxNTkHdW5pRTE1QQd1bmlFMTVCB3VuaUUxNUMHdW5pRTE1RAd1bmlFMTVFB3VuaUUxNUYHdW5pRTE2MAd1bmlFMTYxB3VuaUUxNjIHdW5pRTE2Mwd1bmlFMTY0B3VuaUUxNjUHdW5pRTE2Ngd1bmlFMTY3B3VuaUUxNjgHdW5pRTE2OQd1bmlFMTZBB3VuaUUxNkIHdW5pRTE2Qwd1bmlFMTZEB3VuaUUxNkUHdW5pRTE2Rgd1bmlFMTcwB3VuaUUxNzEHdW5pRTE3Mgd1bmlFMTczB3VuaUUxNzQHdW5pRTE3NQd1bmlFMTc2B3VuaUUxNzcHdW5pRTE3OAd1bmlFMTc5B3VuaUUxN0EHdW5pRTE3Qgd1bmlFMTdDB3VuaUUxN0QHdW5pRTE3RQd1bmlFMTdGB3VuaUY2MTgHdW5pRjYxOQd1bmlGNzAwB3VuaUY3MDEHdW5pRjcwMgd1bmlGNzAzB3VuaUY3MDQHdW5pRjcwNQd1bmlGRjYxB3VuaUZGNjIHdW5pRkY2Mwd1bmlGRjY0B3VuaUZGNjUHdW5pRkY2Ngd1bmlGRjY3B3VuaUZGNjgHdW5pRkY2OQd1bmlGRjZBB3VuaUZGNkIHdW5pRkY2Qwd1bmlGRjZEB3VuaUZGNkUHdW5pRkY2Rgd1bmlGRjcwB3VuaUZGNzEHdW5pRkY3Mgd1bmlGRjczB3VuaUZGNzQHdW5pRkY3NQd1bmlGRjc2B3VuaUZGNzcHdW5pRkY3OAd1bmlGRjc5B3VuaUZGN0EHdW5pRkY3Qgd1bmlGRjdDB3VuaUZGN0QHdW5pRkY3RQd1bmlGRjdGB3VuaUZGODAHdW5pRkY4MQd1bmlGRjgyB3VuaUZGODMHdW5pRkY4NAd1bmlGRjg1B3VuaUZGODYHdW5pRkY4Nwd1bmlGRjg4B3VuaUZGODkHdW5pRkY4QQd1bmlGRjhCB3VuaUZGOEMHdW5pRkY4RAd1bmlGRjhFB3VuaUZGOEYHdW5pRkY5MAd1bmlGRjkxB3VuaUZGOTIHdW5pRkY5Mwd1bmlGRjk0B3VuaUZGOTUHdW5pRkY5Ngd1bmlGRjk3B3VuaUZGOTgHdW5pRkY5OQd1bmlGRjlBB3VuaUZGOUIHdW5pRkY5Qwd1bmlGRjlEB3VuaUZGOUUHdW5pRkY5Rgd1bmlGRkZE");
+}
+`;
+/**
+ * Add the above CSS to the page if it's not already there. Idempotent.
+ */
+function addCssFontToPage() {
+    if (document.getElementById(FONT_CSS_ID_NAME) === null) {
+        const node = document.createElement("style");
+        node.id = FONT_CSS_ID_NAME;
+        node.innerHTML = FONT_CSS;
+        document.head.append(node);
+    }
+}
+exports.addCssFontToPage = addCssFontToPage;
+
+
+/***/ }),
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18456,12 +18611,12 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(__webpack_require__(89), exports);
-__exportStar(__webpack_require__(90), exports);
+__exportStar(__webpack_require__(91), exports);
+__exportStar(__webpack_require__(92), exports);
 
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18509,7 +18664,7 @@ exports.concatByteArrays = concatByteArrays;
 
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18585,39 +18740,6 @@ class ByteReader {
     }
 }
 exports.ByteReader = ByteReader;
-
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// Another Man's Treasure font, for the editor.
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.addCssFontToPage = void 0;
-const Utils_1 = __webpack_require__(2);
-const FONT_CSS_ID_NAME = Utils_1.CSS_PREFIX + "-css-font";
-// Kept in a different file so the long text isn't in our way.
-const FONT_CSS = `
-@font-face {
-    /* http://www.kreativekorp.com/software/fonts/index.shtml#retro */
-    font-family: "TreasureMIII64C";
-    src: url("data:font/ttf;base64,AAEAAAAKAIAAAwAgT1MvMo/ITg4AAAEoAAAAYGNtYXDl2APGAAAQrAAAAiRnbHlmfKdewwAAIfgAAZTcaGVhZAblu0AAAACsAAAANmhoZWEOdglCAAAA5AAAACRobXR42mHlKAAAAYgAAA8kbG9jYQMSP6AAABLQAAAPKG1heHAD+gDCAAABCAAAACBuYW1lQWtiywABttQAAAdncG9zdIeZwIkAAb48AAAeKAABAAAAAQAAQWWVvF8PPPUAAwlgAAAAAM9qOacAAAAAz2o5pwAA/BgI/AV4AAAADAAAAAEAAAAAAAEAAAV4/BgAAAlgAAAAAAj8AAEAAAAAAAAAAAAAAAAAAAPJAAEAAAPJAMAAMAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAwMjAfQABQAABLAJYAAABLAEsAlgAAAEsADIArwAAAAAAAAAAAAAAACAAACvUAfwygAAADAAAAAAS0JuUAAAAAD//QV4/BgAAAV4A+ggAAABAAAAAAPoBXgAAAAgAAAAAAAAAyAAAAAAAAADIAAAAyABkAMgAMgDIABkAyAAyAMgAGQDIABkAyABLAMgASwDIADIAyAAyAMgAMgDIAEsAyAAZAMgAZADIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAZADIAEsAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgASwDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAyAMgAMgDIAAAAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyABLAMgAGQDIABkAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAZADIADIAyAAZAMgAAADIAGQAyAAyAMgAGQDIABkAyAAyAMgAZADIADIAyAAyAMgAAADIABkAyAAZAMgAGQDIABkAyAAAAMgAGQDIADIAyAAyAMgAMgDIADIAyABLAMgAMgDIABkAyABkAMgASwDIAEsAyAAZAMgAAADIABkAyAAZAMgAGQDIABkAyAAyAMgAMgDIADIAyAAZAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyABLAMgASwDIAEsAyABLAMgAGQDIABkAyAAyAMgAMgDIADIAyAAZAMgAMgDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIAEsAyABLAMgASwDIAEsAyAAZAMgAGQDIADIAyAAyAMgAMgDIABkAyAAyAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyABLAMgAGQDIAEsAyAAyAMgAMgDIABkAyAAZAMgAMgDIABkAyAAZAMgAAADIADIAyAAZAMgAGQDIADIAyAAyAMgASwDIAGQAyAAyAMgAZADIAEsAyABLAMgAGQDIADIAyAAAAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAZAMgASwDIADIAyAAZAMgAMgDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIAEsAyAAyAMgASwDIABkAyAAyAMgAMgDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAAAMgAAADIAEsAyABLAMgASwDIAEsAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIAGQAyAAyAMgAGQDIAGQAyAAZAMgAGQDIADIAyAAyAMgAMgDIABkAyAAAAMgAGQDIAAAAyAAAAMgAAADIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIAAAAyAAZAMgAGQDIADIAyAAyAMgAMgDIADIAyAAyAMgAGQDIABkAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAZADIAAAAyAAAAMgAAADIAAAAyACvAMgAAADIAGQAyAAAAMgAAADIAAAAyAAAAMgAAADIAGQAyAAAAMgAAADIABkAyAAZAMgAGQDIABkAyAAAAMgAAADIAAAAyAAAAMgAMgJYABkCWAAZAMgAAADIAAAAyAAAAMgAMgDIADIAyAAAAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyABLAMgASwDIAEsAyAAyAMgASwDIAEsAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyABLAMgAGQDIADIAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAAAMgAGQDIAAAAyAAZAMgAAADIABkAyAAAAMgAGQDIAAAAyAAZAMgAAADIABkAyAAAAMgAMgDIABkAyAAZAMgAAADIABkAyAAAAMgAGQDIAAAAyAAZAMgAAADIADIAyAAZAMgAAADIABkAyAAAAMgASwDIADIAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAAAMgAAADIABkAyAAAAMgAAADIABkAyAAAAMgAAADIABkAyAAAAMgAAADIABkAyAAAAMgAAADIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyAAyAMgAGQDIADIAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAAAMgAMgDIABkAyAAAAMgAAADIAAAAyAAAAMgASwDIADIAyAAAAMgAGQDIAGQAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAZAMgAGQDIAGQAyAAZAMgAGQDIADIAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIAAAAyABkAMgAMgDIABkAyAAyAMgAGQDIABkAyABLAMgASwDIADIAyAAyAMgAMgDIAEsAyAAZAMgAZADIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAZADIAEsAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgASwDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAyAMgAMgDIAAAAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyABLAMgAGQDIABkAyABLAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAZADIADIAyAAZAMgAMgDIAAAAyAAAAMgAZADIAAAAyAAAAMgAAADIAAAAyAAAAMgAZADIAAAAyABkAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAZADIAAAAyABkAMgAAADIAAAAyAAAAMgAAADIAAAAyABkAMgAAADIAGQAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAZAMgAGQDIABkAyAAZAMgAAADIAAAAyAAyAMgAMgDIABkAyAAZAMgAGQDIAEsAyAAyAMgASwDIABkAyAAyAMgAMgDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIAAAAyAAZAMgAGQDIADIAyAAAAMgAGQDIAAAAyAAAAMgAGQDIAAAAyAAAAMgAMgDIAGQAyAAAAMgAMgDIADIAyAAyAMgAMgDIABkAyAAyAMgAGQDIABkAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIABkAyAAZAMgAMgDIADIAyAAyAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAMgDIADIAyAAyAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgASwDIAEsAyAAyAMgASwDIABkAyAAyAMgASwDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIAEsAyAAZAMgAGQDIADIAyAAZAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAMgDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIAEsAyABLAMgAMgDIAEsAyAAZAMgAMgDIAEsAyAAyAMgAMgDIADIAyAAyAMgAMgDIADIAyAAyAMgAMgDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyABLAMgAGQDIABkAyAAyAMgAGQDIADIAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAyAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAGQDIABkAyAAZAMgAAAAAAACAAAAAwAAABQAAwABAAAAFAAEAhAAAACAAIAABgAAAAAAfgEBATEBQgFTAWEBeAF+AZICJwI3AscCywLdA6EDziAVICcgMSA6ID0gRCCsIQYhFyEeISAhIiEnIgIiDSISIhUiHiIrIkgiYCJlIwIjByMYI34lnyXIJcol5iYcJh4mOyZCJmcnEzACMBEwnDD84X/2GfcF+wL/n//9//8AAAAAACAAoAExAUEBUgFgAXgBfQGSAiYCNwLGAsoC2AOQA6MgECAYIDAgOSA8IEQgrCEFIRchHiEgISIhJiICIgYiDyIV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AAEG+AABBzwAAQekAAEICAABCLgAAQkMAAEJhAABCbQAAQowAAEKYAABCsgAAQroAAELLAABC6QAAQwcAAEMhAABDPwAAQ1YAAENvAABDjQAAQ6IAAEO1AABDzQAAQ/AAAEP+AABEFgAARCsAAERBAABEWwAARHUAAESKAABEpAAARL0AAETSAABE7AAARQYAAEUyAABFTAAARWUAAEV/AABFjAAARaYAAEXAAABF1QAARdUAAEXdAABF5QAARe0AAEX1AABF/QAARgoAAEYUAABGHAAARikAAEYxAABGOwAARkMAAEZNAABGVwAARl8AAEZnAABGdAAARoEAAEaOAABGlgAARp4AAEarAABGtQAARsIAAEbTAABG4AAARu8AAEb5AABHBQAARxEAAEcbAABHIwAARzAAAEc9AABHSgAAR1cAAEdkAABHdQAAR4QAAEeMAABHmQAAR6EAAEerAABHtQAAR8EAAEfNAABH1wAAR98AAEfsAABH+QAASAYAAEgQAABIGgAASCkAAEg1AABIPwAASE4AAEhYAABIZAAASGwAAEh2AABIgAAASIgAAEikAABIwAAASOAAAEkAAABJPgAASXwAAEmhAABJxgAASeUAAEoFAABKJQAASkoAAEpsAABKjQAASqcAAErSAABK4wAASwoAAEsrAABLQAAAS1cAAEt+AABLpgAAS7sAAEvQAABL5QAAS/YAAEwOAABMLwAATFsAAEx9AABMoAAATMYAAEzZAABM6gAATQwAAE00AABNUgAATXEAAE2SAABNtAAATfYAAE4cAABOPwAATl0AAE6FAABO4wAATxgAAE9SAABPaQAAT48AAE/BAABP6gAAUA8AAFAgAABQRwAAUI4AAFCuAABQ0AAAUNwAAFD7AABRNAAAUW8AAFGWAABRwAAAUdYAAFHgAABR6gAAUgAAAFIIAABSHQAAUjIAAFJHAABSXAAAUmwAAFKDAABSlQAAUqMAAFKzAABSzQAAUtUAAFLxAABTCwAAUykAAFM5AABTVgAAU3MAAFOLAABTqQAAU8IAAFPOAABT7wAAVA4AAFQ1AABUUgAAVHoAAFSYAABUuQAAVNUAAFTvAABVBAAAVR0AAFUqAABVVAAAVXgAAFWZAABVuAAAVc0AAFXpAABWCAAAViEAAFZCAABWbgAAVpgAAFbEAABW4QAAVvg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/zgAAAAAAAD/OAAAAMgAAP84AAAAAgDIAAACvAV4AAsADwAACQ8AyADIAAAAZAAAAMgAAP84AAD/nAAA/zgB9AAA/gwAAAPoAAABkAAA/nAAAP84AAD+cAAAAZAAAP2o/zgAAADIAAAAAQAAAlgBkAV4AAMAAAkDAAAAAAGQAAACWAMgAAD84AABAZACWAMgBXgAAwAACQMDIP5wAAABkAJYAAADIAAAAAEAAAJYAyAFeAADAAAJAwAAAAADIAAAAlgDIAAA/OAAAQAA/zgBkAJYAAMAAAkDAAAAAAGQAAD/OAMgAAD84AABAAD/OAGQBXgAAwAACQMAAAAAAZAAAP84BkAAAPnAAAIAAP84AyAFeAADAAcAAAkHAAAAAAGQAAABkP5wAAABkP84AyAAAPzgAyAAAAMgAAAAAAABAAD/OAMgBXgABQAACQUAAAAAAyAAAP5wAAD/OAZAAAD84AAA/OAAAQGQ/zgDIAJYAAMAAAkDAyD+cAAAAZD/OAAAAyAAAAACAAD/OAMgBXgAAwAHAAAJBwAAAAABkAAAAZD+cAAAAZACWAMgAAD84PzgAAADIAAAAAAAAQGQ/zgDIAV4AAMAAAkDAyD+cAAAAZD/OAAABkAAAAABAAD/OAMgBXgABQAACQUAAAAAAyAAAP5wAAACWAMgAAD5wAAAAyAAAQAA/zgDIAJYAAMAAAkDAAAAAAMgAAD/OAMgAAD84AABAAD/OAMgBXgABQAACQUAAAAAAZAAAAGQAAD/OAZAAAD84AAA/OAAAQAA/zgDIAV4AAUAAAkFAAAAAAGQAAABkAAA/zgDIAAAAyAAAPnAAAEAAP84AyAFeAADAAAJAwAAAAADIAAA/zgGQAAA+cAAAQAA/BgBkP84AAMAAAkDAAABkAAA/nD/OAAA/OAAAAACAAD8GAGQBXgAAwAHAAAJBwAAAZAAAP5wAAAAAAGQAAD/OAAA/OAAAAZAAyAAAPzgAAAAAgAA/BgDIAV4AAMABwAACQcAAAGQAAD+cAMg/nAAAAGQ/zgAAPzgAAAGQAAAAyAAAAAAAAIAAPwYAyAFeAADAAcAAAkHAAABkAAA/nAAAAAAAyAAAP84AAD84AAABkADIAAA/OAAAAABAAD8GAGQAlgAAwAACQMAAAGQAAD+cAJYAAD5wAAAAAEAAPwYAZAFeAADAAAJAwAAAZAAAP5wBXgAAPagAAAAAgAA/BgDIAV4AAMABwAACQcAAAGQAAD+cAMg/nAAAAGQAlgAAPnAAAAGQAAAAyAAAAAAAAEAAPwYAyAFeAAFAAAJBQAAAyAAAP5wAAD+cAV4AAD84AAA+cAAAAACAAD8GAMgAlgAAwAHAAAJBwAAAZAAAP5wAyD+cAAAAZD/OAAA/OAAAAMgAAADIAAAAAAAAwAA/BgDIAV4AAMABwALAAAJCwAAAZAAAP5wAAAAAAGQAAABkP5wAAABkP84AAD84AAABkADIAAA/OD84AAAAyAAAAACAAD8GAMgBXgAAwAHAAAJBwAAAZAAAP5wAyD+cAAAAZD/OAAA/OAAAAMgAAAGQAAAAAAAAgAA/BgDIAV4AAMACQAACQkAAAGQAAD+cAAAAAADIAAA/nAAAP84AAD84AAABkADIAAA+cAAAAMgAAAAAQAA/BgDIAJYAAUAAAkFAAADIAAA/nAAAP5wAlgAAPzgAAD84AAAAAEAAPwYAyAFeAAHAAAJBwAAAZAAAAGQAAD+cAAA/nAFeAAA/OAAAPzgAAD84AAAAAEAAPwYAyAFeAAHAAAJBwAAAZAAAAGQAAD+cAAA/nACWAAAAyAAAPnAAAD84AAAAAEAAPwYAyAFeAAFAAAJBQAAAyAAAP5wAAD+cAV4AAD5wAAA/OAAAAABAZD8GAMg/zgAAwAACQMDIP5wAAABkPwYAAADIAAAAAIAAPwYAyAFeAADAAcAAAkHAAAAAAGQAAABkP5wAAABkAJYAyAAAPzg+cAAAAMgAAAAAAACAZD8GAMgBXgAAwAHAAAJBwMg/nAAAAGQAAD+cAAAAZD8GAAAAyAAAAMgAAADIAAAAAAAAgAA/BgDIAV4AAMABwAACQcAAAAAAyAAAAAA/nAAAAGQAlgDIAAA/OD5wAAAAyAAAAAAAAIAAPwYAyACWAADAAcAAAkHAAAAAAGQAAABkP5wAAABkP84AyAAAPzg/OAAAAMgAAAAAAACAAD8GAMgBXgAAwAHAAAJBwAAAAABkAAAAZD+cAAAAZD/OAZAAAD5wPzgAAADIAAAAAAAAwAA/BgDIAV4AAMABwALAAAJCwAAAAABkAAAAZD+cAAAAZAAAP5wAAABkP84AyAAAPzg/OAAAAMgAAADIAAAAyAAAAACAAD8GAMgBXgABQAJAAAJCQAAAAADIAAA/nAAAAGQ/nAAAAGQ/zgGQAAA/OAAAPzg/OAAAAMgAAAAAAABAZD8GAMgAlgAAwAACQMDIP5wAAABkPwYAAAGQAAAAAIAAPwYAyAFeAADAAcAAAkHAAAAAAGQAAABkP5wAAABkAJYAyAAAPzg+cAAAAZAAAAAAAABAZD8GAMgBXgAAwAACQMDIP5wAAABkPwYAAAJYAAAAAEAAPwYAyAFeAAFAAAJBQAAAAADIAAA/nAAAAJYAyAAAPagAAAGQAABAAD8GAMgAlgABQAACQUAAAAAAyAAAP5wAAD/OAMgAAD5wAAAAyAAAQAA/BgDIAV4AAcAAAkHAAAAAAGQAAABkAAA/nAAAP84BkAAAPzgAAD5wAAAAyAAAQAA/BgDIAV4AAcAAAkHAAAAAAGQAAABkAAA/nAAAP84AyAAAAMgAAD2oAAAAyAAAQAA/BgDIAV4AAUAAAkFAAAAAAMgAAD+cAAA/zgGQAAA9qAAAAMgAAEAAPwYAyD/OAADAAAJAwAAAyAAAPzg/zgAAPzgAAAAAgAA/BgDIAV4AAMABwAACQcAAAMgAAD84AAAAAABkAAA/zgAAPzgAAAGQAMgAAD84AAAAAIAAPwYAyAFeAADAAcAAAkHAAADIAAA/OADIP5wAAABkP84AAD84AAABkAAAAMgAAAAAAACAAD8GAMgBXgAAwAHAAAJBwAAAyAAAPzgAAAAAAMgAAD/OAAA/OAAAAZAAyAAAPzgAAAAAQAA/BgDIAJYAAUAAAkFAAABkAAAAZAAAPzgAlgAAPzgAAD84AAAAAEAAPwYAyAFeAAFAAAJBQAAAZAAAAGQAAD84AV4AAD5wAAA/OAAAAACAAD8GAMgBXgABQAJAAAJCQAAAZAAAAGQAAD84AMg/nAAAAGQAlgAAPzgAAD84AAABkAAAAMgAAAAAAABAAD8GAMgBXgABwAACQcAAAMgAAD+cAAAAZAAAPzgBXgAAPzgAAD84AAA/OAAAAABAAD8GAMgAlgABQAACQUAAAGQAAABkAAA/OD/OAAAAyAAAPnAAAAAAgAA/BgDIAV4AAUACQAACQkAAAGQAAABkAAA/OAAAAAAAZAAAP84AAADIAAA+cAAAAZAAyAAAPzgAAAAAQAA/BgDIAV4AAUAAAkFAAABkAAAAZAAAPzg/zgAAAZAAAD2oAAAAAEAAPwYAyAFeAAHAAAJBwAAAZAAAP5w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Q01lZGl1bUJpdHNOUGljYXM6IEFub3RoZXJNYW5zVHJlYXN1cmVNSUlJNjRDOiAyMDE0QW5vdGhlciBNYW5zIFRyZWFzdXJlIE1JSUkgNjRDVmVyc2lvbiAxLjBBbm90aGVyTWFuc1RyZWFzdXJlTUlJSTY0Q01hZGUgd2l0aCBCaXRzJ24nUGljYXMgYnkgS3JlYXRpdmUgU29mdHdhcmVodHRwOi8vd3d3LmtyZWF0aXZla29ycC5jb20vc29mdHdhcmUvYml0c25waWNhcy8AQwByAGUAYQB0AGUAZAAgAGIAeQAgAFIAZQBiAGUAYwBjAGEAIABCAGUAdAB0AGUAbgBjAG8AdQByAHQAIAB3AGkAdABoACAARgBvAG4AdABGAG8AcgBnAGUAIAAyAC4AMAAgACgAaAB0AHQAcAA6AC8ALwBmAG8AbgB0AGYAbwByAGcAZQAuAHMAZgAuAG4AZQB0ACkAQQBuAG8AdABoAGUAcgAgAE0AYQBuAHMAIABUAHIAZQBhAHMAdQByAGUAIABNAEkASQBJACAANgA0AEMATQBlAGQAaQB1AG0AQgBpAHQAcwBOAFAAaQBjAGEAcwA6ACAAQQBuAG8AdABoAGUAcgBNAGEAbgBzAFQAcgBlAGEAcwB1AHIAZQBNAEkASQBJADYANABDADoAIAAyADAAMQA0AEEAbgBvAHQAaABlAHIAIABNAGEAbgBzACAAVAByAGUAYQBzAHUAcgBlACAATQBJAEkASQAgADYANABDAFYAZQByAHMAaQBvAG4AIAAxAC4AMABBAG4AbwB0AGgAZQByAE0AYQBuAHMAVAByAGUAYQBzAHUAcgBlAE0ASQBJAEkANgA0AEMATQBhAGQAZQAgAHcAaQB0AGgAIABCAGkAdABzACcAbgAnAFAAaQBjAGEAcwAgAGIAeQAgAEsAcgBlAGEAdABpAHYAZQAgAFMAbwBmAHQAdwBhAHIAZQBoAHQAdABwADoALwAvAHcAdwB3AC4AawByAGUAYQB0AGkAdgBlAGsAbwByAHAALgBjAG8AbQAvAHMAbwBmAHQAdwBhAHIAZQAvAGIAaQB0AHMAbgBwAGkAYwBhAHMALwAAAgAAAAAAAP84AMgAAAAAAAAAAAAAAAAAAAAAAAAAAAPJAAAAAQACAAMABAAFAAYABwAIAAkACgALAAwADQAOAA8AEAARABIAEwAUABUAFgAXABgAGQAaABsAHAAdAB4AHwAgACEAIgAjACQAJQAmACcAKAApACoAKwAsAC0ALgAvADAAMQAyADMANAA1ADYANwA4ADkAOgA7ADwAPQA+AD8AQABBAEIAQwBEAEUARgBHAEgASQBKAEsATABNAE4ATwBQAFEAUgBTAFQAVQBWAFcAWABZAFoAWwBcAF0AXgBfAGAAYQCsAKMAhACFAL0AlgDoAIYAjgCLAJ0AqQCkAQIAigDaAIMAkwDyAPMAjQCXAIgBAwDeAPEAngCqAPUA9AD2AKIArQDJAMcArgBiAGMAkABkAMsAZQDIAMoAzwDMAM0AzgDpAGYA0wDQANEArwBnAPAAkQDWANQA1QBoAOsA7QCJAGoAaQBrAG0AbABuAKAAbwBxAHAAcgBzAHUAdAB2AHcA6gB4AHoAeQB7AH0AfAC4AKEAfwB+AIAAgQDsAO4AugEEAQUA1wDiAOMAsACxAOQA5QC7AOYA5wCmAQYBBwEIANgA4QEJAQoA2wDcAN0A4AELAN8BDAENAQ4BDwEQAREBEgETARQBFQEWARcBGAEZARoBGwEcAR0BHgEfASABIQEiASMBJAElASYBJwEoASkBKgErASwBLQEuAS8BMAExATIBMwE0ATUBNgE3ATgBOQE6AJsBOwE8AT0BPgE/AUABQQFCAUMBRAFFAUYBRwFIAUkBSgFLALIAswFMALYAtwDEAU0AtAC1AMUBTgCCAMIAhwFPAVABUQCrAVIAxgFTAL4AvwFUAVUBVgFXAVgBWQFaAVsBXACMAJ8BXQCYAKgBXgFfAWABYQFiAWMBZACaAWUAmQDvALwApQFmAWcBaACSAJwApwCPAJQAlQFpAWoBawFsAW0BbgFvAXABcQFyAXMBdAF1AXYBdwF4AXkBegF7AXwBfQF+AX8BgAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQALkBkQGSAZMBlAGVAZYBlwGYAZkBmgGbAZwBnQGeAZ8BoAGhAaIBowGkAaUBpgGnAagBqQGqAasBrAGtAa4BrwGwAbEBsgGzAbQBtQG2AbcBuAG5AboBuwG8Ab0BvgG/AcABwQHCAcMBxAHFAcYBxwHIAckBygHLAcwBzQHOAc8B0AHRAdIB0wHUAdUB1gHXAdgB2QHaAdsB3AHdAd4B3wHgAeEB4gHjAeQB5QHmAecB6AHpAeoB6wHsAe0B7gHvAfAB8QHyAfMB9AH1AfYB9wH4AfkB+gH7AfwB/QH+Af8CAAIBAgICAwIEAgUCBgIHAggCCQIKAgsCDAINAg4CDwIQAhECEgITAhQCFQIWAhcCGAIZAhoCGwIcAh0CHgIfAiACIQIiAiMCJAIlAiYCJwIoAikCKgIrAiwCLQIuAi8CMAIxAjICMwI0AjUCNgI3AjgCOQI6AjsCPAI9Aj4CPwJAAkECQgJDAkQCRQJGAkcCSAJJAkoCSwJMAk0CTgJPAlACUQJSAlMCVAJVAlYCVwJYAlkCWgJbAlwCXQJeAl8CYAJhAmICYwJkAmUCZgJnAmgCaQJqAmsCbAJtAm4CbwJwAnECcgJzAnQCdQJ2AncCeAJ5AnoCewJ8An0CfgJ/AoACgQKCAoMChAKFAoYChwKIAokCigKLAowCjQKOAo8CkAKRApICkwKUApUClgKXApgCmQKaApsCnAKdAp4CnwKgAqECogKjAqQCpQKmAqcCqAKpAqoCqwKsAq0CrgKvArACsQKyArMCtAK1ArYCtwK4ArkCugK7ArwCvQK+Ar8CwALBAsICwwLEAsUCxgLHAsgCyQLKAssCzALNAs4CzwLQAtEC0gLTAtQC1QLWAtcC2ALZAtoC2wLcAt0C3gLfAuAC4QLiAuMC5ALlAuYC5wLoAukC6gLrAuwC7QLuAu8C8ALxAvIC8wL0AvUC9gL3AvgC+QL6AvsC/AL9Av4C/wMAAwEDAgMDAwQDBQMGAwcDCAMJAwoDCwMMAw0DDgMPAxADEQMSAxMDFAMVAxYDFwMYAxkDGgMbAxwDHQMeAx8DIAMhAyIDIwMkAyUDJgMnAygDKQMqAysDLAMtAy4DLwMwAzEDMgMzAzQDNQM2AzcDOAM5AzoDOwM8Az0DPgM/A0ADQQNCA0MDRANFA0YDRwNIA0kDSgNLA0wDTQNOA08DUANRA1IDUwNUA1UDVgNXA1gDWQNaA1sDXANdA14DXwNgA2EDYgNjA2QDZQNmA2cDaANpA2oDawNsA20DbgNvA3ADcQNyA3MDdAN1A3YDdwN4A3kDegN7A3wDfQN+A38DgAOBA4IDgwOEA4UDhgOHA4gDiQOKA4sDjAONA44DjwOQA5EDkgOTA5QDlQOWAMAAwQOXA5gDmQOaA5sDnAOdA54DnwOgA6EDogOjA6QDpQOmA6cDqAOpA6oDqwOsA60DrgOvA7ADsQOyA7MDtAO1A7YDtwO4A7kDugO7A7wDvQO+A78DwAPBA8IDwwPEA8UDxgPHA8gDyQPKA8sDzAPNA84DzwPQA9ED0gPTA9QD1QPWBmh5cGhlbg5wZXJpb2RjZW50ZXJlZAdBbWFjcm9uB2FtYWNyb24HdW5pMDIyNgd1bmkwMjI3B3VuaTAyMzcHdW5pMDJDQQd1bmkwMkNCBXRpbGRlEWlvdGFkaWVyZXNpc3Rvbm9zBUFscGhhBEJldGEFR2FtbWEFRGVsdGEHRXBzaWxvbgRaZXRhA0V0YQVUaGV0YQRJb3RhBUthcHBhBkxhbWJkYQJNdQJOdQJYaQdPbWljcm9uAlBpA1JobwVTaWdtYQNUYXUHVXBzaWxvbgNQaGkDQ2hpA1BzaQVPbWVnYQxJb3RhZGllcmVzaXMPVXBzaWxvbmRpZXJlc2lzCmFscGhhdG9ub3MMZXBzaWxvbnRvbm9zCGV0YXRvbm9zCWlvdGF0b25vcxR1cHNpbG9uZGllcmVzaXN0b25vcwVhbHBoYQRiZXRhBWdhbW1hBWRlbHRhB2Vwc2lsb24EemV0YQNldGEFdGhldGEEaW90YQVrYXBwYQZsYW1iZGECbXUCbnUCeGkHb21pY3JvbgNyaG8Gc2lnbWExBXNpZ21hA3RhdQd1cHNpbG9uA3BoaQNjaGkDcHNpBW9tZWdhDGlvdGFkaWVyZXNpcw91cHNpbG9uZGllcmVzaXMMb21pY3JvbnRvbm9zDHVwc2lsb250b25vcwpvbWVnYXRvbm9zB3VuaTIwMTAHdW5pMjAxMQd1bmkyMDEyCWFmaWkwMDIwOA1xdW90ZXJldmVyc2VkB3VuaTIwMUYHdW5pMjAyMwd1bmkyMDI0B3VuaTIwMjUHdW5pMjAyNwd1bmkyMDMxCWV4Y2xhbWRibAd1bmkyMDNECGZyYWN0aW9uBEV1cm8JYWZpaTYxMjQ4B3VuaTIxMDYHdW5pMjExNwd1bmkyMTFFB3VuaTIxMjAHdW5pMjEyNwd1bmkyMjA3B3VuaTIyMDgHdW5pMjIwOQd1bmkyMjBBB3VuaTIyMEIHdW5pMjIwQwd1bmkyMjBEB3VuaTIyMTAHdW5pMjIxQgd1bmkyMjFDB3VuaTIyMUQHdW5pMjMwMQVob3VzZQd1bmkyMzA3B3VuaTIzMTgHdW5pMjM3RQd1cGJsb2NrB3VuaTI1ODEHdW5pMjU4Mgd1bmkyNTgzB2RuYmxvY2sHdW5pMjU4NQd1bmkyNTg2B3VuaTI1ODcFYmxvY2sHdW5pMjU4OQd1bmkyNThBB3VuaTI1OEIHbGZibG9jawd1bmkyNThEB3VuaTI1OEUHdW5pMjU4RgdydGJsb2NrB2x0c2hhZGUFc2hhZGUHZGtzaGFkZQd1bmkyNTk0B3VuaTI1OTUHdW5pMjU5Ngd1bmkyNTk3B3VuaTI1OTgHdW5pMjU5OQd1bmkyNTlBB3VuaTI1OUIHdW5pMjU5Qwd1bmkyNTlEB3VuaTI1OUUHdW5pMjU5Rgd1bmkyNUM2B3VuaTI1QzcHdW5pMjVDOAd1bmkyNUUyB3VuaTI1RTMHdW5pMjVFNAd1bmkyNUU1Cm9wZW5idWxsZXQHdW5pMjYxQwd1bmkyNjFFB3VuaTI2MzkJc21pbGVmYWNlDGludnNtaWxlZmFjZQZmZW1hbGUHdW5pMjY0MQRtYWxlBXNwYWRlB3VuaTI2NjEHdW5pMjY2MgRjbHViB3VuaTI2NjQFaGVhcnQHZGlhbW9uZAd1bmkyNjY3B3VuaTI3MTMHdW5pMzAwMQd1bmkzMDAyB3VuaTMwMEMHdW5pMzAwRAd1bmkzMDBFB3VuaTMwMEYHdW5pMzAxMAd1bmkzMDExB3VuaTMwOTkHdW5pMzA5QQd1bmkzMDlCB3VuaTMwOUMHdW5pMzBBMQd1bmkzMEEyB3VuaTMwQTMHdW5pMzBBNAd1bmkzMEE1B3VuaTMwQTYHdW5pMzBBNwd1bmkzMEE4B3VuaTMwQTkHdW5pMzBBQQd1bmkzMEFCB3VuaTMwQUMHdW5pMzBBRAd1bmkzMEFFB3VuaTMwQUYHdW5pMzBCMAd1bmkzMEIxB3VuaTMwQjIHdW5pMzBCMwd1bmkzMEI0B3VuaTMwQjUHdW5pMzBCNgd1bmkzMEI3B3VuaTMwQjgHdW5pMzBCOQd1bmkzMEJBB3VuaTMwQkIHdW5pMzBCQwd1bmkzMEJEB3VuaTMwQkUHdW5pMzBCRgd1bmkzMEMwB3VuaTMwQzEHdW5pMzBDMgd1bmkzMEMzB3VuaTMwQzQHdW5pMzBDNQd1bmkzMEM2B3VuaTMwQzcHdW5pMzBDOAd1bmkzMEM5B3VuaTMwQ0EHdW5pMzBDQgd1bmkzMENDB3VuaTMwQ0QHdW5pMzBDRQd1bmkzMENGB3VuaTMwRDAHdW5pMzBEMQd1bmkzMEQyB3VuaTMwRDMHdW5pMzBENAd1bmkzMEQ1B3VuaTMwRDYHdW5pMzBENwd1bmkzMEQ4B3VuaTMwRDkHdW5pMzBEQQd1bmkzMERCB3VuaTMwREMHdW5pMzBERAd1bmkzMERFB3VuaTMwREYHdW5pMzBFMAd1bmkzMEUxB3VuaTMwRTIHdW5pMzBFMwd1bmkzMEU0B3VuaTMwRTUHdW5pMzBFNgd1bmkzMEU3B3VuaTMwRTgHdW5pMzBFOQd1bmkzMEVBB3VuaTMwRUIHdW5pMzBFQwd1bmkzMEVEB3VuaTMwRUUHdW5pMzBFRgd1bmkzMEYwB3VuaTMwRjEHdW5pMzBGMgd1bmkzMEYzB3VuaTMwRjQHdW5pMzBGNQd1bmkzMEY2B3VuaTMwRjcHdW5pMzBGOAd1bmkzMEY5B3VuaTMwRkEHdW5pMzBGQgd1bmkzMEZDB3VuaUUwMDAHdW5pRTAwMQd1bmlFMDAyB3VuaUUwMDMHdW5pRTAwNAd1bmlFMDA1B3VuaUUwMDYHdW5pRTAwNwd1bmlFMDA4B3VuaUUwMDkHdW5pRTAwQQd1bmlFMDBCB3VuaUUwMEMHdW5pRTAwRAd1bmlFMDBFB3VuaUUwMEYHdW5pRTAxMAd1bmlFMDExB3VuaUUwMTIHdW5pRTAxMwd1bmlFMDE0B3VuaUUwMTUHdW5pRTAxNgd1bmlFMDE3B3VuaUUwMTgHdW5pRTAxOQd1bmlFMDFBB3VuaUUwMUIHdW5pRTAxQwd1bmlFMDFEB3VuaUUwMUUHdW5pRTAxRgd1bmlFMDIwB3VuaUUwMjEHdW5pRTAyMgd1bmlFMDIzB3VuaUUwMjQHdW5pRTAyNQd1bmlFMDI2B3VuaUUwMjcHdW5pRTAyOAd1bmlFMDI5B3VuaUUwMkEHdW5pRTAyQgd1bmlFMDJDB3VuaUUwMkQHdW5pRTAyRQd1bmlFMDJGB3VuaUUwMzAHdW5pRTAzMQd1bmlFMDMyB3VuaUUwMzMHdW5pRTAzNAd1bmlFMDM1B3VuaUUwMzYHdW5pRTAzNwd1bmlFMDM4B3VuaUUwMzkHdW5pRTAzQQd1bmlFMDNCB3VuaUUwM0MHdW5pRTAzRAd1bmlFMDNFB3VuaUUwM0YHdW5pRTA0MAd1bmlFMDQxB3VuaUUwNDIHdW5pRTA0Mwd1bmlFMDQ0B3VuaUUwNDUHdW5pRTA0Ngd1bmlFMDQ3B3VuaUUwNDgHdW5pRTA0OQd1bmlFMDRBB3VuaUUwNEIHdW5pRTA0Qwd1bmlFMDREB3VuaUUwNEUHdW5pRTA0Rgd1bmlFMDUwB3VuaUUwNTEHdW5pRTA1Mgd1bmlFMDUzB3VuaUUwNTQHdW5pRTA1NQd1bmlFMDU2B3VuaUUwNTcHdW5pRTA1OAd1bmlFMDU5B3VuaUUwNUEHdW5pRTA1Qgd1bmlFMDVDB3VuaUUwNUQHdW5pRTA1RQd1bmlFMDVGB3VuaUUwNjAHdW5pRTA2MQd1bmlFMDYyB3VuaUUwNjMHdW5pRTA2NAd1bmlFMDY1B3VuaUUwNjYHdW5pRTA2Nwd1bmlFMDY4B3VuaUUwNjkHdW5pRTA2QQd1bmlFMDZCB3VuaUUwNkMHdW5pRTA2RAd1bmlFMDZFB3VuaUUwNkYHdW5pRTA3MAd1bmlFMDcxB3VuaUUwNzIHdW5pRTA3Mwd1bmlFMDc0B3VuaUUwNzUHdW5pRTA3Ngd1bmlFMDc3B3VuaUUwNzgHdW5pRTA3OQd1bmlFMDdBB3VuaUUwN0IHdW5pRTA3Qwd1bmlFMDdEB3VuaUUwN0UHdW5pRTA3Rgd1bmlFMDgwB3VuaUUwODEHdW5pRTA4Mgd1bmlFMDgzB3VuaUUwODQHdW5pRTA4NQd1bmlFMDg2B3VuaUUwODcHdW5pRTA4OAd1bmlFMDg5B3VuaUUwOEEHdW5pRTA4Qgd1bmlFMDhDB3VuaUUwOEQHdW5pRTA4RQd1bmlFMDhGB3VuaUUwOTAHdW5pRTA5MQd1bmlFMDkyB3VuaUUwOTMHdW5pRTA5NAd1bmlFMDk1B3VuaUUwOTYHdW5pRTA5Nwd1bmlFMDk4B3VuaUUwOTkHdW5pRTA5QQd1bmlFMDlCB3VuaUUwOUMHdW5pRTA5RAd1bmlFMDlFB3VuaUUwOUYHdW5pRTBBMAd1bmlFMEExB3VuaUUwQTIHdW5pRTBBMwd1bmlFMEE0B3VuaUUwQTUHdW5pRTBBNgd1bmlFMEE3B3VuaUUwQTgHdW5pRTBBOQd1bmlFMEFBB3VuaUUwQUIHdW5pRTBBQwd1bmlFMEFEB3VuaUUwQUUHdW5pRTBBRgd1bmlFMEIwB3VuaUUwQjEHdW5pRTBCMgd1bmlFMEIzB3VuaUUwQjQHdW5pRTBCNQd1bmlFMEI2B3VuaUUwQjcHdW5pRTBCOAd1bmlFMEI5B3VuaUUwQkEHdW5pRTBCQgd1bmlFMEJDB3VuaUUwQkQHdW5pRTBCRQd1bmlFMEJGB3VuaUUwQzAHdW5pRTBDMQd1bmlFMEMyB3VuaUUwQzMHdW5pRTBDNAd1bmlFMEM1B3VuaUUwQzYHdW5pRTBDNwd1bmlFMEM4B3VuaUUwQzkHdW5pRTBDQQd1bmlFMENCB3VuaUUwQ0MHdW5pRTBDRAd1bmlFMENFB3VuaUUwQ0YHdW5pRTBEMAd1bmlFMEQxB3VuaUUwRDIHdW5pRTBEMwd1bmlFMEQ0B3VuaUUwRDUHdW5pRTBENgd1bmlFMEQ3B3VuaUUwRDgHdW5pRTBEOQd1bmlFMERBB3VuaUUwREIHdW5pRTBEQwd1bmlFMEREB3VuaUUwREUHdW5pRTBERgd1bmlFMEUwB3VuaUUwRTEHdW5pRTBFMgd1bmlFMEUzB3VuaUUwRTQHdW5pRTBFNQd1bmlFMEU2B3VuaUUwRTcHdW5pRTBFOAd1bmlFMEU5B3VuaUUwRUEHdW5pRTBFQgd1bmlFMEVDB3VuaUUwRUQHdW5pRTBFRQd1bmlFMEVGB3VuaUUwRjAHdW5pRTBGMQd1bmlFMEYyB3VuaUUwRjMHdW5pRTBGNAd1bmlFMEY1B3VuaUUwRjYHdW5pRTBGNwd1bmlFMEY4B3VuaUUwRjkHdW5pRTBGQQd1bmlFMEZCB3VuaUUwRkMHdW5pRTBGRAd1bmlFMEZFB3VuaUUwRkYHdW5pRTEwMAd1bmlFMTAxB3VuaUUxMDIHdW5pRTEwMwd1bmlFMTA0B3VuaUUxMDUHdW5pRTEwNgd1bmlFMTA3B3VuaUUxMDgHdW5pRTEwOQd1bmlFMTBBB3VuaUUxMEIHdW5pRTEwQwd1bmlFMTBEB3VuaUUxMEUHdW5pRTEwRgd1bmlFMTEwB3VuaUUxMTEHdW5pRTExMgd1bmlFMTEzB3VuaUUxMTQHdW5pRTExNQd1bmlFMTE2B3VuaUUxMTcHdW5pRTExOAd1bmlFMTE5B3VuaUUxMUEHdW5pRTExQgd1bmlFMTFDB3VuaUUxMUQHdW5pRTExRQd1bmlFMTFGB3VuaUUxMjAHdW5pRTEyMQd1bmlFMTIyB3VuaUUxMjMHdW5pRTEyNAd1bmlFMTI1B3VuaUUxMjYHdW5pRTEyNwd1bmlFMTI4B3VuaUUxMjkHdW5pRTEyQQd1bmlFMTJCB3VuaUUxMkMHdW5pRTEyRAd1bmlFMTJFB3VuaUUxMkYHdW5pRTEzMAd1bmlFMTMxB3VuaUUxMzIHdW5pRTEzMwd1bmlFMTM0B3VuaUUxMzUHdW5pRTEzNgd1bmlFMTM3B3VuaUUxMzgHdW5pRTEzOQd1bmlFMTNBB3VuaUUxM0IHdW5pRTEzQwd1bmlFMTNEB3VuaUUxM0UHdW5pRTEzRgd1bmlFMTQwB3VuaUUxNDEHdW5pRTE0Mgd1bmlFMTQzB3VuaUUxNDQHdW5pRTE0NQd1bmlFMTQ2B3VuaUUxNDcHdW5pRTE0OAd1bmlFMTQ5B3VuaUUxNEEHdW5pRTE0Qgd1bmlFMTRDB3VuaUUxNEQHdW5pRTE0RQd1bmlFMTRGB3VuaUUxNTAHdW5pRTE1MQd1bmlFMTUyB3VuaUUxNTMHdW5pRTE1NAd1bmlFMTU1B3VuaUUxNTYHdW5pRTE1Nwd1bmlFMTU4B3VuaUUxNTkHdW5pRTE1QQd1bmlFMTVCB3VuaUUxNUMHdW5pRTE1RAd1bmlFMTVFB3VuaUUxNUYHdW5pRTE2MAd1bmlFMTYxB3VuaUUxNjIHdW5pRTE2Mwd1bmlFMTY0B3VuaUUxNjUHdW5pRTE2Ngd1bmlFMTY3B3VuaUUxNjgHdW5pRTE2OQd1bmlFMTZBB3VuaUUxNkIHdW5pRTE2Qwd1bmlFMTZEB3VuaUUxNkUHdW5pRTE2Rgd1bmlFMTcwB3VuaUUxNzEHdW5pRTE3Mgd1bmlFMTczB3VuaUUxNzQHdW5pRTE3NQd1bmlFMTc2B3VuaUUxNzcHdW5pRTE3OAd1bmlFMTc5B3VuaUUxN0EHdW5pRTE3Qgd1bmlFMTdDB3VuaUUxN0QHdW5pRTE3RQd1bmlFMTdGB3VuaUY2MTgHdW5pRjYxOQd1bmlGNzAwB3VuaUY3MDEHdW5pRjcwMgd1bmlGNzAzB3VuaUY3MDQHdW5pRjcwNQd1bmlGRjYxB3VuaUZGNjIHdW5pRkY2Mwd1bmlGRjY0B3VuaUZGNjUHdW5pRkY2Ngd1bmlGRjY3B3VuaUZGNjgHdW5pRkY2OQd1bmlGRjZBB3VuaUZGNkIHdW5pRkY2Qwd1bmlGRjZEB3VuaUZGNkUHdW5pRkY2Rgd1bmlGRjcwB3VuaUZGNzEHdW5pRkY3Mgd1bmlGRjczB3VuaUZGNzQHdW5pRkY3NQd1bmlGRjc2B3VuaUZGNzcHdW5pRkY3OAd1bmlGRjc5B3VuaUZGN0EHdW5pRkY3Qgd1bmlGRjdDB3VuaUZGN0QHdW5pRkY3RQd1bmlGRjdGB3VuaUZGODAHdW5pRkY4MQd1bmlGRjgyB3VuaUZGODMHdW5pRkY4NAd1bmlGRjg1B3VuaUZGODYHdW5pRkY4Nwd1bmlGRjg4B3VuaUZGODkHdW5pRkY4QQd1bmlGRjhCB3VuaUZGOEMHdW5pRkY4RAd1bmlGRjhFB3VuaUZGOEYHdW5pRkY5MAd1bmlGRjkxB3VuaUZGOTIHdW5pRkY5Mwd1bmlGRjk0B3VuaUZGOTUHdW5pRkY5Ngd1bmlGRjk3B3VuaUZGOTgHdW5pRkY5OQd1bmlGRjlBB3VuaUZGOUIHdW5pRkY5Qwd1bmlGRjlEB3VuaUZGOUUHdW5pRkY5Rgd1bmlGRkZE");
-}
-`;
-/**
- * Add the above CSS to the page if it's not already there. Idempotent.
- */
-function addCssFontToPage() {
-    if (document.getElementById(FONT_CSS_ID_NAME) === null) {
-        const node = document.createElement("style");
-        node.id = FONT_CSS_ID_NAME;
-        node.innerHTML = FONT_CSS;
-        document.head.append(node);
-    }
-}
-exports.addCssFontToPage = addCssFontToPage;
 
 
 /***/ })
