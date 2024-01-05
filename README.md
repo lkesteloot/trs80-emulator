@@ -1,3 +1,5 @@
+This project has been moved to https://github.com/lkesteloot/trs80
+
 # TRS-80 Model I and Model III emulator
 
 This is a TypeScript-based TRS-80 Model I and Model III emulator.
